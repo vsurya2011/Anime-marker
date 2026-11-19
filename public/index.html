@@ -1,89 +1,793 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#10121b" />
+  <meta name="description" content="OtakuLog — your personal anime watchlist and episode tracker." />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="./icons/icon-192.png" />
+  <title>OtakuLog — Anime Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#0c0e15;--panel:#141722;--panel2:#191d2a;--line:#292e40;--muted:#9299ad;--text:#f4f5fb;--accent:#9b8cff;--accent2:#c0b7ff;--cyan:#70d9d0;--orange:#ffb875;--pink:#ff8fb4;--green:#8fdbad;--red:#ff8290;--shadow:0 18px 50px rgba(0,0,0,.28)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 82% -10%,rgba(121,104,255,.15),transparent 34%),radial-gradient(ellipse at -12% 35%,rgba(71,189,180,.07),transparent 33%),var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}button,input,select,textarea{font:inherit}button{cursor:pointer}a{color:inherit}.app{max-width:1440px;margin:0 auto;padding:24px 30px 60px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:34px}.brand{display:flex;align-items:center;gap:12px}.brand-mark{height:42px;width:42px;border-radius:14px;background:linear-gradient(135deg,#a99cff,#6c61d9);display:grid;place-items:center;box-shadow:0 8px 24px rgba(133,115,255,.28);font-size:21px}.brand-name{font:700 21px 'Space Grotesk',sans-serif;letter-spacing:-.6px}.brand-sub{font-size:11px;color:var(--muted);margin-top:2px;letter-spacing:1.35px;text-transform:uppercase}.top-actions{display:flex;align-items:center;gap:10px}.sync-state{display:flex;align-items:center;gap:7px;padding:8px 11px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:11px}.dot{width:7px;height:7px;border-radius:50%;background:var(--orange);box-shadow:0 0 10px currentColor}.dot.live{background:var(--green)}.btn{border:1px solid var(--line);border-radius:12px;padding:10px 14px;color:var(--text);background:#1a1e2c;font-weight:600;font-size:13px;transition:.18s}.btn:hover{transform:translateY(-1px);border-color:#55516f;background:#22263a}.btn.primary{background:linear-gradient(135deg,#a99cff,#8174ef);border:0;color:#10111a;box-shadow:0 7px 22px rgba(141,122,255,.2)}.btn.primary:hover{filter:brightness(1.08)}.btn.ghost{background:transparent}.btn.small{padding:7px 10px;font-size:12px;border-radius:9px}.btn.danger{color:#ff9baa;border-color:#673743;background:#261922}.hero{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:24px}.eyebrow{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--accent2);font-weight:700;margin-bottom:9px}.hero h1{font:700 clamp(28px,4vw,42px)/1.08 'Space Grotesk',sans-serif;letter-spacing:-1.6px;margin:0}.hero p{color:var(--muted);font-size:14px;margin:10px 0 0;max-width:600px;line-height:1.55}.hero-actions{display:flex;gap:9px;flex-shrink:0}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin-bottom:28px}.stat{background:linear-gradient(145deg,rgba(28,32,48,.94),rgba(19,22,33,.92));border:1px solid var(--line);border-radius:17px;padding:17px 18px;position:relative;overflow:hidden}.stat:after{content:'';position:absolute;width:82px;height:82px;right:-24px;top:-30px;border-radius:50%;background:var(--glow,rgba(155,140,255,.12));filter:blur(2px)}.stat-label{font-size:12px;color:var(--muted);position:relative;z-index:1}.stat-value{font:700 27px 'Space Grotesk',sans-serif;margin-top:8px;position:relative;z-index:1}.stat-foot{font-size:11px;color:#747d92;margin-top:2px;position:relative;z-index:1}.stat.purple{--glow:rgba(155,140,255,.2)}.stat.teal{--glow:rgba(112,217,208,.15)}.stat.orange{--glow:rgba(255,184,117,.15)}.stat.pink{--glow:rgba(255,143,180,.14)}.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:0 0 14px}.section-head h2{font:600 18px 'Space Grotesk',sans-serif;margin:0;letter-spacing:-.3px}.section-head .sub{font-size:12px;color:var(--muted);margin-top:4px}.continue-wrap{margin-bottom:30px}.continue-card{display:flex;gap:16px;align-items:center;padding:13px;background:linear-gradient(110deg,rgba(33,34,54,.92),rgba(19,23,34,.96));border:1px solid #353451;border-radius:17px;max-width:100%;min-height:146px}.cover{width:88px;height:118px;flex:0 0 auto;object-fit:cover;border-radius:10px;background:#282c3c}.continue-info{min-width:0;flex:1}.continue-kicker{font-size:10px;text-transform:uppercase;letter-spacing:1.7px;color:var(--accent2);font-weight:700}.continue-title{font:600 20px 'Space Grotesk',sans-serif;margin:6px 0 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.continue-meta{color:var(--muted);font-size:12px}.progress-line{height:6px;background:#2d3042;border-radius:99px;margin:14px 0 7px;overflow:hidden;max-width:420px}.progress-line span{height:100%;display:block;border-radius:99px;background:linear-gradient(90deg,#8e7dff,#70d9d0)}.progress-foot{font-size:11px;color:#9ba2b5}.continue-ctrl{display:flex;gap:8px;align-items:center}.toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:15px}.searchbox{position:relative;flex:1;min-width:200px;max-width:360px}.searchbox input{width:100%;padding:11px 13px 11px 37px;border-radius:11px;border:1px solid var(--line);background:#141824;color:var(--text);outline:none;font-size:13px}.searchbox input:focus,.field input:focus,.field textarea:focus,.field select:focus{border-color:#8175d9;box-shadow:0 0 0 3px rgba(155,140,255,.12)}.search-icon{position:absolute;left:13px;top:10px;color:#777f94;font-size:16px}.tabs{display:flex;gap:6px;flex-wrap:wrap}.tab{border:1px solid transparent;background:transparent;color:var(--muted);border-radius:9px;padding:8px 11px;font-size:12px;font-weight:600}.tab:hover{color:var(--text);background:#171b28}.tab.active{color:#d8d2ff;background:rgba(155,140,255,.13);border-color:rgba(155,140,255,.25)}.sort-select{margin-left:auto;background:#141824;color:#b7bdcb;border:1px solid var(--line);border-radius:9px;padding:9px 11px;font-size:12px;outline:none}.anime-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px}.anime-card{background:linear-gradient(155deg,#191d2a,#131722);border:1px solid var(--line);border-radius:15px;overflow:hidden;transition:.2s;min-width:0}.anime-card:hover{transform:translateY(-3px);border-color:#4a4865;box-shadow:var(--shadow)}.card-poster{height:178px;position:relative;background:linear-gradient(135deg,#2d3150,#1b2030);overflow:hidden}.card-poster img{width:100%;height:100%;object-fit:cover;display:block;opacity:.87;transition:transform .35s}.anime-card:hover .card-poster img{transform:scale(1.04)}.card-poster:after{content:'';position:absolute;inset:35% 0 0;background:linear-gradient(transparent,rgba(10,12,19,.78))}.status-pill{position:absolute;top:10px;left:10px;z-index:1;padding:5px 8px;border-radius:7px;font-size:10px;font-weight:700;letter-spacing:.2px;backdrop-filter:blur(8px);background:rgba(12,14,21,.78);border:1px solid rgba(255,255,255,.12)}.ongoing-pill{position:absolute;top:10px;right:10px;z-index:1;padding:5px 7px;border-radius:7px;background:rgba(31,83,75,.85);color:#9df0d4;font-size:9px;font-weight:700}.card-body{padding:12px 13px 13px}.card-title{font:600 15px 'Space Grotesk',sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin:0 0 4px}.card-meta{font-size:11px;color:var(--muted);display:flex;gap:6px;align-items:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.card-progress-head{display:flex;align-items:center;justify-content:space-between;margin:13px 0 6px;font-size:11px;color:#aab0c1}.card-progress-head b{color:#e5e6f0;font-weight:600}.mini-progress{height:5px;border-radius:99px;background:#2c3040;overflow:hidden}.mini-progress span{display:block;height:100%;background:linear-gradient(90deg,#9b8cff,#70d9d0);border-radius:99px}.card-actions{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:12px}.card-actions-left{display:flex;align-items:center;gap:6px}.icon-btn{width:29px;height:29px;border-radius:8px;display:grid;place-items:center;border:1px solid #35394a;background:#202536;color:#d9d9e7;font-size:16px}.icon-btn:hover{background:#2c3150;border-color:#6961a0}.card-actions .btn{padding:7px 9px;font-size:11px}.source-tag{max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#8992a7;font-size:10px}.empty{padding:50px 20px;text-align:center;border:1px dashed #34394d;border-radius:16px;background:rgba(20,23,34,.55);grid-column:1/-1}.empty-icon{font-size:34px;margin-bottom:10px}.empty h3{font:600 18px 'Space Grotesk',sans-serif;margin:0 0 7px}.empty p{font-size:13px;color:var(--muted);margin:0 auto 16px;max-width:380px;line-height:1.55}.bottom-note{margin-top:28px;padding:13px 15px;border:1px solid #2a3040;border-radius:12px;color:#959caf;font-size:11px;line-height:1.55;background:rgba(18,21,31,.75)}.bottom-note strong{color:#d9d4ff}.modal-backdrop{position:fixed;inset:0;background:rgba(3,5,10,.76);backdrop-filter:blur(7px);z-index:50;display:none;align-items:center;justify-content:center;padding:18px}.modal-backdrop.open{display:flex}.modal{width:min(650px,100%);max-height:92vh;overflow:auto;background:#171b28;border:1px solid #3a3d52;border-radius:19px;box-shadow:0 24px 80px rgba(0,0,0,.55)}.modal-head{display:flex;align-items:center;justify-content:space-between;padding:19px 21px 15px;border-bottom:1px solid var(--line)}.modal-head h3{font:600 19px 'Space Grotesk',sans-serif;margin:0}.xbtn{border:0;background:transparent;color:#939bad;font-size:23px}.modal-content{padding:19px 21px 21px}.field-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.field{min-width:0}.field.full{grid-column:1/-1}.field label{display:block;font-size:11px;color:#aeb4c6;margin-bottom:7px;font-weight:600}.field input,.field textarea,.field select{width:100%;border:1px solid #34394c;border-radius:10px;background:#10141e;color:var(--text);padding:11px 12px;outline:none;font-size:13px}.field textarea{resize:vertical;min-height:74px}.field select{appearance:auto}.search-results{display:none;margin-top:7px;border:1px solid #3b3e53;border-radius:10px;overflow:hidden;background:#10141e;max-height:240px;overflow-y:auto}.search-results.show{display:block}.result-row{display:flex;align-items:center;gap:10px;padding:8px 10px;border-bottom:1px solid #252a39;cursor:pointer}.result-row:last-child{border-bottom:0}.result-row:hover{background:#20253a}.result-row img{height:46px;width:34px;object-fit:cover;border-radius:5px;background:#292e40}.result-copy{min-width:0}.result-copy b{display:block;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.result-copy span{display:block;font-size:10px;color:var(--muted);margin-top:3px}.search-hint{font-size:10px;color:#7f879a;margin-top:6px}.form-actions{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:18px}.form-actions-right{display:flex;gap:8px}.auth-copy{font-size:12px;color:var(--muted);line-height:1.55;margin:0 0 16px}.auth-toggle{font-size:12px;color:#bdb4ff;cursor:pointer;text-decoration:underline;margin-left:4px}.toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,20px);opacity:0;pointer-events:none;padding:11px 15px;border-radius:11px;background:#e9e5ff;color:#171526;box-shadow:var(--shadow);font-size:12px;font-weight:700;z-index:90;transition:.25s;max-width:calc(100% - 30px);text-align:center}.toast.show{opacity:1;transform:translate(-50%,0)}.help-modal{width:min(700px,100%)}.help-content{font-size:13px;line-height:1.65;color:#aeb5c7}.help-content h4{font:600 14px 'Space Grotesk',sans-serif;color:#eeeaff;margin:18px 0 6px}.help-content code{color:#d4ceff;background:#24263a;padding:2px 5px;border-radius:5px}.help-content pre{white-space:pre-wrap;background:#0e121b;padding:12px;border-radius:9px;border:1px solid #2d3345;color:#b9c1d6;font-size:11px;overflow:auto}.help-content a{color:#c1b8ff}.hidden{display:none!important}.footer{display:flex;justify-content:space-between;gap:15px;align-items:center;color:#697287;font-size:10px;margin-top:16px}.footer button{font-size:10px;color:#a59af0;background:none;border:0;padding:0}.airing-line{font-size:10px;color:#8edbd0;margin-top:6px}
+    @media(max-width:1100px){.anime-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+    @media(max-width:760px){.app{padding:18px 16px 45px}.topbar{margin-bottom:26px}.hero{display:block}.hero-actions{margin-top:17px}.stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.stat{padding:14px}.stat-value{font-size:23px}.anime-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.card-poster{height:155px}.continue-card{align-items:flex-start}.continue-ctrl{flex-direction:column;align-items:stretch}.continue-title{font-size:16px}.top-actions .sync-state{display:none}}
+    @media(max-width:440px){#topAddBtn{display:none}.brand-sub{display:none}.brand-name{font-size:18px}.topbar .btn{padding:9px 10px}.anime-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.card-poster{height:137px}.card-body{padding:10px}.card-title{font-size:13px}.card-meta{font-size:10px}.card-actions{margin-top:10px}.source-tag{display:none}.continue-card{gap:10px;padding:10px}.cover{width:68px;height:97px}.continue-title{font-size:14px}.continue-meta{font-size:10px}.continue-ctrl .btn{font-size:10px;padding:7px}.field-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.sort-select{margin-left:0}.toolbar{gap:7px}}
 
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/13.4.0/firebase-app-compat.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/13.4.0/firebase-auth-compat.js"></script>
-    <script defer src="/__/firebase/13.4.0/firebase-database-compat.js"></script>
-    <script defer src="/__/firebase/13.4.0/firebase-firestore-compat.js"></script>
-    <script defer src="/__/firebase/13.4.0/firebase-functions-compat.js"></script>
-    <script defer src="/__/firebase/13.4.0/firebase-messaging-compat.js"></script>
-    <script defer src="/__/firebase/13.4.0/firebase-storage-compat.js"></script>
-    <script defer src="/__/firebase/13.4.0/firebase-analytics-compat.js"></script>
-    <script defer src="/__/firebase/13.4.0/firebase-remote-config-compat.js"></script>
-    <script defer src="/__/firebase/13.4.0/firebase-performance-compat.js"></script>
-    <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
-    -->
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+    .hero-actions{flex-wrap:wrap}.downloaded-line{overflow-wrap:anywhere;line-height:1.4}.import-panel{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:18px 20px;margin:0 0 29px;border:1px solid #393653;border-radius:17px;background:linear-gradient(110deg,rgba(40,36,67,.84),rgba(20,24,36,.94));}
+    .import-panel-copy{min-width:0}.import-panel-copy h2{font:600 17px 'Space Grotesk',sans-serif;margin:0 0 5px}.import-panel-copy p{font-size:12px;color:var(--muted);line-height:1.5;margin:0;max-width:640px}.import-panel-actions{display:flex;gap:8px;flex-shrink:0;flex-wrap:wrap}
+    .import-kicker{font-size:10px;text-transform:uppercase;letter-spacing:1.7px;color:var(--accent2);font-weight:700;margin-bottom:6px}
+    .import-file-box{display:flex;align-items:center;gap:12px;padding:13px;border:1px dashed #555071;background:#1b1d2c;border-radius:12px;margin-bottom:14px}.import-file-icon{width:39px;height:39px;display:grid;place-items:center;border-radius:11px;background:rgba(155,140,255,.14);font-size:19px;flex-shrink:0}.import-file-name{font-size:12px;font-weight:700;overflow-wrap:anywhere}.import-file-meta{font-size:10px;color:var(--muted);margin-top:4px}.import-hint{color:var(--muted);font-size:11px;line-height:1.55;margin:10px 0 15px}.import-results{display:none;max-height:220px;overflow:auto;border:1px solid var(--line);border-radius:11px;margin-top:8px}.import-results.show{display:block}.import-results .result-row.selected{background:rgba(155,140,255,.16);outline:1px solid rgba(155,140,255,.4)}.import-results .result-row img{width:38px;height:52px;object-fit:cover;border-radius:6px;background:#292d3e}.import-selected{font-size:11px;color:#a9e9cb;margin-top:9px;min-height:16px}.import-checkbox{display:flex;gap:9px;align-items:flex-start;padding:12px;border:1px solid #34384b;border-radius:11px;background:#141824;margin-top:14px;color:#d9dbea;font-size:12px;line-height:1.45}.import-checkbox input{margin-top:2px;accent-color:#9b8cff}.downloaded-line{font-size:10px;color:#9dddc9;margin-top:8px}.downloaded-line span{color:#aab0c1}.install-note{font-size:11px;color:#aeb4c6;line-height:1.55;margin-top:9px}.install-note strong{color:#e3ddff}
+    @media(max-width:760px){.import-panel{display:block;padding:15px}.import-panel-actions{margin-top:13px}.import-panel-actions .btn{flex:1}.import-panel-copy h2{font-size:16px}}
+    @media(max-width:440px){.import-panel-actions .btn{font-size:11px;padding:9px 10px}}
 
-    <style media="screen">
-      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
-      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
-      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
-      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
-      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
-      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
-      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
-      @media (max-width: 600px) {
-        body, #message { margin-top: 0; background: white; box-shadow: none; }
-        body { border-top: 16px solid #ffa100; }
-      }
-    </style>
-  </head>
-  <body>
-    <div id="message">
-      <h2>Welcome</h2>
-      <h1>Firebase Hosting Setup Complete</h1>
-      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
-      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
+    /* Live anime discovery and airing schedule */
+    .discover-section,.schedule-section{margin:0 0 30px}
+    .catalog-searchbar{display:flex;gap:9px;align-items:center;margin:0 0 12px;padding:10px;border:1px solid var(--line);border-radius:14px;background:rgba(20,24,36,.88)}
+    .catalog-searchbar .catalog-search-icon{font-size:19px;color:#aaa0ff;padding:0 3px}
+    .catalog-searchbar input{flex:1;min-width:0;border:0;outline:0;background:transparent;color:var(--text);font-size:14px;padding:7px 3px}
+    .catalog-searchbar input::placeholder{color:#788197}
+    .catalog-search-note{font-size:10px;color:#80899e;margin:0 2px 14px;line-height:1.5}
+    .catalog-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+    .catalog-card{display:flex;flex-direction:column;min-width:0;overflow:hidden;border:1px solid var(--line);border-radius:15px;background:linear-gradient(155deg,#191d2a,#131722);transition:.2s}
+    .catalog-card:hover{transform:translateY(-2px);border-color:#514b75;box-shadow:var(--shadow)}
+    .catalog-poster{height:190px;position:relative;background:linear-gradient(135deg,#2d3150,#1b2030);overflow:hidden}
+    .catalog-poster img{width:100%;height:100%;display:block;object-fit:cover}
+    .catalog-score{position:absolute;top:9px;right:9px;padding:5px 8px;border-radius:8px;background:rgba(10,12,19,.82);border:1px solid rgba(255,255,255,.12);font-size:10px;color:#ffe2a6;font-weight:700;backdrop-filter:blur(8px)}
+    .catalog-card-body{display:flex;flex-direction:column;flex:1;padding:12px}
+    .catalog-title{font:600 14px 'Space Grotesk',sans-serif;line-height:1.35;margin:0 0 5px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:38px}
+    .catalog-meta{font-size:10px;color:var(--muted);line-height:1.5}
+    .catalog-desc{font-size:10px;color:#aab1c2;line-height:1.55;margin:9px 0 8px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;min-height:46px}
+    .catalog-genres{display:flex;gap:5px;flex-wrap:wrap;margin:0 0 10px}
+    .catalog-genre{padding:4px 6px;border-radius:6px;background:rgba(155,140,255,.1);color:#c3baff;font-size:9px}
+    .catalog-actions{display:flex;gap:6px;margin-top:auto}
+    .catalog-actions .btn{flex:1;padding:8px 9px;font-size:10px}
+    .catalog-state{grid-column:1/-1;padding:34px 18px;border:1px dashed #34394d;border-radius:15px;text-align:center;color:var(--muted);font-size:12px;line-height:1.6;background:rgba(20,23,34,.45)}
+    .schedule-topline{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+    .schedule-source{font-size:10px;color:#90d9ce;padding:5px 8px;border-radius:7px;background:rgba(77,171,157,.1);border:1px solid rgba(112,217,208,.17)}
+    .schedule-day-tabs{display:flex;gap:7px;overflow:auto;padding:3px 1px 12px;scrollbar-width:thin}
+    .schedule-day-tab{flex:0 0 auto;border:1px solid var(--line);border-radius:10px;padding:8px 11px;background:#141824;color:#aab1c2;font-size:11px;font-weight:600;white-space:nowrap}
+    .schedule-day-tab.active{background:rgba(155,140,255,.15);border-color:rgba(155,140,255,.42);color:#e3ddff}
+    .schedule-group{margin:4px 0 18px}
+    .schedule-group-title{display:flex;align-items:center;gap:9px;margin:0 0 9px;color:#e4e5f0;font:600 13px 'Space Grotesk',sans-serif}
+    .schedule-group-title span{font:400 10px 'DM Sans',sans-serif;color:var(--muted)}
+    .schedule-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+    .schedule-card{display:flex;gap:11px;align-items:center;min-width:0;padding:10px;border:1px solid var(--line);border-radius:13px;background:linear-gradient(110deg,rgba(27,31,46,.96),rgba(18,22,33,.96))}
+    .schedule-card img,.schedule-poster-placeholder{width:55px;height:75px;flex:0 0 auto;object-fit:cover;border-radius:7px;background:#282c3c}.schedule-poster-placeholder{display:grid;place-items:center;color:#a99cff;font-size:21px}
+    .schedule-info{min-width:0;flex:1}
+    .schedule-title{font:600 12px 'Space Grotesk',sans-serif;line-height:1.35;margin:0 0 4px;white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .schedule-meta{font-size:10px;color:var(--muted);line-height:1.5}
+    .schedule-time{font-size:10px;color:#a9e9d9;margin-top:4px;font-weight:700}
+    .schedule-actions{display:flex;flex-direction:column;gap:5px;flex:0 0 auto}
+    .schedule-actions .btn{font-size:9px;padding:7px 8px;white-space:nowrap}
+    .schedule-actions .btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+    .schedule-empty{padding:33px 18px;border:1px dashed #34394d;border-radius:15px;text-align:center;color:var(--muted);font-size:12px;line-height:1.6}
+    .schedule-loading{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:11px;padding:13px 2px}
+    .detail-modal{width:min(780px,100%)}
+    .anime-detail-hero{display:grid;grid-template-columns:170px 1fr;gap:18px}
+    .anime-detail-poster{width:100%;max-height:260px;object-fit:cover;border-radius:12px;background:#282c3c}
+    .anime-detail-title{font:700 23px/1.2 'Space Grotesk',sans-serif;margin:0 0 7px;letter-spacing:-.5px}
+    .anime-detail-native{font-size:11px;color:var(--muted);margin-bottom:10px}
+    .detail-stats{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 10px}
+    .detail-stat{padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:#111520;font-size:10px;color:#d3d7e5}
+    .detail-description{color:#c2c8d7;font-size:12px;line-height:1.7;white-space:pre-line;margin:13px 0}
+    .detail-block{border-top:1px solid var(--line);padding-top:12px;margin-top:12px}
+    .detail-block h4{font:600 12px 'Space Grotesk',sans-serif;margin:0 0 8px;color:#e5e3f5}
+    .detail-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+    .detail-fact{padding:9px;border-radius:9px;background:#111520;border:1px solid #292e40;font-size:10px;color:#adb5c7;line-height:1.45}
+    .detail-fact b{display:block;color:#e5e6f0;font-size:10px;margin-bottom:3px}
+    .detail-modal-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}
+    .detail-modal-actions .btn{flex:1}
+    .catalog-link{color:#c5bcff;text-decoration:none;font-size:11px}
+    .catalog-link:hover{text-decoration:underline}
+    @media(max-width:1100px){.catalog-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+    @media(max-width:760px){.catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.catalog-poster{height:165px}.schedule-list{grid-template-columns:1fr}.anime-detail-hero{grid-template-columns:115px 1fr;gap:12px}.anime-detail-poster{max-height:190px}.anime-detail-title{font-size:18px}}
+    @media(max-width:440px){.catalog-poster{height:142px}.catalog-card-body{padding:10px}.catalog-title{font-size:12px}.catalog-desc{font-size:9px}.catalog-searchbar{padding:8px}.catalog-searchbar .btn{padding:8px 10px}.schedule-card{gap:8px;padding:8px}.schedule-card img,.schedule-poster-placeholder{width:46px;height:64px}.schedule-actions .btn{padding:6px}.detail-facts{grid-template-columns:1fr}.anime-detail-hero{grid-template-columns:92px 1fr}.anime-detail-title{font-size:16px}.detail-stat{font-size:9px}}
+
+  </style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand"><div class="brand-mark">✦</div><div><div class="brand-name">OtakuLog</div><div class="brand-sub">your anime memory</div></div></div>
+    <div class="top-actions">
+      <div class="sync-state" id="syncState"><span class="dot" id="syncDot"></span><span id="syncText">Local save</span></div>
+      <button class="btn ghost" id="helpBtn">Setup</button>
+      <button class="btn" id="accountBtn">Sign in</button>
+      <button class="btn primary" id="topAddBtn">＋ Add anime</button>
     </div>
-    <p id="load">Firebase SDK Loading&hellip;</p>
+  </header>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const loadEl = document.querySelector('#load');
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.firestore().doc('/foo/bar').get().then(() => { });
-        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        // firebase.analytics(); // call to activate
-        // firebase.analytics().logEvent('tutorial_completed');
-        // firebase.performance(); // call to activate
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+  <section class="hero">
+    <div><div class="eyebrow">Your personal watchlist</div><h1>Never lose your<br>episode again.</h1><p>Every anime, every episode, all in one place. Pick up exactly where you left off — whether you watch on a website, in Telegram, or somewhere else.</p></div>
+    <div class="hero-actions"><button class="btn" id="exportBtn">↓ Export list</button><button class="btn" id="importHeroBtn">📥 Import episode</button><button class="btn primary" id="heroAddBtn">＋ Track an anime</button></div>
+  </section>
 
-        try {
-          let app = firebase.app();
-          let features = [
-            'auth', 
-            'database', 
-            'firestore',
-            'functions',
-            'messaging', 
-            'storage', 
-            'analytics', 
-            'remoteConfig',
-            'performance',
-          ].filter(feature => typeof app[feature] === 'function');
-          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
+  <section class="stats" aria-label="Anime statistics">
+    <div class="stat purple"><div class="stat-label">Currently watching</div><div class="stat-value" id="watchingCount">0</div><div class="stat-foot">Shows in progress</div></div>
+    <div class="stat teal"><div class="stat-label">Completed</div><div class="stat-value" id="completedCount">0</div><div class="stat-foot">Finished anime</div></div>
+    <div class="stat orange"><div class="stat-label">Plan to watch</div><div class="stat-value" id="plannedCount">0</div><div class="stat-foot">Saved for later</div></div>
+    <div class="stat pink"><div class="stat-label">Total tracked</div><div class="stat-value" id="totalCount">0</div><div class="stat-foot">Your anime collection</div></div>
+  </section>
+
+  <section class="continue-wrap" id="continueSection">
+    <div class="section-head"><div><h2>Pick up where you left off</h2><div class="sub">Your most recently updated anime</div></div></div>
+    <div id="continueCard"></div>
+  </section>
+
+  <section class="import-panel" aria-label="Android episode import">
+    <div class="import-panel-copy"><div class="import-kicker">Android quick import</div><h2>Send a Telegram episode straight to OtakuLog</h2><p>Install OtakuLog on your Android phone, then use Telegram's Share button and choose OtakuLog. You can also pick a video from Downloads manually.</p></div>
+    <div class="import-panel-actions"><button class="btn primary" id="importEpisodeBtn">📥 Import downloaded video</button><button class="btn" id="installAppBtn">＋ Install app</button></div>
+  </section>
+
+  <!-- Live anime catalogue search: results are fetched from AniList and displayed as full cards. -->
+  <section class="discover-section" aria-label="Discover anime">
+    <div class="section-head"><div><h2>Discover anime</h2><div class="sub">Search the live anime catalogue and open a full details card</div></div><span class="schedule-source">Free AniList data</span></div>
+    <div class="catalog-searchbar"><span class="catalog-search-icon">⌕</span><input id="catalogSearchInput" type="search" autocomplete="off" placeholder="Search any anime — e.g. Naruto, Frieren, One Piece..."><button class="btn primary" id="catalogSearchBtn">Search</button></div>
+    <div class="catalog-search-note">Posters, synopsis, genres, scores, studios, episode counts, release status and next-airing information are fetched online. Search results do not enter your library until you choose Track anime.</div>
+    <div class="catalog-grid" id="catalogResults"><div class="catalog-state">Type an anime title above to see matching anime cards and full details.</div></div>
+  </section>
+
+  <!-- Weekly airing times from AniList's live airing schedule, displayed in India Standard Time. -->
+  <section class="schedule-section" id="airingScheduleSection" aria-label="Anime airing schedule">
+    <div class="section-head"><div><h2>Anime airing schedule</h2><div class="sub" id="scheduleSubtitle">Upcoming episodes this week · India Standard Time (IST)</div></div><div class="schedule-topline"><span class="schedule-source">Live AniList schedule</span><button class="btn small" id="refreshScheduleBtn">↻ Refresh</button></div></div>
+    <div class="schedule-day-tabs" id="scheduleDayTabs"><button class="schedule-day-tab active" data-day="all">All week</button></div>
+    <div id="scheduleStatus" class="schedule-loading">Loading current airing schedule…</div>
+    <div id="scheduleResults"></div><div class="catalog-search-note">Airing dates and times reflect AniList's reported schedule, converted to IST. Actual streaming availability may differ by service and region.</div>
+  </section>
+
+  <section>
+    <div class="section-head"><div><h2>My anime library</h2><div class="sub" id="librarySub">All your tracked shows in one place</div></div></div>
+    <div class="toolbar">
+      <div class="searchbox"><span class="search-icon">⌕</span><input id="filterInput" type="search" placeholder="Search your anime..." autocomplete="off"></div>
+      <div class="tabs" id="statusTabs">
+        <button class="tab active" data-filter="ALL">All</button><button class="tab" data-filter="WATCHING">Watching</button><button class="tab" data-filter="COMPLETED">Completed</button><button class="tab" data-filter="PLANNING">Plan to watch</button><button class="tab" data-filter="ON_HOLD">On hold</button><button class="tab" data-filter="DROPPED">Dropped</button>
+      </div>
+      <select class="sort-select" id="sortSelect" aria-label="Sort anime"><option value="updated">Recently updated</option><option value="title">Title A–Z</option><option value="progress">Most episodes</option><option value="rating">Highest rated</option></select>
+    </div>
+    <div class="anime-grid" id="animeGrid"></div>
+  </section>
+
+  <div class="bottom-note"><strong>Tracking tip:</strong> after you finish an episode, tap <strong>+1 EP</strong> on its card. Set the source to your streaming site or Telegram so you also remember where you watched it. Firebase sync becomes available after you add your project configuration.</div>
+  <div class="footer"><span>OtakuLog · Made for your watchlist</span><span><button id="footerSetup">Firebase setup & auto-tracking info</button></span></div>
+</div>
+
+<!-- Add / edit anime modal -->
+<div class="modal-backdrop" id="animeModal">
+  <div class="modal">
+    <div class="modal-head"><h3 id="animeModalTitle">Add anime to your library</h3><button class="xbtn" data-close="animeModal" aria-label="Close">×</button></div>
+    <div class="modal-content">
+      <form id="animeForm">
+        <input type="hidden" id="animeId">
+        <div class="field full">
+          <label for="animeSearch">Find anime title</label>
+          <input id="animeSearch" placeholder="Search e.g. Jujutsu Kaisen, One Piece..." autocomplete="off">
+          <div class="search-results" id="searchResults"></div>
+          <div class="search-hint">Search fills the poster, episode count and anime details automatically. Or type a title and enter it manually.</div>
+        </div>
+        <div class="field-grid" style="margin-top:14px">
+          <div class="field"><label for="animeTitle">Anime title *</label><input id="animeTitle" required placeholder="Anime name"></div>
+          <div class="field"><label for="animeTotal">Total episodes</label><input id="animeTotal" type="number" min="0" placeholder="Unknown / ongoing"></div>
+          <div class="field"><label for="animeProgress">Episode watched</label><input id="animeProgress" type="number" min="0" value="0"></div>
+          <div class="field"><label for="animeStatus">Watch status</label><select id="animeStatus"><option value="WATCHING">Watching</option><option value="COMPLETED">Completed</option><option value="PLANNING">Plan to watch</option><option value="ON_HOLD">On hold</option><option value="DROPPED">Dropped</option></select></div>
+          <div class="field"><label for="animeSource">Where do you watch?</label><select id="animeSource"><option value="Aniilli">Aniilli / Anilili</option><option value="Telegram">Telegram</option><option value="Website">Website</option><option value="Crunchyroll">Crunchyroll</option><option value="Netflix">Netflix</option><option value="Other">Other</option></select></div>
+          <div class="field"><label for="animeRating">Your rating (1–10)</label><input id="animeRating" type="number" min="1" max="10" placeholder="Not rated"></div>
+          <div class="field"><label for="animeYear">Year</label><input id="animeYear" type="number" min="1950" max="2100" placeholder="e.g. 2026"></div>
+          <div class="field"><label for="animeFormat">Format</label><select id="animeFormat"><option value="">Not specified</option><option>TV</option><option>Movie</option><option>OVA</option><option>ONA</option><option>Special</option></select></div>
+          <div class="field full"><label for="animeNotes">Notes (optional)</label><textarea id="animeNotes" placeholder="Season 2 next, watching on Telegram channel..., favourite character..."></textarea></div>
+          <div class="field full"><label for="animeCover">Poster image URL (optional)</label><input id="animeCover" type="url" placeholder="Filled automatically when you pick a search result"></div>
+        </div>
+        <div class="form-actions"><button type="button" class="btn danger hidden" id="deleteAnimeBtn">Delete anime</button><div class="form-actions-right"><button type="button" class="btn" data-close="animeModal">Cancel</button><button type="submit" class="btn primary">Save anime</button></div></div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Android video / Telegram share import modal -->
+<div class="modal-backdrop" id="importModal">
+  <div class="modal" style="max-width:610px">
+    <div class="modal-head"><h3>Import an anime episode</h3><button class="xbtn" data-close="importModal" aria-label="Close">×</button></div>
+    <div class="modal-content">
+      <div class="import-file-box"><div class="import-file-icon">▶</div><div style="min-width:0;flex:1"><div class="import-file-name" id="importFileName">No video selected yet</div><div class="import-file-meta" id="importFileMeta">Choose a Telegram download or share a video to OtakuLog.</div></div></div>
+      <input id="videoFileInput" type="file" accept="video/*,.mkv,.avi,.mov,.webm,.mp4,.m4v" hidden />
+      <button type="button" class="btn" id="chooseVideoBtn">Choose video from Downloads</button>
+      <p class="import-hint">OtakuLog reads the filename only. The actual video is never uploaded to Firebase or copied into your anime library. Android may show Telegram's saved files through the system file picker.</p>
+      <div class="field-grid">
+        <div class="field full"><label for="importAnimeTitle">Detected anime title</label><input id="importAnimeTitle" placeholder="Example: Solo Leveling" autocomplete="off"></div>
+        <div class="field"><label for="importSeason">Season (if detected)</label><input id="importSeason" type="number" min="1" max="99" placeholder="e.g. 2"></div>
+        <div class="field"><label for="importEpisode">Episode number</label><input id="importEpisode" type="number" min="1" max="9999" placeholder="e.g. 5"></div>
+      </div>
+      <div class="field" style="margin-top:13px"><label>Confirm the matching anime</label><div class="import-results" id="importResults"></div><div class="import-selected" id="importSelectedText">Search suggestions will appear after the title is detected. You can still save manually.</div></div>
+      <label class="import-checkbox"><input type="checkbox" id="markImportedWatched"><span><strong>Also update my watched progress</strong><br>Leave unchecked if you have downloaded the episode but have not watched it yet. The download will still be saved.</span></label>
+      <div class="form-actions"><span style="font-size:10px;color:#8f97aa" id="importStatusText">Source: Telegram / Downloads</span><div class="form-actions-right"><button type="button" class="btn" data-close="importModal">Cancel</button><button type="button" class="btn primary" id="saveImportBtn">Save episode details</button></div></div>
+      <div class="install-note"><strong>Telegram shortcut:</strong> after installing this PWA, open a downloaded video in Telegram → Share → choose OtakuLog. If OtakuLog is not listed, install it from Chrome first.</div>
+    </div>
+  </div>
+</div>
+
+<!-- Full catalogue anime details -->
+<div class="modal-backdrop" id="animeDetailModal">
+  <div class="modal detail-modal">
+    <div class="modal-head"><h3>Anime details</h3><button class="xbtn" data-close="animeDetailModal" aria-label="Close">×</button></div>
+    <div class="modal-content" id="animeDetailContent"><div class="catalog-state">Choose an anime to view its details.</div></div>
+  </div>
+</div>
+
+<!-- Auth modal -->
+<div class="modal-backdrop" id="authModal">
+  <div class="modal" style="max-width:430px">
+    <div class="modal-head"><h3 id="authTitle">Sign in to sync</h3><button class="xbtn" data-close="authModal">×</button></div>
+    <div class="modal-content">
+      <p class="auth-copy">Use an email and password to keep your anime list synced across your devices. Your list is private to your account.</p>
+      <form id="authForm">
+        <div class="field" style="margin-bottom:12px"><label for="authEmail">Email</label><input id="authEmail" type="email" required placeholder="you@example.com"></div>
+        <div class="field"><label for="authPassword">Password</label><input id="authPassword" type="password" required minlength="6" placeholder="At least 6 characters"></div>
+        <div class="form-actions"><span style="font-size:11px;color:#9299ad" id="authModeText">New here?<a class="auth-toggle" id="authToggle">Create account</a></span><button type="submit" class="btn primary" id="authSubmit">Sign in</button></div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Setup modal -->
+<div class="modal-backdrop" id="helpModal">
+  <div class="modal help-modal">
+    <div class="modal-head"><h3>Firebase setup & tracking guide</h3><button class="xbtn" data-close="helpModal">×</button></div>
+    <div class="modal-content help-content">
+      <p><strong style="color:#eeeaff">Your Firebase web configuration is prefilled in this build.</strong> Enable Email/Password sign-in and create the Cloud Firestore database to turn on cloud sync.</p>
+      <h4>1. Enable Email/Password authentication</h4>
+      <p>Open <a href="https://console.firebase.google.com/project/anime-maker-d2725/authentication" target="_blank" rel="noopener">Firebase Authentication</a> → Get started → Sign-in method → enable <strong>Email/Password</strong>.</p>
+      <h4>2. Create Firestore Database</h4>
+      <p>Open <a href="https://console.firebase.google.com/project/anime-maker-d2725/firestore" target="_blank" rel="noopener">Firestore Database</a> → Create database. After creation, open Rules and publish the supplied <code>firestore.rules</code> file. These rules keep each signed-in user's anime library private to that account.</p>
+      <pre>rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId}/anime/{animeId} {
+      allow read, write: if request.auth != null
+                         && request.auth.uid == userId;
+    }
+  }
+}</pre>
+      <h4>3. Deploy the PWA to Firebase Hosting</h4>
+      <p>In this project folder, run <code>npm install -g firebase-tools</code>, then <code>firebase login</code>, then <code>firebase deploy</code>. The included <code>firebase.json</code> and <code>.firebaserc</code> are set for your project. Hosting provides the HTTPS origin required for installation and Android file sharing.</p>
+      <h4>4. Install it on Android</h4>
+      <p>Open your Firebase Hosting URL in <strong>Chrome on Android</strong> → ⋮ menu → <strong>Install app</strong> (or Add to Home screen). Open the installed OtakuLog app once. Then in Telegram, open a downloaded video → Share → choose OtakuLog. You can also use <strong>Import downloaded video</strong> and select a file through Android's picker.</p>
+      <h4>How episode detection works</h4>
+      <p>OtakuLog reads the video filename, detects common patterns such as <code>S02E05</code>, <code>Season 2 Episode 5</code>, or <code>Episode 5</code>, then searches AniList for the anime poster and catalogue information. Review the match before saving. Duplicate downloaded episode records are avoided.</p>
+      <h4>Downloaded does not automatically mean watched</h4>
+      <p>The import checkbox is off by default. Turn it on only when you have watched that episode and want your watched progress to move forward. The imported video itself is never uploaded to Firebase; only its filename and anime/episode details are saved.</p>
+      <h4>Important limits</h4>
+      <p>Android file sharing requires OtakuLog to be installed as a PWA from an HTTPS website. Share-target availability depends on the app that sends the file and Android's share sheet. If Telegram does not offer the file to OtakuLog, use the manual Downloads picker. A filename can be ambiguous, so always check the detected title and episode before saving.</p>
+      <p>The Firebase web API configuration is a client identifier, not a private service-account key. Do not add service-account JSON or private credentials to this page. This tracker uses Firestore; the Realtime Database and Storage URLs are included in the config but the app does not upload videos or use those products.</p>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<!-- Firebase compat SDK. The app continues in local mode when config is not added. -->
+<script src="https://www.gstatic.com/firebasejs/13.4.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/13.4.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/13.4.0/firebase-analytics-compat.js"></script>
+<script>
+  // Firebase Web App config supplied for anime-maker-d2725.
+  // This client config is not a service-account private key; protect data with Firestore Rules.
+  const firebaseConfig = {
+    apiKey: "AIzaSyDVqR2bhYMk1auPXAP3PMDydfhfLz-VGNc",
+    authDomain: "anime-maker-d2725.firebaseapp.com",
+    databaseURL: "https://anime-maker-d2725-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "anime-maker-d2725",
+    storageBucket: "anime-maker-d2725.firebasestorage.app",
+    messagingSenderId: "1068669685573",
+    appId: "1:1068669685573:web:f4e38c501ed91278ecb82c",
+    measurementId: "G-F3KZQBPYJ7"
+  };
+
+  const $ = (id) => document.getElementById(id);
+  const STORAGE_KEY = 'otakulog_anime_v1';
+  const STATE_LABELS = {WATCHING:'Watching',COMPLETED:'Completed',PLANNING:'Plan to watch',ON_HOLD:'On hold',DROPPED:'Dropped'};
+  const STATE_COLORS = {WATCHING:'#c3baff',COMPLETED:'#9ce4bd',PLANNING:'#ffc68d',ON_HOLD:'#9bd9e1',DROPPED:'#ff9eaa'};
+  let animeList = [];
+  let activeFilter = 'ALL';
+  let editingId = null;
+  let selectedAniList = null;
+  let authMode = 'login';
+  let firebaseReady = false;
+  let currentUser = null;
+  let unsubscribeAnime = null;
+  let db = null;
+  let auth = null;
+  let analytics = null;
+  let toastTimer = null;
+  let searchTimer = null;
+  let importSearchTimer = null;
+  let selectedImportAniList = null;
+  let pendingImportFile = null;
+  let installPromptEvent = null;
+  const SHARE_DB_NAME = 'otakulog-share-v1';
+  const SHARE_STORE_NAME = 'incoming';
+  let activeSharedRecordId = null;
+  let catalogSearchTimer = null;
+  let catalogSearchToken = 0;
+  let catalogSearchCache = new Map();
+  let catalogDetailCache = new Map();
+  let selectedCatalogAnime = null;
+  let airingScheduleItems = [];
+  let selectedScheduleDay = 'all';
+  let scheduleCacheLoadedAt = 0;
+  let scheduleRefreshTimer = null;
+  const ANILIST_ENDPOINT = 'https://graphql.anilist.co';
+  const ANILIST_CACHE_KEY = 'otakulog_airing_cache_v1';
+  const INDIA_OFFSET_SECONDS = 19800;
+
+  function showToast(message){ const el=$('toast'); el.textContent=message; el.classList.add('show'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>el.classList.remove('show'),2600); }
+  function escapeHtml(value=''){ return String(value).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+  function safeImage(url){ return typeof url==='string' && /^https:\/\//i.test(url) ? url : ''; }
+  function clampProgress(progress,total){ let p=Math.max(0,Number(progress)||0); let t=Math.max(0,Number(total)||0); return t>0?Math.min(p,t):p; }
+  function readLocal(){ try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]')}catch(e){return[]} }
+  function writeLocal(){ localStorage.setItem(STORAGE_KEY,JSON.stringify(animeList)); }
+  function configureFirebase(){
+    const configured = firebaseConfig.apiKey && firebaseConfig.authDomain && firebaseConfig.projectId && firebaseConfig.appId;
+    if(!configured || !window.firebase){ setSyncState(false,'Local save'); $('accountBtn').textContent='Sign in'; return; }
+    try{
+      if(!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+      auth=firebase.auth(); db=firebase.firestore(); firebaseReady=true;
+      // Analytics is optional; unsupported browsers and local previews continue normally.
+      if(firebase.analytics && firebase.analytics.isSupported){ firebase.analytics.isSupported().then(supported=>{ if(supported) firebase.analytics(); }).catch(()=>{}); }
+      setSyncState(false,'Sign in to sync');
+      auth.onAuthStateChanged(async user=>{
+        currentUser=user||null;
+        if(user){
+          $('accountBtn').textContent='Sign out';
+          setSyncState(true,'Firebase sync');
+          await attachFirestoreListener();
+        }else{
+          if(unsubscribeAnime){unsubscribeAnime();unsubscribeAnime=null;}
+          $('accountBtn').textContent='Sign in';
+          setSyncState(false,'Sign in to sync');
+          animeList=readLocal(); render();
         }
       });
-    </script>
-  </body>
+    }catch(err){ console.error(err); setSyncState(false,'Local save'); showToast('Firebase config could not be loaded. Check Setup.'); }
+  }
+  function setSyncState(connected,label){ $('syncText').textContent=label; $('syncDot').classList.toggle('live',!!connected); }
+  async function attachFirestoreListener(){
+    if(!db||!currentUser)return;
+    if(unsubscribeAnime)unsubscribeAnime();
+    const ref=db.collection('users').doc(currentUser.uid).collection('anime');
+    let migrationInProgress=false;
+    unsubscribeAnime=ref.onSnapshot(async snapshot=>{
+      // Merge locally saved/offline items into this account without replacing newer cloud records.
+      // This also prevents a non-empty Firestore list from hiding unsynced local anime.
+      const local=readLocal();
+      if(local.length&&!migrationInProgress){
+        migrationInProgress=true;
+        try{
+          const cloudById=new Map(snapshot.docs.map(doc=>[doc.id,doc.data()]));
+          const pending=local.filter(item=>{
+            if(!item.id)return true;
+            const cloud=cloudById.get(item.id);
+            return !cloud || (Number(item.updatedAt)||0)>(Number(cloud.updatedAt)||0);
+          });
+          for(let start=0;start<pending.length;start+=400){
+            const batch=db.batch();
+            pending.slice(start,start+400).forEach(item=>{
+              const id=item.id||('a_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,9));
+              batch.set(ref.doc(id),{...item,id,updatedAt:item.updatedAt||Date.now()},{merge:true});
+            });
+            await batch.commit();
+          }
+          localStorage.removeItem(STORAGE_KEY);
+          if(pending.length)showToast('Your locally saved anime was synced to Firebase.');
+        }catch(e){
+          console.error(e);
+          showToast('Could not sync local anime. Check Firestore rules and connection.');
+        }finally{migrationInProgress=false;}
+      }
+      animeList=snapshot.docs.map(doc=>({id:doc.id,...doc.data()}));
+      render();
+    },err=>{console.error(err);setSyncState(false,'Sync error');showToast('Firebase read failed. Check your Firestore rules.');});
+  }
+  async function persist(item){
+    const data={...item,updatedAt:Date.now()};
+    if(firebaseReady&&currentUser){
+      try{
+        await db.collection('users').doc(currentUser.uid).collection('anime').doc(data.id).set(data,{merge:true});
+        return true;
+      }catch(e){
+        console.error(e);
+        showToast('Firebase save failed. Your change is kept locally for now.');
+        animeList=animeList.filter(x=>x.id!==data.id); animeList.push(data); writeLocal(); render();
+        return false;
+      }
+    }
+    const idx=animeList.findIndex(x=>x.id===data.id);
+    if(idx>=0)animeList[idx]=data;else animeList.push(data);
+    writeLocal();render();
+    return false;
+  }
+  async function removeAnime(id){
+    if(!confirm('Remove this anime from your library?'))return;
+    if(firebaseReady&&currentUser){try{await db.collection('users').doc(currentUser.uid).collection('anime').doc(id).delete();}catch(e){showToast('Could not delete from Firebase.');return;}}
+    animeList=animeList.filter(x=>x.id!==id); if(!currentUser)writeLocal(); render(); closeModal('animeModal'); showToast('Anime removed.');
+  }
+  function statusName(status){return STATE_LABELS[status]||'Watching';}
+  function progressPercent(item){const p=Number(item.progress)||0,t=Number(item.total)||0;return t>0?Math.min(100,Math.round(p/t*100)):0;}
+  function sortedList(list){const mode=$('sortSelect').value; return [...list].sort((a,b)=>{if(mode==='title')return (a.title||'').localeCompare(b.title||'');if(mode==='progress')return (Number(b.progress)||0)-(Number(a.progress)||0);if(mode==='rating')return (Number(b.rating)||0)-(Number(a.rating)||0);return (Number(b.updatedAt)||0)-(Number(a.updatedAt)||0);});}
+  function filteredList(){const q=$('filterInput').value.trim().toLowerCase();let list=animeList.filter(x=>activeFilter==='ALL'||x.status===activeFilter);if(q)list=list.filter(x=>(x.title||'').toLowerCase().includes(q)||(x.source||'').toLowerCase().includes(q)||(x.notes||'').toLowerCase().includes(q));return sortedList(list);}
+  function render(){
+    $('watchingCount').textContent=animeList.filter(x=>x.status==='WATCHING').length;
+    $('completedCount').textContent=animeList.filter(x=>x.status==='COMPLETED').length;
+    $('plannedCount').textContent=animeList.filter(x=>x.status==='PLANNING').length;
+    $('totalCount').textContent=animeList.length;
+    $('librarySub').textContent=`${animeList.length} ${animeList.length===1?'anime':'anime'} in your library`;
+    renderContinue();
+    if(airingScheduleItems.length)renderSchedule();
+    const list=filteredList(); const grid=$('animeGrid');
+    if(!list.length){
+      const isEmpty=animeList.length===0;
+      grid.innerHTML=`<div class="empty"><div class="empty-icon">${isEmpty?'✦':'⌕'}</div><h3>${isEmpty?'Your anime shelf is waiting':'No anime found'}</h3><p>${isEmpty?'Add the anime you are watching and record the last episode you finished. Your list will start taking shape here.':'Try another search or choose a different status filter.'}</p>${isEmpty?'<button class="btn primary" onclick="openAddModal()">＋ Add your first anime</button>':''}</div>`;
+      return;
+    }
+    grid.innerHTML=list.map(item=>{
+      const pct=progressPercent(item), total=Number(item.total)||0, progress=Number(item.progress)||0;
+      const cover=safeImage(item.cover);
+      const ongoing=item.airStatus==='RELEASING';
+      return `<article class="anime-card">
+        <div class="card-poster">${cover?`<img src="${escapeHtml(cover)}" alt="${escapeHtml(item.title)} poster" loading="lazy" onerror="this.style.display='none'">`:''}<span class="status-pill" style="color:${STATE_COLORS[item.status]||'#c3baff'}">${statusName(item.status)}</span>${ongoing?'<span class="ongoing-pill">AIRING</span>':''}</div>
+        <div class="card-body"><h3 class="card-title" title="${escapeHtml(item.title)}">${escapeHtml(item.title)}</h3><div class="card-meta"><span>${escapeHtml(item.year||'')}</span>${item.format?`<span>· ${escapeHtml(item.format)}</span>`:''}${item.total?`<span>· ${total} eps</span>`:'<span>· Episode count unknown</span>'}</div>
+          <div class="card-progress-head"><span>Episode progress</span><b>${progress}${total?` / ${total}`:''}</b></div><div class="mini-progress"><span style="width:${pct}%"></span></div>
+          ${item.nextEpisode?`<div class="airing-line">Next: episode ${escapeHtml(item.nextEpisode)}${item.nextAiringAt?` · ${escapeHtml(formatAiring(item.nextAiringAt))}`:''}</div>`:''}
+          ${item.lastDownloadedEpisode?`<div class="downloaded-line">↓ Downloaded: <span>${item.lastDownloadedSeason?`S${escapeHtml(item.lastDownloadedSeason)} · `:''}EP ${escapeHtml(item.lastDownloadedEpisode)}</span>${item.lastDownloadFileName?` · ${escapeHtml(item.lastDownloadFileName)}`:''}</div>`:''}
+          <div class="card-actions"><div class="card-actions-left"><button class="icon-btn" title="Decrease episode" onclick="changeProgress('${item.id}',-1)">−</button><button class="icon-btn" title="Increase episode" onclick="changeProgress('${item.id}',1)">＋</button><span class="source-tag">${escapeHtml(item.source||'Not set')}</span></div><button class="btn small" onclick="openEditModal('${item.id}')">Details ↗</button></div>
+        </div></article>`;
+    }).join('');
+  }
+  function renderContinue(){
+    const candidates=animeList.filter(x=>x.status==='WATCHING').sort((a,b)=>(Number(b.updatedAt)||0)-(Number(a.updatedAt)||0));
+    const item=candidates[0]; const root=$('continueCard');
+    if(!item){root.innerHTML=`<div class="continue-card"><div class="cover" style="display:grid;place-items:center;color:#a99cff;font-size:25px">✦</div><div class="continue-info"><div class="continue-kicker">Ready when you are</div><div class="continue-title">Nothing in progress yet</div><div class="continue-meta">Add a show and update your episode progress to see it here.</div></div><div class="continue-ctrl"><button class="btn primary" onclick="openAddModal()">＋ Add anime</button></div></div>`;return;}
+    const pct=progressPercent(item); root.innerHTML=`<div class="continue-card"><img class="cover" src="${escapeHtml(safeImage(item.cover)||'') }" alt="" onerror="this.style.display='none'"><div class="continue-info"><div class="continue-kicker">Continue watching</div><div class="continue-title" title="${escapeHtml(item.title)}">${escapeHtml(item.title)}</div><div class="continue-meta">Last recorded: episode ${Number(item.progress)||0}${item.total?` of ${Number(item.total)}`:''} · ${escapeHtml(item.source||'Source not set')}</div><div class="progress-line"><span style="width:${pct}%"></span></div><div class="progress-foot">${pct}% complete</div></div><div class="continue-ctrl"><button class="btn primary" onclick="changeProgress('${item.id}',1)">＋1 episode</button><button class="btn small" onclick="openEditModal('${item.id}')">Edit</button></div></div>`;
+  }
+  function formatAiring(seconds){try{return new Date(Number(seconds)*1000).toLocaleDateString('en-IN',{month:'short',day:'numeric',timeZone:'Asia/Kolkata'});}catch(e){return''}}
+  function openModal(id){$(id).classList.add('open');document.body.style.overflow='hidden';}
+  function closeModal(id){$(id).classList.remove('open');if(!document.querySelector('.modal-backdrop.open'))document.body.style.overflow='';}
+  function resetForm(){ $('animeForm').reset();$('animeId').value='';$('animeProgress').value='0';$('animeStatus').value='WATCHING';$('animeModalTitle').textContent='Add anime to your library';$('deleteAnimeBtn').classList.add('hidden');$('searchResults').classList.remove('show');$('searchResults').innerHTML='';selectedAniList=null;editingId=null; }
+  function openAddModal(){resetForm();openModal('animeModal');setTimeout(()=>$('animeSearch').focus(),100);}
+  function openEditModal(id){const item=animeList.find(x=>x.id===id);if(!item)return;resetForm();editingId=id;$('animeId').value=id;$('animeModalTitle').textContent='Edit anime';$('deleteAnimeBtn').classList.remove('hidden');$('animeSearch').value=item.title||'';$('animeTitle').value=item.title||'';$('animeTotal').value=item.total||'';$('animeProgress').value=item.progress||0;$('animeStatus').value=item.status||'WATCHING';$('animeSource').value=item.source||'Other';$('animeRating').value=item.rating||'';$('animeYear').value=item.year||'';$('animeFormat').value=item.format||'';$('animeNotes').value=item.notes||'';$('animeCover').value=item.cover||'';openModal('animeModal');}
+  async function changeProgress(id,delta){const item=animeList.find(x=>x.id===id);if(!item)return;const total=Number(item.total)||0;const progress=clampProgress((Number(item.progress)||0)+delta,total);let status=item.status;if(total>0&&progress>=total)status='COMPLETED';else if(status==='COMPLETED'&&progress<total)status='WATCHING';const updated={...item,progress,status,updatedAt:Date.now()};await persist(updated);if(!firebaseReady||!currentUser)render();showToast(delta>0?`Episode ${progress} saved for ${item.title}.`:'Progress updated.');}
+  // All catalogue and schedule data is retrieved from AniList's free public GraphQL API.
+  // Searches are debounced and weekly schedule results are cached to respect API rate limits.
+  async function anilistRequest(query,variables={}){
+    const response=await fetch(ANILIST_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({query,variables})});
+    if(response.status===429){const wait=response.headers.get('Retry-After')||'60';throw new Error(`AniList is busy. Please retry in about ${wait} seconds.`);}
+    if(!response.ok)throw new Error(`AniList request failed (${response.status}).`);
+    const payload=await response.json();
+    if(payload.errors?.length)throw new Error(payload.errors.map(x=>x.message).join(' '));
+    return payload.data||{};
+  }
+  function animeDisplayTitle(item){return item?.title?.english||item?.title?.romaji||item?.title?.native||'Unknown anime';}
+  function animePlainDescription(value=''){
+    return String(value||'').replace(/<br\s*\/?\s*>/gi,'\n').replace(/<[^>]*>/g,' ').replace(/\[([^\]]+)\]\([^)]*\)/g,'$1').replace(/\*\*|__|~~|`/g,'').replace(/\s+\n/g,'\n').replace(/\n{3,}/g,'\n\n').trim();
+  }
+  function animeDateText(date){if(!date||!date.year)return 'Not announced';const d=new Date(Date.UTC(date.year,(date.month||1)-1,date.day||1));return d.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric',timeZone:'UTC'});}
+  function getAniListSearchQuery(){return `query ($search: String!) { Page(page: 1, perPage: 12) { media(search: $search, type: ANIME, sort: SEARCH_MATCH) { id idMal title { romaji english native } coverImage { extraLarge large medium } bannerImage description(asHtml: false) format status episodes duration season seasonYear startDate { year month day } endDate { year month day } genres averageScore meanScore popularity favourites source countryOfOrigin siteUrl nextAiringEpisode { episode airingAt timeUntilAiring } studios(isMain: true) { nodes { name } } tags { name rank category isMediaSpoiler } } } }`;}
+  async function fetchFullAnimeById(id){
+    const key=Number(id);if(!key)throw new Error('Anime ID is missing.');if(catalogDetailCache.has(key))return catalogDetailCache.get(key);
+    const query=`query ($id: Int!) { Media(id: $id, type: ANIME) { id idMal title { romaji english native } coverImage { extraLarge large medium } bannerImage description(asHtml: false) format status episodes duration season seasonYear startDate { year month day } endDate { year month day } genres averageScore meanScore popularity favourites source countryOfOrigin siteUrl nextAiringEpisode { episode airingAt timeUntilAiring } studios(isMain: true) { nodes { name } } tags { name rank category isMediaSpoiler } } }`;
+    const data=await anilistRequest(query,{id:key});if(!data?.Media)throw new Error('Anime details were not found.');catalogDetailCache.set(key,data.Media);return data.Media;
+  }
+  function renderCatalogState(message){$('catalogResults').innerHTML=`<div class="catalog-state">${escapeHtml(message)}</div>`;}
+  function renderCatalogCards(items){
+    const root=$('catalogResults');
+    if(!items.length){renderCatalogState('No matching anime was found. Try another title or spelling.');return;}
+    root.innerHTML=items.map((item,index)=>{
+      const title=animeDisplayTitle(item),poster=safeImage(item.coverImage?.large||item.coverImage?.extraLarge||item.coverImage?.medium||''),description=animePlainDescription(item.description).slice(0,220);
+      const genres=(item.genres||[]).slice(0,3);
+      const score=Number(item.averageScore)||Number(item.meanScore);
+      const meta=[item.format||'Anime',item.seasonYear||'Year unknown',item.episodes?`${item.episodes} episodes`:'Episode count unknown',item.status==='RELEASING'?'Currently airing':(item.status||'Status unknown').replaceAll('_',' ')].join(' · ');
+      return `<article class="catalog-card" data-catalog-index="${index}"><div class="catalog-poster">${poster?`<img src="${escapeHtml(poster)}" alt="${escapeHtml(title)} poster" loading="lazy" onerror="this.style.display='none'">`:''}${score?`<span class="catalog-score">★ ${(score/10).toFixed(1)} / 10</span>`:''}</div><div class="catalog-card-body"><h3 class="catalog-title">${escapeHtml(title)}</h3><div class="catalog-meta">${escapeHtml(meta)}</div><p class="catalog-desc">${escapeHtml(description||'Synopsis is not available in the catalogue.')}</p><div class="catalog-genres">${genres.map(g=>`<span class="catalog-genre">${escapeHtml(g)}</span>`).join('')}</div><div class="catalog-actions"><button class="btn" data-catalog-details="${index}">Full details</button><button class="btn primary" data-catalog-track="${index}">＋ Track</button></div></div></article>`;
+    }).join('');
+    root.querySelectorAll('[data-catalog-details]').forEach(btn=>btn.addEventListener('click',()=>openAnimeDetails(items[Number(btn.dataset.catalogDetails)])));
+    root.querySelectorAll('[data-catalog-track]').forEach(btn=>btn.addEventListener('click',()=>addCatalogAnime(items[Number(btn.dataset.catalogTrack)])));
+    root.querySelectorAll('.catalog-card').forEach(card=>card.addEventListener('click',e=>{if(e.target.closest('button'))return;openAnimeDetails(items[Number(card.dataset.catalogIndex)]);}));
+  }
+  async function searchCatalog(query){
+    const token=++catalogSearchToken;const q=String(query||'').trim();if(q.length<2){renderCatalogState('Type at least two letters to search the anime catalogue.');return;}
+    const cacheKey=q.toLowerCase();
+    const cached=catalogSearchCache.get(cacheKey);
+    if(cached){renderCatalogCards(cached);return;}
+    const stored=(()=>{try{return JSON.parse(localStorage.getItem(`otakulog_catalog_${encodeURIComponent(cacheKey)}`)||'null')}catch(e){return null}})();
+    if(stored&&Date.now()-stored.savedAt<6*60*60*1000){catalogSearchCache.set(cacheKey,stored.items);renderCatalogCards(stored.items);return;}
+    renderCatalogState('Searching the live anime catalogue…');
+    try{
+      const data=await anilistRequest(getAniListSearchQuery(),{search:q});
+      if(token!==catalogSearchToken)return;
+      const items=data?.Page?.media||[];catalogSearchCache.set(cacheKey,items);
+      try{localStorage.setItem(`otakulog_catalog_${encodeURIComponent(cacheKey)}`,JSON.stringify({savedAt:Date.now(),items}));}catch(e){}
+      renderCatalogCards(items);
+    }catch(err){if(token!==catalogSearchToken)return;console.warn(err);renderCatalogState(`${err.message||'Catalogue search is unavailable.'} Check your internet connection and try again.`);}
+  }
+  function trackedAnimeFor(item){return animeList.find(x=>(item?.id&&Number(x.anilistId)===Number(item.id))||normalizeAnimeTitle(x.title)===normalizeAnimeTitle(animeDisplayTitle(item)));}
+  function catalogItemToEntry(item,status='PLANNING',progress=0){
+    const old=trackedAnimeFor(item),title=animeDisplayTitle(item),total=Number(item.episodes)||0;
+    return {id:old?.id||('a_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,8)),title:old?.title||title,total:total||old?.total||0,progress:Math.max(Number(old?.progress)||0,Number(progress)||0),status:old?.status||status,source:old?.source||'Other',rating:old?.rating||null,year:item.seasonYear||old?.year||null,format:item.format==='TV_SHORT'?'TV':(item.format||old?.format||''),notes:old?.notes||'',cover:safeImage(item.coverImage?.large||item.coverImage?.extraLarge||item.coverImage?.medium||old?.cover||''),airStatus:item.status||old?.airStatus||'',nextEpisode:item.nextAiringEpisode?.episode||old?.nextEpisode||null,nextAiringAt:item.nextAiringEpisode?.airingAt||old?.nextAiringAt||null,anilistId:item.id||old?.anilistId||null,description:animePlainDescription(item.description)||old?.description||'',genres:item.genres||old?.genres||[],studios:(item.studios?.nodes||[]).map(x=>x.name)||old?.studios||[],averageScore:item.averageScore||item.meanScore||old?.averageScore||null,popularity:item.popularity||old?.popularity||null,season:item.season||old?.season||'',countryOfOrigin:item.countryOfOrigin||old?.countryOfOrigin||'',startDate:item.startDate||old?.startDate||null,endDate:item.endDate||old?.endDate||null,siteUrl:item.siteUrl||old?.siteUrl||(item.id?`https://anilist.co/anime/${item.id}`:''),createdAt:old?.createdAt||Date.now(),updatedAt:Date.now()};
+  }
+  async function addCatalogAnime(item){
+    if(!item)return;const existing=trackedAnimeFor(item);
+    if(existing){showToast(`${existing.title} is already in your library.`);closeModal('animeDetailModal');$('animeGrid').scrollIntoView({behavior:'smooth',block:'start'});return;}
+    const entry=catalogItemToEntry(item,'PLANNING',0);await persist(entry);if(!firebaseReady||!currentUser)render();
+    showToast(`${entry.title} added to Plan to watch.`);closeModal('animeDetailModal');$('animeGrid').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function openAnimeDetails(item){
+    if(!item)return;selectedCatalogAnime=item;const title=animeDisplayTitle(item),poster=safeImage(item.coverImage?.extraLarge||item.coverImage?.large||item.coverImage?.medium||''),score=Number(item.averageScore)||Number(item.meanScore),studios=(item.studios?.nodes||[]).map(x=>x.name).join(', ')||'Not listed';
+    const tags=(item.tags||[]).filter(x=>x.isMediaSpoiler!==true).sort((a,b)=>(Number(b.rank)||0)-(Number(a.rank)||0)).slice(0,8).map(x=>x.name);
+    const next=item.nextAiringEpisode?`Episode ${item.nextAiringEpisode.episode} · ${formatAiringDateTime(item.nextAiringEpisode.airingAt)}`:'No upcoming episode listed';
+    const tracked=trackedAnimeFor(item);
+    const details=[['Format',item.format||'Unknown'],['Release status',(item.status||'Unknown').replaceAll('_',' ')],['Episodes',item.episodes||'Unknown'],['Episode duration',item.duration?`${item.duration} min`: 'Unknown'],['Season',item.season?`${item.season} ${item.seasonYear||''}`:String(item.seasonYear||'Unknown')],['First released',animeDateText(item.startDate)],['Last released',animeDateText(item.endDate)],['Source material',(item.source||'Unknown').replaceAll('_',' ')],['Country',item.countryOfOrigin||'Unknown'],['Popularity',item.popularity?Number(item.popularity).toLocaleString('en-IN'):'Not listed'],['Studios',studios],['Next episode',next]];
+    $('animeDetailContent').innerHTML=`<div class="anime-detail-hero">${poster?`<img class="anime-detail-poster" src="${escapeHtml(poster)}" alt="${escapeHtml(title)} poster">`:'<div class="anime-detail-poster"></div>'}<div><h2 class="anime-detail-title">${escapeHtml(title)}</h2><div class="anime-detail-native">${escapeHtml(item.title?.native||item.title?.romaji||'')}</div><div class="detail-stats">${score?`<span class="detail-stat">★ ${(score/10).toFixed(1)} / 10</span>`:''}<span class="detail-stat">${escapeHtml(item.format||'Anime')}</span><span class="detail-stat">${escapeHtml((item.status||'Unknown').replaceAll('_',' '))}</span>${item.favourites?`<span class="detail-stat">♥ ${Number(item.favourites).toLocaleString('en-IN')}</span>`:''}</div><div class="catalog-genres">${(item.genres||[]).map(g=>`<span class="catalog-genre">${escapeHtml(g)}</span>`).join('')}</div><p class="detail-description">${escapeHtml(animePlainDescription(item.description)||'No synopsis has been provided for this entry.')}</p>${item.siteUrl?`<a class="catalog-link" href="${escapeHtml(item.siteUrl)}" target="_blank" rel="noopener">Open AniList entry ↗</a>`:''}</div></div><div class="detail-block"><h4>Anime information</h4><div class="detail-facts">${details.map(([label,value])=>`<div class="detail-fact"><b>${escapeHtml(label)}</b>${escapeHtml(String(value))}</div>`).join('')}</div></div>${tags.length?`<div class="detail-block"><h4>Tags</h4><div class="catalog-genres">${tags.map(t=>`<span class="catalog-genre">${escapeHtml(t)}</span>`).join('')}</div></div>`:''}<div class="detail-modal-actions"><button class="btn primary" id="detailTrackBtn">${tracked?'✓ Already in your library':'＋ Add to Plan to watch'}</button>${tracked?`<button class="btn" id="detailEditBtn">Edit tracking</button>`:''}</div>`;
+    $('detailTrackBtn').addEventListener('click',()=>{if(tracked){closeModal('animeDetailModal');openEditModal(tracked.id);}else addCatalogAnime(item);});
+    if(tracked)$('detailEditBtn').addEventListener('click',()=>{closeModal('animeDetailModal');openEditModal(tracked.id);});
+    openModal('animeDetailModal');
+  }
+  function istDateKey(unixSeconds){return new Date(Number(unixSeconds)*1000+INDIA_OFFSET_SECONDS*1000).toISOString().slice(0,10);}
+  function istTodayStart(){const shifted=new Date(Date.now()+INDIA_OFFSET_SECONDS*1000);return Math.floor(Date.UTC(shifted.getUTCFullYear(),shifted.getUTCMonth(),shifted.getUTCDate())/1000)-INDIA_OFFSET_SECONDS;}
+  function istDateForOffset(offset){const shifted=new Date(Date.now()+INDIA_OFFSET_SECONDS*1000);const d=new Date(Date.UTC(shifted.getUTCFullYear(),shifted.getUTCMonth(),shifted.getUTCDate()+offset));return {key:d.toISOString().slice(0,10),label:d.toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short',timeZone:'UTC'}),full:d.toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric',timeZone:'UTC'})};}
+  function formatAiringDateTime(unixSeconds){const d=new Date(Number(unixSeconds)*1000);return `${d.toLocaleDateString('en-IN',{day:'numeric',month:'short',timeZone:'Asia/Kolkata'})} · ${d.toLocaleTimeString('en-IN',{hour:'numeric',minute:'2-digit',timeZone:'Asia/Kolkata'})} IST`;}
+  function buildScheduleTabs(){
+    const days=Array.from({length:7},(_,i)=>{const d=istDateForOffset(i);return {key:d.key,label:`${i===0?'Today':i===1?'Tomorrow':d.label}`};});
+    if(selectedScheduleDay!=='all'&&!days.some(d=>d.key===selectedScheduleDay))selectedScheduleDay='all';
+    const tabs=[{key:'all',label:'All week'},...days];
+    $('scheduleDayTabs').innerHTML=tabs.map(t=>`<button class="schedule-day-tab ${selectedScheduleDay===t.key?'active':''}" data-day="${t.key}">${escapeHtml(t.label)}</button>`).join('');
+  }
+  async function logScheduleEpisode(entry){
+    const name=animeDisplayTitle(entry.media),episode=Number(entry.episode)||0;
+    if(!episode)return;
+    if(Number(entry.airingAt)*1000>Date.now()){showToast('This episode has not aired yet.');return;}
+    const tracked=trackedAnimeFor(entry.media);
+    if(!confirm(`Mark ${name} episode ${episode} as watched in OtakuLog?`))return;
+    try{
+      const full=await fetchFullAnimeById(entry.media.id).catch(()=>entry.media);
+      const item=catalogItemToEntry(full,'WATCHING',episode);
+      item.progress=Math.max(Number(tracked?.progress)||0,episode);
+      if(item.total&&item.progress>=item.total)item.status='COMPLETED';else if(!tracked||tracked.status==='PLANNING')item.status='WATCHING';
+      await persist(item);if(!firebaseReady||!currentUser)render();showToast(`${name} · episode ${episode} logged.`);renderSchedule();
+    }catch(err){console.warn(err);showToast('Could not save this episode. Please try again.');}
+  }
+  async function trackFromSchedule(entry){
+    const tracked=trackedAnimeFor(entry.media);if(tracked){showToast(`${tracked.title} is already in your library.`);return;}
+    try{const full=await fetchFullAnimeById(entry.media.id).catch(()=>entry.media);const item=catalogItemToEntry(full,'PLANNING',0);await persist(item);if(!firebaseReady||!currentUser)render();showToast(`${item.title} added to Plan to watch.`);renderSchedule();}
+    catch(err){console.warn(err);showToast('Could not add this anime. Please try again.');}
+  }
+  function renderSchedule(){
+    const root=$('scheduleResults');buildScheduleTabs();
+    if(!airingScheduleItems.length){root.innerHTML='<div class="schedule-empty">No airing entries are available for this week yet. Try refreshing later.</div>';return;}
+    let rows=[...airingScheduleItems].sort((a,b)=>a.airingAt-b.airingAt);
+    if(selectedScheduleDay!=='all')rows=rows.filter(x=>istDateKey(x.airingAt)===selectedScheduleDay);
+    if(!rows.length){root.innerHTML='<div class="schedule-empty">No anime episodes are listed for this day.</div>';return;}
+    const groups=selectedScheduleDay==='all'?Array.from(rows.reduce((map,item)=>{const key=istDateKey(item.airingAt);if(!map.has(key))map.set(key,[]);map.get(key).push(item);return map;},new Map()).entries()):[[selectedScheduleDay,rows]];
+    root.innerHTML=groups.map(([key,items])=>{
+      const offset=Array.from({length:7},(_,i)=>istDateForOffset(i)).findIndex(d=>d.key===key);const label=offset>=0?istDateForOffset(offset).full:new Date(`${key}T12:00:00+05:30`).toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',timeZone:'Asia/Kolkata'});
+      return `<div class="schedule-group"><h3 class="schedule-group-title">${escapeHtml(label)} <span>${items.length} ${items.length===1?'episode':'episodes'}</span></h3><div class="schedule-list">${items.map(entry=>{
+        const media=entry.media||{},title=animeDisplayTitle(media),poster=safeImage(media.coverImage?.large||''),tracked=trackedAnimeFor(media),aired=Number(entry.airingAt)*1000<=Date.now(),logged=tracked&&Number(tracked.progress)>=Number(entry.episode);
+        const action=logged?'✓ Logged':(tracked?'Log episode':'＋ Track anime');
+        const button=logged?`<button class="btn" disabled>✓ Logged EP ${escapeHtml(entry.episode)}</button>`:`<button class="btn ${tracked?'primary':''}" data-schedule-action="${tracked?'log':'track'}" data-schedule-id="${escapeHtml(entry.id)}" ${tracked&&!aired?'disabled title="Available after it airs"':''}>${tracked?`Log EP ${escapeHtml(entry.episode)}`:'＋ Track anime'}</button>`;
+        return `<article class="schedule-card">${poster?`<img src="${escapeHtml(poster)}" alt="" loading="lazy">`:'<div class="schedule-poster-placeholder">✦</div>'}<div class="schedule-info"><h4 class="schedule-title">${escapeHtml(title)}</h4><div class="schedule-meta">Episode ${escapeHtml(entry.episode)}${media.format?` · ${escapeHtml(media.format)}`:''}${media.averageScore?` · ★ ${(Number(media.averageScore)/10).toFixed(1)}`:''}</div><div class="schedule-time">${escapeHtml(formatAiringDateTime(entry.airingAt))}</div></div><div class="schedule-actions">${button}<button class="btn" data-schedule-details="${escapeHtml(media.id||'')}" data-entry-id="${escapeHtml(entry.id)}">Details</button></div></article>`;
+      }).join('')}</div></div>`;
+    }).join('');
+    root.querySelectorAll('[data-schedule-action]').forEach(btn=>btn.addEventListener('click',()=>{const entry=airingScheduleItems.find(x=>String(x.id)===String(btn.dataset.scheduleId));if(!entry)return;if(btn.dataset.scheduleAction==='log')logScheduleEpisode(entry);else trackFromSchedule(entry);}));
+    root.querySelectorAll('[data-schedule-details]').forEach(btn=>btn.addEventListener('click',async()=>{const entry=airingScheduleItems.find(x=>String(x.id)===String(btn.dataset.entryId));if(!entry)return;openAnimeDetails(entry.media);try{const full=await fetchFullAnimeById(entry.media.id);if(Number(selectedCatalogAnime?.id)===Number(entry.media.id))openAnimeDetails(full);}catch(err){console.warn(err);showToast('Showing the schedule details; full catalogue details are unavailable.');}}));
+  }
+  async function loadAiringSchedule(force=false){
+    const status=$('scheduleStatus'),root=$('scheduleResults');
+    if(!force){try{const cache=JSON.parse(localStorage.getItem(ANILIST_CACHE_KEY)||'null');if(cache&&Array.isArray(cache.items)){airingScheduleItems=cache.items;scheduleCacheLoadedAt=cache.savedAt||0;renderSchedule();const sameWeek=cache.dateKey===istDateForOffset(0).key;const fresh=Date.now()-Number(cache.savedAt||0)<15*60*1000;if(sameWeek&&fresh){status.textContent='Showing recently refreshed AniList schedule · India Standard Time (IST)';return;}}}catch(e){}}
+    status.textContent=airingScheduleItems.length?'Refreshing live airing data…':'Loading live airing data from AniList…';
+    const start=istTodayStart(),end=start+(7*86400)-1;
+    const query=`query ($page: Int!, $start: Int!, $end: Int!) { Page(page: $page, perPage: 50) { pageInfo { hasNextPage } airingSchedules(airingAt_greater: $start, airingAt_lesser: $end, sort: TIME) { id airingAt episode media { id title { romaji english native } coverImage { large } format status episodes seasonYear averageScore siteUrl nextAiringEpisode { episode airingAt } } } } }`;
+    try{
+      let items=[];let page=1,hasNext=true;
+      while(hasNext&&page<=5){const data=await anilistRequest(query,{page,start,end});const result=data?.Page;items=items.concat(result?.airingSchedules||[]);hasNext=!!result?.pageInfo?.hasNextPage;page++;}
+      airingScheduleItems=items.filter(x=>x.media).sort((a,b)=>a.airingAt-b.airingAt);scheduleCacheLoadedAt=Date.now();
+      try{localStorage.setItem(ANILIST_CACHE_KEY,JSON.stringify({savedAt:scheduleCacheLoadedAt,dateKey:istDateForOffset(0).key,items:airingScheduleItems}));}catch(e){}
+      status.textContent=`Updated from AniList · ${new Date().toLocaleTimeString('en-IN',{hour:'numeric',minute:'2-digit',timeZone:'Asia/Kolkata'})} IST · Air times are shown in IST.`;
+      $('scheduleSubtitle').textContent=`This week's anime broadcasts · ${airingScheduleItems.length} scheduled episodes · India Standard Time (IST)`;
+      renderSchedule();
+    }catch(err){console.warn(err);status.textContent=airingScheduleItems.length?'Could not refresh now. Showing the last saved schedule.':'AniList schedule is temporarily unavailable.';if(!airingScheduleItems.length)root.innerHTML=`<div class="schedule-empty">${escapeHtml(err.message||'Could not load the airing schedule.')}<br>Check your connection or tap Refresh to try again.</div>`;}
+  }
+  function initLiveAnimeFeatures(){
+    $('catalogSearchInput').addEventListener('input',()=>{clearTimeout(catalogSearchTimer);const q=$('catalogSearchInput').value;catalogSearchTimer=setTimeout(()=>searchCatalog(q),450);});
+    $('catalogSearchInput').addEventListener('keydown',e=>{if(e.key==='Enter'){clearTimeout(catalogSearchTimer);searchCatalog($('catalogSearchInput').value);}});
+    $('catalogSearchBtn').addEventListener('click',()=>{clearTimeout(catalogSearchTimer);searchCatalog($('catalogSearchInput').value);});
+    $('scheduleDayTabs').addEventListener('click',e=>{const btn=e.target.closest('[data-day]');if(!btn)return;selectedScheduleDay=btn.dataset.day;renderSchedule();});
+    $('refreshScheduleBtn').addEventListener('click',()=>loadAiringSchedule(true));
+    loadAiringSchedule(false);
+    document.addEventListener('visibilitychange',()=>{if(!document.hidden&&Date.now()-scheduleCacheLoadedAt>20*60*1000)loadAiringSchedule(false);});
+    scheduleRefreshTimer=setInterval(()=>{if(!document.hidden)loadAiringSchedule(true);},30*60*1000);
+  }
+
+  async function searchAniList(query){
+    const results=$('searchResults'); if(query.trim().length<2){results.classList.remove('show');return;}
+    results.innerHTML='<div class="result-row"><div class="result-copy"><b>Searching anime catalogue…</b></div></div>';results.classList.add('show');
+    const gql=`query ($search: String!) { Page(page: 1, perPage: 8) { media(search: $search, type: ANIME, sort: SEARCH_MATCH) { id title { romaji english native } coverImage { large extraLarge } description(asHtml: false) genres averageScore meanScore popularity source countryOfOrigin episodes duration status format season seasonYear startDate { year month day } endDate { year month day } siteUrl studios(isMain: true) { nodes { name } } nextAiringEpisode { episode airingAt timeUntilAiring } } } }`;
+    try{const res=await fetch('https://graphql.anilist.co',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({query:gql,variables:{search:query}})});if(!res.ok)throw new Error('Search service unavailable');const data=await res.json();const items=data?.data?.Page?.media||[];if(!items.length){results.innerHTML='<div class="result-row"><div class="result-copy"><b>No match found</b><span>You can still add the title manually below.</span></div></div>';return;}results.innerHTML=items.map((x,i)=>{const name=x.title.english||x.title.romaji||x.title.native||'Untitled';return `<div class="result-row" data-result="${i}"><img src="${escapeHtml(x.coverImage?.large||'')}" alt=""><div class="result-copy"><b>${escapeHtml(name)}</b><span>${escapeHtml(x.format||'Anime')} · ${escapeHtml(x.seasonYear||'Year unknown')} · ${x.episodes||'?'} episodes · ${escapeHtml(x.status||'')}</span></div></div>`;}).join('');results.querySelectorAll('.result-row[data-result]').forEach(row=>row.addEventListener('click',()=>selectAniList(items[Number(row.dataset.result)])));}catch(e){console.error(e);results.innerHTML='<div class="result-row"><div class="result-copy"><b>Catalogue search unavailable</b><span>Add the anime manually instead.</span></div></div>';}
+  }
+  function selectAniList(item){selectedAniList=item;const title=animeDisplayTitle(item);$('animeTitle').value=title;$('animeSearch').value=title;$('animeTotal').value=item.episodes||'';$('animeCover').value=item.coverImage?.large||item.coverImage?.extraLarge||'';$('animeYear').value=item.seasonYear||'';$('animeFormat').value=item.format==='TV_SHORT'?'TV':(item.format||'');$('searchResults').classList.remove('show');$('searchResults').innerHTML='';if(item.status==='RELEASING')$('animeStatus').value='WATCHING';showToast('Anime details added.');}
+  $('animeSearch').addEventListener('input',()=>{clearTimeout(searchTimer);const q=$('animeSearch').value;searchTimer=setTimeout(()=>searchAniList(q),450);if(!$('animeTitle').value.trim())$('animeTitle').value=q;});
+  $('animeForm').addEventListener('submit',async e=>{e.preventDefault();const title=$('animeTitle').value.trim();if(!title){showToast('Enter an anime title.');return;}let total=Math.max(0,Number($('animeTotal').value)||0);let progress=clampProgress($('animeProgress').value,total);let status=$('animeStatus').value;if(total>0&&progress>=total&&status==='WATCHING')status='COMPLETED';const old=animeList.find(x=>x.id===editingId);const item={id:editingId||('a_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,7)),title,total,progress,status,source:$('animeSource').value,rating:Number($('animeRating').value)||null,year:Number($('animeYear').value)||null,format:$('animeFormat').value,notes:$('animeNotes').value.trim(),cover:safeImage($('animeCover').value.trim()),airStatus:selectedAniList?.status||(old?.airStatus||''),nextEpisode:selectedAniList?.nextAiringEpisode?.episode||old?.nextEpisode||null,nextAiringAt:selectedAniList?.nextAiringEpisode?.airingAt||old?.nextAiringAt||null,anilistId:selectedAniList?.id||old?.anilistId||null,description:animePlainDescription(selectedAniList?.description)||old?.description||'',genres:selectedAniList?.genres||old?.genres||[],studios:(selectedAniList?.studios?.nodes||[]).map(x=>x.name)||old?.studios||[],averageScore:selectedAniList?.averageScore||selectedAniList?.meanScore||old?.averageScore||null,popularity:selectedAniList?.popularity||old?.popularity||null,season:selectedAniList?.season||old?.season||'',countryOfOrigin:selectedAniList?.countryOfOrigin||old?.countryOfOrigin||'',startDate:selectedAniList?.startDate||old?.startDate||null,endDate:selectedAniList?.endDate||old?.endDate||null,siteUrl:selectedAniList?.siteUrl||old?.siteUrl||'',createdAt:old?.createdAt||Date.now(),updatedAt:Date.now()};await persist(item);if(!firebaseReady||!currentUser)render();closeModal('animeModal');showToast(editingId?'Anime updated.':'Anime added to your library.');});
+  $('deleteAnimeBtn').addEventListener('click',()=>{if(editingId)removeAnime(editingId)});
+  $('topAddBtn').addEventListener('click',openAddModal);$('heroAddBtn').addEventListener('click',openAddModal);
+  $('helpBtn').addEventListener('click',()=>openModal('helpModal'));$('footerSetup').addEventListener('click',()=>openModal('helpModal'));
+  $('accountBtn').addEventListener('click',async()=>{if(!firebaseReady){openModal('helpModal');showToast('Add your Firebase config first to enable cloud sync.');return;}if(currentUser){try{await auth.signOut();showToast('Signed out.');}catch(e){showToast('Sign out failed.');}}else{authMode='login';updateAuthMode();openModal('authModal');}});
+  function updateAuthMode(){$('authTitle').textContent=authMode==='login'?'Sign in to sync':'Create your account';$('authSubmit').textContent=authMode==='login'?'Sign in':'Create account';$('authModeText').innerHTML=authMode==='login'?'New here? <a class="auth-toggle" id="authToggle">Create account</a>':'Already have an account? <a class="auth-toggle" id="authToggle">Sign in</a>';$('authToggle').addEventListener('click',()=>{authMode=authMode==='login'?'signup':'login';updateAuthMode();});}
+  $('authForm').addEventListener('submit',async e=>{e.preventDefault();if(!auth){showToast('Firebase is not configured.');return;}const email=$('authEmail').value.trim(),pass=$('authPassword').value;try{if(authMode==='login')await auth.signInWithEmailAndPassword(email,pass);else await auth.createUserWithEmailAndPassword(email,pass);closeModal('authModal');showToast('Account connected.');}catch(err){console.error(err);const msg=err.code==='auth/email-already-in-use'?'That email already has an account. Sign in instead.':err.code==='auth/weak-password'?'Use a stronger password (at least 6 characters).':err.code==='auth/user-not-found'||err.code==='auth/wrong-password'?'Email or password is incorrect.':err.message;showToast(msg);}});
+  $('filterInput').addEventListener('input',render);$('sortSelect').addEventListener('change',render);
+  $('statusTabs').addEventListener('click',e=>{const btn=e.target.closest('[data-filter]');if(!btn)return;activeFilter=btn.dataset.filter;document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===btn));render();});
+  $('exportBtn').addEventListener('click',()=>{const blob=new Blob([JSON.stringify({app:'OtakuLog',exportedAt:new Date().toISOString(),anime:animeList},null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='otakulog-anime-backup.json';a.click();URL.revokeObjectURL(a.href);showToast('Anime list exported.');});
+  document.querySelectorAll('[data-close]').forEach(btn=>btn.addEventListener('click',()=>btn.dataset.close==='importModal'?dismissImportModal():closeModal(btn.dataset.close)));
+  document.querySelectorAll('.modal-backdrop').forEach(bg=>bg.addEventListener('click',e=>{if(e.target===bg){if(bg.id==='importModal')dismissImportModal();else closeModal(bg.id);}}));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.modal-backdrop.open').forEach(x=>{if(x.id==='importModal')dismissImportModal();else closeModal(x.id);});});
+  window.openAddModal=openAddModal;window.openEditModal=openEditModal;window.changeProgress=changeProgress;
+
+  function humanFileSize(bytes){if(!Number(bytes))return 'Size unavailable';const units=['B','KB','MB','GB'];let n=Number(bytes),i=0;while(n>=1024&&i<units.length-1){n/=1024;i++;}return `${n.toFixed(i?1:0)} ${units[i]}`;}
+  function parseAnimeFilename(filename){
+    const original=String(filename||'').split(/[\\/]/).pop().replace(/\.[^.]+$/,'');
+    let working=original.replace(/^\[[^\]]{1,60}\]\s*/,'');
+    let season=null,episode=null,match=null;
+
+    // Season/episode forms: S02E05, S2.E5, Season 2 Episode 5, and 2x05.
+    match=working.match(/\bS(?:eason)?\s*0?(\d{1,2})\s*[._ -]*E(?:p(?:isode)?)?\s*0?(\d{1,4})\b/i);
+    if(match){season=Number(match[1]);episode=Number(match[2]);working=working.replace(match[0],' ');}
+    if(!episode){
+      match=working.match(/\b(\d{1,2})\s*[xX]\s*0?(\d{1,4})\b/);
+      if(match){season=Number(match[1]);episode=Number(match[2]);working=working.replace(match[0],' ');}
+    }
+    if(!episode){
+      match=working.match(/\b(?:episode|ep)\s*#?\s*[-_. ]?0?(\d{1,4})\b/i);
+      if(match){episode=Number(match[1]);working=working.replace(match[0],' ');}
+    }
+    if(!episode){
+      match=working.match(/\bE\s*0?(\d{1,4})\b/i);
+      if(match){episode=Number(match[1]);working=working.replace(match[0],' ');}
+    }
+    if(!episode){
+      // Common fansub names: "Anime Title - 05 [1080p]" or "One Piece - 1111".
+      match=working.match(/\s[-–—]\s*0?(\d{1,4})(?:v\d+)?(?=\s*(?:\[|\(|\.|_|-|$))/i);
+      if(match){episode=Number(match[1]);working=working.replace(match[0],' ');}
+    }
+    if(!episode){
+      // Also accept a bare trailing episode number before a release tag: "Anime Title 05 (1080p)".
+      match=working.match(/\s+0?(\d{1,3})(?:v\d+)?(?=\s*(?:\[|\(|\.|_|$))/i);
+      if(match){episode=Number(match[1]);working=working.replace(match[0],' ');}
+    }
+
+    working=working
+      .replace(/\[[^\]]*\]|\([^)]*\)/g,' ')
+      .replace(/\b\d{3,4}p\b|\b4k\b|\b8k\b/gi,' ')
+      .replace(/\b(?:HEVC|AVC|x264|x265|H264|H265|10bit|8bit|WEB[- ]?DL|WEBRip|BluRay|BDRip|AAC\d?|DDP\d?|AMZN|NF|CR|ENG|JPN|JAP|DUAL|SUBBED|DUBBED|PROPER|REMASTERED|UNCENSORED)\b/gi,' ')
+      .replace(/\b(?:480|720|1080|2160)\b/g,' ')
+      .replace(/[._]+/g,' ').replace(/[–—]+/g,' ').replace(/\s+-\s+/g,' ')
+      .replace(/\s{2,}/g,' ').replace(/^[\s\-]+|[\s\-]+$/g,'').trim();
+    if(!working)working=original.replace(/[._]+/g,' ').trim();
+    return {title:working,season,episode,original};
+  }
+  function normalizeAnimeTitle(value){return String(value||'').toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/g,'');}
+  function openImportModal(){pendingImportFile=null;selectedImportAniList=null;$('importFileName').textContent='No video selected yet';$('importFileMeta').textContent='Choose a Telegram download or share a video to OtakuLog.';$('importAnimeTitle').value='';$('importSeason').value='';$('importEpisode').value='';$('importResults').innerHTML='';$('importResults').classList.remove('show');$('importSelectedText').textContent='Search suggestions will appear after the title is detected. You can still save manually.';$('markImportedWatched').checked=false;$('videoFileInput').value='';openModal('importModal');}
+  function showImportFile(fileInfo,fromShare=false){
+    pendingImportFile={...fileInfo,origin:fromShare?'Telegram':'Downloads'};
+    const parsed=parseAnimeFilename(fileInfo.name||'');
+    $('importFileName').textContent=fileInfo.name||'Shared video';
+    $('importFileMeta').textContent=`${fileInfo.type||'Video file'} · ${humanFileSize(fileInfo.size)}${fromShare?' · received from Android Share':''}`;
+    $('importStatusText').textContent=`${pendingImportFile.origin} · ${firebaseReady&&currentUser?'Firebase sync ready':'Local save; sign in to sync'}`;
+    $('importAnimeTitle').value=parsed.title||'';$('importSeason').value=parsed.season||'';$('importEpisode').value=parsed.episode||'';
+    selectedImportAniList=null;$('importResults').innerHTML='';$('importResults').classList.remove('show');
+    $('importSelectedText').textContent=parsed.episode?`Detected episode ${parsed.episode}${parsed.season?` from season ${parsed.season}`:''}. Confirm the anime below.`:'Anime/episode could not be fully detected. Edit the fields before saving.';
+    openModal('importModal');
+    if(parsed.title&&parsed.title.length>1)searchImportAniList(parsed.title);
+  }
+  async function searchImportAniList(query){
+    const results=$('importResults');if(query.trim().length<2){results.classList.remove('show');return;}
+    results.innerHTML='<div class="result-row"><div class="result-copy"><b>Searching AniList…</b></div></div>';results.classList.add('show');
+    const gql=`query ($search: String) { Page(page: 1, perPage: 6) { media(search: $search, type: ANIME, sort: SEARCH_MATCH) { id title { romaji english native } coverImage { large } episodes status format seasonYear nextAiringEpisode { episode airingAt } } } }`;
+    try{const res=await fetch('https://graphql.anilist.co',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({query:gql,variables:{search:query}})});if(!res.ok)throw new Error('AniList search unavailable');const data=await res.json();const items=data?.data?.Page?.media||[];if(!items.length){results.innerHTML='<div class="result-row"><div class="result-copy"><b>No catalogue match found</b><span>You can still save the title manually.</span></div></div>';return;}
+      results.innerHTML=items.map((x,i)=>{const name=x.title.english||x.title.romaji||x.title.native||'Untitled';return `<div class="result-row" data-import-result="${i}"><img src="${escapeHtml(x.coverImage?.large||'')}" alt=""><div class="result-copy"><b>${escapeHtml(name)}</b><span>${escapeHtml(x.format||'Anime')} · ${escapeHtml(x.seasonYear||'Year unknown')} · ${x.episodes||'?'} eps · ${escapeHtml(x.status||'')}</span></div></div>`;}).join('');
+      results.querySelectorAll('[data-import-result]').forEach(row=>row.addEventListener('click',()=>{selectedImportAniList=items[Number(row.dataset.importResult)];const chosen=selectedImportAniList;const name=chosen.title.english||chosen.title.romaji||chosen.title.native||$('importAnimeTitle').value;$('importAnimeTitle').value=name;results.querySelectorAll('.result-row').forEach(el=>el.classList.toggle('selected',el===row));$('importSelectedText').textContent=`Selected: ${name}. ${chosen.episodes||'Unknown'} total episodes · ${chosen.status||'Status unavailable'}.`;}));
+      // Preselect the top search result for convenience, but keep it visibly reviewable.
+      const first=results.querySelector('[data-import-result="0"]');if(first)first.click();
+    }catch(err){console.warn(err);results.innerHTML='<div class="result-row"><div class="result-copy"><b>AniList search unavailable</b><span>Check your connection or save the title manually.</span></div></div>';}
+  }
+  async function saveImportedEpisode(){
+    const title=$('importAnimeTitle').value.trim();const episode=Math.max(0,Number($('importEpisode').value)||0);const season=Math.max(0,Number($('importSeason').value)||0)||null;
+    if(!title){showToast('Enter the anime title before saving.');return;}
+    if(!pendingImportFile){showToast('Choose a video or share one from Telegram first.');return;}
+    if(!episode){showToast('Enter the episode number detected from the filename.');return;}
+    const candidate=selectedImportAniList;
+    const norm=normalizeAnimeTitle(title);
+    let existing=animeList.find(x=>(candidate?.id&&Number(x.anilistId)===Number(candidate.id))||normalizeAnimeTitle(x.title)===norm);
+    if(!existing&&candidate){const candidateTitle=normalizeAnimeTitle(candidate.title.english||candidate.title.romaji||candidate.title.native||'');existing=animeList.find(x=>normalizeAnimeTitle(x.title)===candidateTitle);}
+    const history=Array.isArray(existing?.downloadHistory)?[...existing.downloadHistory]:[];
+    const duplicate=history.some(x=>Number(x.episode)===episode&&Number(x.season||0)===Number(season||0));
+    if(!duplicate){history.push({episode,season,filename:String(pendingImportFile.name||'').slice(0,240),mimeType:String(pendingImportFile.type||'').slice(0,100),source:pendingImportFile.origin||'Downloads',importedAt:Date.now()});}
+    const markWatched=$('markImportedWatched').checked;
+    const total=Number(existing?.total)||Number(candidate?.episodes)||0;
+    let progress=Number(existing?.progress)||0;
+    if(markWatched)progress=Math.max(progress,episode);
+    let status=existing?.status||(markWatched?'WATCHING':'PLANNING');if(markWatched&&total>0&&progress>=total)status='COMPLETED';else if(markWatched&&status==='COMPLETED'&&progress<total)status='WATCHING';
+    const item={
+      ...(existing||{}),id:existing?.id||('a_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,7)),
+      title:existing?.title||title,total,progress,status,source:existing?.source||pendingImportFile.origin||'Downloads',
+      cover:safeImage(existing?.cover||candidate?.coverImage?.large||''),
+      year:existing?.year||candidate?.seasonYear||null,format:existing?.format||(candidate?.format==='TV_SHORT'?'TV':(candidate?.format||'')),
+      airStatus:candidate?.status||existing?.airStatus||'',
+      nextEpisode:candidate?.nextAiringEpisode?.episode||existing?.nextEpisode||null,
+      nextAiringAt:candidate?.nextAiringEpisode?.airingAt||existing?.nextAiringAt||null,
+      anilistId:candidate?.id||existing?.anilistId||null,
+      lastDownloadedEpisode:episode,lastDownloadedSeason:season,lastDownloadedAt:Date.now(),
+      lastDownloadFileName:String(pendingImportFile.name||'').slice(0,240),lastDownloadSource:pendingImportFile.origin||'Downloads',downloadHistory:history.slice(-50),
+      createdAt:existing?.createdAt||Date.now(),updatedAt:Date.now()
+    };
+    const sharedRecordId=pendingImportFile.shareRecordId||null;
+    const syncedToFirebase=await persist(item);
+    if(!firebaseReady||!currentUser||!syncedToFirebase)render();
+    closeModal('importModal');
+    if(sharedRecordId){await deleteSharedMetadata(sharedRecordId);activeSharedRecordId=null;}
+    const savedMessage=duplicate?`${title} episode ${episode} was already recorded.`:`Saved ${title} episode ${episode}.`;
+    showToast(`${savedMessage} ${syncedToFirebase?'Synced to Firebase.':'Saved on this device; sign in to sync.'}`);
+    pendingImportFile=null;selectedImportAniList=null;
+    await consumeSharedMetadata();
+  }
+  function openVideoPicker(){ $('videoFileInput').click(); }
+  $('importEpisodeBtn').addEventListener('click',()=>{openImportModal();openVideoPicker();});
+  $('importHeroBtn').addEventListener('click',()=>{openImportModal();openVideoPicker();});
+  $('chooseVideoBtn').addEventListener('click',openVideoPicker);
+  $('videoFileInput').addEventListener('change',e=>{const file=e.target.files?.[0];if(!file)return;if(file.size>0&&file.type&&!file.type.startsWith('video/')&&!/\.(mkv|avi|mov|webm|mp4|m4v)$/i.test(file.name)){showToast('Choose a video file.');return;}showImportFile({name:file.name,type:file.type,size:file.size},false);});
+  $('importAnimeTitle').addEventListener('input',()=>{clearTimeout(importSearchTimer);const q=$('importAnimeTitle').value;selectedImportAniList=null;importSearchTimer=setTimeout(()=>searchImportAniList(q),550);});
+  $('saveImportBtn').addEventListener('click',saveImportedEpisode);
+
+  function openShareDb(){return new Promise((resolve,reject)=>{const req=indexedDB.open(SHARE_DB_NAME,1);req.onupgradeneeded=()=>{const db=req.result;if(!db.objectStoreNames.contains(SHARE_STORE_NAME))db.createObjectStore(SHARE_STORE_NAME,{keyPath:'id'});};req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error);});}
+  async function getSharedMetadata(){
+    const idb=await openShareDb();
+    try{return await new Promise((resolve,reject)=>{const tx=idb.transaction(SHARE_STORE_NAME,'readonly');const req=tx.objectStore(SHARE_STORE_NAME).getAll();req.onsuccess=()=>resolve(req.result||[]);req.onerror=()=>reject(req.error);tx.onerror=()=>reject(tx.error);});}
+    finally{idb.close();}
+  }
+  async function deleteSharedMetadata(recordId){
+    if(!recordId||!('indexedDB'in window))return;
+    const idb=await openShareDb();
+    try{await new Promise((resolve,reject)=>{const tx=idb.transaction(SHARE_STORE_NAME,'readwrite');tx.objectStore(SHARE_STORE_NAME).delete(recordId);tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error||new Error('Could not clear shared file record.'));});}
+    finally{idb.close();}
+  }
+  async function consumeSharedMetadata(){
+    if(!('indexedDB'in window)||activeSharedRecordId)return;
+    try{
+      const records=(await getSharedMetadata()).sort((a,b)=>(a.receivedAt||0)-(b.receivedAt||0));
+      if(!records.length)return;
+      const next=records[0];activeSharedRecordId=next.id;
+      showImportFile({name:next.name,type:next.type,size:next.size,shareRecordId:next.id},true);
+    }catch(err){console.warn('Could not read shared file metadata',err);}
+  }
+  async function dismissImportModal(){
+    const sharedId=pendingImportFile?.shareRecordId||activeSharedRecordId;
+    closeModal('importModal');pendingImportFile=null;selectedImportAniList=null;
+    if(sharedId){try{await deleteSharedMetadata(sharedId);}catch(err){console.warn('Could not clear dismissed shared file',err);}activeSharedRecordId=null;await consumeSharedMetadata();}
+  }
+  async function registerPwa(){
+    if('serviceWorker'in navigator){
+      try{
+        const registration=await navigator.serviceWorker.register('./sw.js');
+        await navigator.serviceWorker.ready;
+        console.info('OtakuLog PWA service worker ready.',registration.scope);
+      }catch(err){console.warn('Service worker registration failed',err);}
+    }
+    if(window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone){$('installAppBtn').textContent='✓ App installed';$('installAppBtn').disabled=true;}
+  }
+  window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installPromptEvent=e;$('installAppBtn').textContent='＋ Install app';});
+  window.addEventListener('appinstalled',()=>{installPromptEvent=null;$('installAppBtn').textContent='✓ App installed';$('installAppBtn').disabled=true;showToast('OtakuLog installed on this device.');});
+  $('installAppBtn').addEventListener('click',async()=>{if(installPromptEvent){installPromptEvent.prompt();const choice=await installPromptEvent.userChoice;installPromptEvent=null;if(choice?.outcome==='accepted')showToast('Installing OtakuLog…');}else{showToast('Open this website in Chrome on Android → ⋮ → Install app / Add to Home screen.');}});
+
+  animeList=readLocal(); render(); configureFirebase(); registerPwa(); consumeSharedMetadata(); initLiveAnimeFeatures();
+</script>
+</body>
 </html>
