@@ -48,16 +48,31 @@
     .folder-monitor-actions .btn{font-size:11px}
     .folder-monitor-options{display:flex;align-items:center;gap:8px;margin-top:12px;color:var(--muted);font-size:11px}
     .folder-monitor-options input{accent-color:var(--accent);width:15px;height:15px}
+    .folder-auto-settings{margin-top:14px;padding:13px;border:1px solid var(--line);border-radius:13px;background:color-mix(in srgb,var(--panel2) 78%,transparent)}
+    .folder-auto-settings-title{font:700 11px 'Space Grotesk',sans-serif;color:var(--text);margin-bottom:10px}
+    .folder-auto-settings-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+    .folder-auto-category{display:flex;flex-direction:column;gap:6px;color:var(--muted);font-size:10px;font-weight:700}
+    .folder-auto-category select{width:100%;min-height:38px;padding:8px 10px;border:1px solid var(--line);border-radius:9px;background:var(--panel);color:var(--text);font-size:11px}
+    .folder-auto-check{display:flex;align-items:flex-start;gap:8px;min-width:0;color:var(--text);font-size:10px;line-height:1.45}
+    .folder-auto-check input{flex:0 0 auto;margin:2px 0 0;accent-color:var(--accent);width:15px;height:15px}
+    .folder-auto-check b{display:block;font-size:10px;color:var(--text)}
+    .folder-auto-check small{display:block;color:var(--muted);font-size:9px;margin-top:3px;line-height:1.45}
     .folder-queue{margin-top:13px;border-top:1px solid var(--line);padding-top:12px}
     .folder-queue-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px;font-size:11px;color:var(--text);font-weight:700}
     .folder-queue-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
     .folder-queue-item{min-width:0;padding:9px 10px;border:1px solid var(--line);border-radius:10px;background:var(--panel2)}
     .folder-queue-item b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10px;color:var(--text)}
-    .folder-queue-item span{display:block;font-size:9px;color:var(--muted);margin-top:4px}
+    .folder-queue-item span{display:block;font-size:9px;color:var(--muted);margin-top:4px;line-height:1.45}
+    .folder-queue-actions{display:flex;justify-content:flex-end;margin-top:9px}
+    .folder-auto-log{margin-top:13px;padding-top:12px;border-top:1px solid var(--line)}
+    .folder-auto-log-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+    .folder-auto-log-item{min-width:0;padding:9px 10px;border:1px solid color-mix(in srgb,var(--green) 28%,var(--line));border-radius:10px;background:color-mix(in srgb,var(--green) 5%,var(--panel))}
+    .folder-auto-log-item b{display:block;color:var(--text);font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .folder-auto-log-item span{display:block;color:var(--muted);font-size:9px;margin-top:4px;line-height:1.4}
     .folder-monitor-note{font-size:10px;color:var(--muted);line-height:1.55;margin:11px 0 0}
     .folder-monitor-note strong{color:var(--accent2)}
-    @media(max-width:760px){.folder-monitor{padding:15px}.folder-monitor-head{display:block}.folder-monitor-actions{display:grid;grid-template-columns:1fr 1fr}.folder-monitor-actions .btn{min-width:0;padding:9px 8px}.folder-queue-list{grid-template-columns:1fr 1fr}}
-    @media(max-width:440px){.folder-monitor-actions{grid-template-columns:1fr 1fr}.folder-queue-list{grid-template-columns:1fr}.folder-monitor-title{font-size:15px}}
+    @media(max-width:760px){.folder-monitor{padding:15px}.folder-monitor-head{display:block}.folder-monitor-actions{display:grid;grid-template-columns:1fr 1fr}.folder-monitor-actions .btn{min-width:0;padding:9px 8px}.folder-queue-list,.folder-auto-log-list{grid-template-columns:1fr 1fr}.folder-auto-settings-grid{grid-template-columns:1fr}}
+    @media(max-width:440px){.folder-monitor-actions{grid-template-columns:1fr 1fr}.folder-queue-list,.folder-auto-log-list{grid-template-columns:1fr}.folder-monitor-title{font-size:15px}}
     :root[data-theme="light"] .folder-monitor{background:linear-gradient(120deg,rgba(132,111,228,.07),var(--panel));border-color:var(--line)}
     :root[data-theme="light"] .folder-queue-item{background:#f8f9fd}
 
@@ -550,10 +565,22 @@
       <button class="btn ghost" type="button" id="disconnectFolderBtn" disabled>Disconnect</button>
     </div>
     <label class="folder-monitor-options"><input type="checkbox" id="folderAutoScanToggle" checked> Automatically rescan every 60 seconds while OtakuLog is open</label>
+    <div class="folder-auto-settings" aria-label="Automatic library update settings">
+      <div class="folder-auto-settings-title">Automatic library updates</div>
+      <div class="folder-auto-settings-grid">
+        <label class="folder-auto-category"><span>Add new anime to category</span><select id="folderAutoCategory"><option value="WATCHING">Watching</option><option value="PLANNING">Plan to watch</option><option value="ON_HOLD">On hold</option><option value="DROPPED">Dropped</option><option value="COMPLETED">Completed</option></select></label>
+        <label class="folder-auto-check"><input type="checkbox" id="folderAutoTrackToggle" checked><span><b>Automatically add confident AniList matches</b><small>Matched videos are added to your library without reviewing each file.</small></span></label>
+        <label class="folder-auto-check"><input type="checkbox" id="folderApplyCategoryToggle"><span><b>Also change the category of existing anime</b><small>Off by default, so an existing Completed anime is not moved accidentally.</small></span></label>
+        <label class="folder-auto-check"><input type="checkbox" id="folderAutoMarkWatchedToggle"><span><b>Count detected episodes as watched</b><small>Off by default: downloading does not necessarily mean watching.</small></span></label>
+        <label class="folder-auto-check"><input type="checkbox" id="folderTrackWithoutEpisodeToggle" checked><span><b>Add a matched anime even if its episode number is missing</b><small>It records the filename in download notes without changing watched progress.</small></span></label>
+      </div>
+    </div>
     <div class="folder-queue" id="folderQueue" hidden>
       <div class="folder-queue-head"><span>New videos found</span><span id="folderQueueCount">0 waiting</span></div>
       <div class="folder-queue-list" id="folderQueuePreview"></div>
+      <div class="folder-queue-actions"><button type="button" class="btn small" id="retryFolderMatchesBtn">↻ Retry unmatched titles</button></div>
     </div>
+    <div class="folder-auto-log" id="folderAutoLog" hidden><div class="folder-queue-head"><span>Recently added to your library</span><span id="folderAutoLogCount"></span></div><div class="folder-auto-log-list" id="folderAutoLogList"></div></div>
     <p class="folder-monitor-note"><strong>Privacy:</strong> OtakuLog reads filenames and file details only; it does not upload or play your videos. Automatic scans run while this page/PWA is open and visible. Android/Chrome may ask you to grant folder access again after reopening the app.</p>
     <input id="folderFallbackInput" type="file" webkitdirectory directory multiple hidden />
   </section>
@@ -636,6 +663,7 @@
         <div class="field full"><label for="importAnimeTitle">Detected anime title</label><input id="importAnimeTitle" placeholder="Example: Solo Leveling" autocomplete="off"></div>
         <div class="field"><label for="importSeason">Season (if detected)</label><input id="importSeason" type="number" min="1" max="99" placeholder="e.g. 2"></div>
         <div class="field"><label for="importEpisode">Episode number</label><input id="importEpisode" type="number" min="1" max="9999" placeholder="e.g. 5"></div>
+        <div class="field"><label for="importDetectedStatus">Add new anime to category</label><select id="importDetectedStatus"><option value="WATCHING">Watching</option><option value="PLANNING">Plan to watch</option><option value="ON_HOLD">On hold</option><option value="DROPPED">Dropped</option><option value="COMPLETED">Completed</option></select></div>
       </div>
       <div class="field" style="margin-top:13px"><label>Confirm the matching anime</label><div class="import-results" id="importResults"></div><div class="import-selected" id="importSelectedText">Search suggestions will appear after the title is detected. You can still save manually.</div></div>
       <label class="import-checkbox"><input type="checkbox" id="markImportedWatched"><span><strong>Also update my watched progress</strong><br>Leave unchecked if you have downloaded the episode but have not watched it yet. The download will still be saved.</span></label>
@@ -691,8 +719,8 @@ service cloud.firestore {
       <p>In this project folder, run <code>npm install -g firebase-tools</code>, then <code>firebase login</code>, then <code>firebase deploy</code>. The included <code>firebase.json</code> and <code>.firebaserc</code> are set for your project. Hosting provides the HTTPS origin required for installation and Android file sharing.</p>
       <h4>4. Install it on Android</h4>
       <p>Open your Firebase Hosting URL in <strong>Chrome on Android</strong> → ⋮ menu → <strong>Install app</strong> (or Add to Home screen). Open the installed OtakuLog app once. Then in Telegram, open a downloaded video → Share → choose OtakuLog. You can also use <strong>Import downloaded video</strong> and select a file through Android's picker.</p>
-      <h4>Connect your Downloads folder for automatic detection</h4>
-      <p>In OtakuLog, tap <strong>Connect folder</strong> and choose your Android Download folder or a Telegram video folder in the Android folder picker. Allow read access. OtakuLog scans filenames when it opens, when you tap Scan now, and every 60 seconds while the app is open and visible if automatic scanning is enabled. New videos appear in the review queue; review and save each episode to update your library. If Chrome asks for folder access again after reopening, tap Scan now and grant access.</p>
+      <h4>Connect your Downloads folder for automatic library updates</h4>
+      <p>In OtakuLog, tap <strong>Connect folder</strong> and choose your Android Download folder or a Telegram video folder in the Android folder picker. Allow read access. OtakuLog scans filenames when it opens, when you tap Scan now, and every 60 seconds while the app is open and visible if automatic scanning is enabled. With <strong>Automatically add confident AniList matches</strong> enabled, recognizable anime are added to the selected category and their download filenames are saved to the anime download notes. Existing anime are updated rather than duplicated. Uncertain titles remain in the review queue. You can choose whether detected episodes count as watched; this is off by default. If Chrome asks for folder access again after reopening, tap Scan now and grant access.</p>
       <p>On browsers without the native folder picker, the website can only run a one-time folder selection. Background scanning while OtakuLog is fully closed is not available to a normal PWA; use the Telegram Share button for that case.</p>
       <h4>How episode detection works</h4>
       <p>OtakuLog reads the video filename, detects common patterns such as <code>S02E05</code>, <code>Season 2 Episode 5</code>, or <code>Episode 5</code>, then searches AniList for the anime poster and catalogue information. Review the match before saving. Duplicate downloaded episode records are avoided.</p>
@@ -774,6 +802,11 @@ service cloud.firestore {
   let activeSharedRecordId = null;
   const FOLDER_SETTINGS_KEY = 'folder-monitor-settings';
   const FOLDER_AUTO_SCAN_KEY = 'otakulog_folder_auto_scan';
+  const FOLDER_AUTO_TRACK_KEY = 'otakulog_folder_auto_track';
+  const FOLDER_AUTO_CATEGORY_KEY = 'otakulog_folder_auto_category';
+  const FOLDER_APPLY_CATEGORY_KEY = 'otakulog_folder_apply_category';
+  const FOLDER_AUTO_WATCHED_KEY = 'otakulog_folder_auto_watched';
+  const FOLDER_NO_EPISODE_KEY = 'otakulog_folder_track_without_episode';
   const VIDEO_EXTENSIONS = /\.(mp4|m4v|mkv|webm|avi|mov|mpeg|mpg|3gp|ts|m2ts)$/i;
   let connectedFolderHandle = null;
   let folderQueue = [];
@@ -781,6 +814,8 @@ service cloud.firestore {
   let folderScanTimer = null;
   let folderLastScanAt = 0;
   let folderRecord = null;
+  let folderAutoProcessBusy = false;
+  const folderAniListMatchCache = new Map();
   const FOLDER_SCAN_INTERVAL_MS = 60000;
   const FOLDER_SCAN_MAX_FILES = 1200;
   const FOLDER_QUEUE_LIMIT = 300;
@@ -915,7 +950,7 @@ service cloud.firestore {
         <div class="card-body"><h3 class="card-title" title="${escapeHtml(item.title)}">${escapeHtml(item.title)}</h3><div class="card-meta"><span>${escapeHtml(item.year||'')}</span>${item.format?`<span>· ${escapeHtml(item.format)}</span>`:''}${item.total?`<span>· ${total} eps</span>`:'<span>· Episode count unknown</span>'}</div>
           <div class="card-progress-head"><span>Episode progress</span><b>${progress}${total?` / ${total}`:''}</b></div><div class="mini-progress"><span style="width:${pct}%"></span></div>
           ${item.nextEpisode?`<div class="airing-line">Next: episode ${escapeHtml(item.nextEpisode)}${item.nextAiringAt?` · ${escapeHtml(formatAiring(item.nextAiringAt))}`:''}</div>`:''}
-          ${item.lastDownloadedEpisode?`<div class="downloaded-line">↓ Downloaded: <span>${item.lastDownloadedSeason?`S${escapeHtml(item.lastDownloadedSeason)} · `:''}EP ${escapeHtml(item.lastDownloadedEpisode)}</span>${item.lastDownloadFileName?` · ${escapeHtml(item.lastDownloadFileName)}`:''}</div>`:''}
+          ${item.lastDownloadFileName?`<div class="downloaded-line">↓ Download detected: <span>${item.lastDownloadedEpisode?`${item.lastDownloadedSeason?`S${escapeHtml(item.lastDownloadedSeason)} · `:''}EP ${escapeHtml(item.lastDownloadedEpisode)}`:'episode not identified'}</span> · ${escapeHtml(item.lastDownloadFileName)}</div>`:''}
           <div class="card-actions"><div class="card-actions-left"><button class="icon-btn" title="Decrease episode" onclick="changeProgress('${item.id}',-1)">−</button><button class="icon-btn" title="Increase episode" onclick="changeProgress('${item.id}',1)">＋</button><span class="source-tag">${escapeHtml(item.source||'Not set')}</span></div><button class="btn small" onclick="openEditModal('${item.id}')">Details ↗</button></div>
         </div></article>`;
     }).join('');
@@ -1148,7 +1183,7 @@ service cloud.firestore {
     return {title:working,season,episode,original};
   }
   function normalizeAnimeTitle(value){return String(value||'').toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/g,'');}
-  function openImportModal(){pendingImportFile=null;selectedImportAniList=null;$('importFileName').textContent='No video selected yet';$('importFileMeta').textContent='Choose a Telegram download or share a video to OtakuLog.';$('importAnimeTitle').value='';$('importSeason').value='';$('importEpisode').value='';$('importResults').innerHTML='';$('importResults').classList.remove('show');$('importSelectedText').textContent='Search suggestions will appear after the title is detected. You can still save manually.';$('markImportedWatched').checked=false;$('videoFileInput').value='';openModal('importModal');}
+  function openImportModal(){pendingImportFile=null;selectedImportAniList=null;$('importFileName').textContent='No video selected yet';$('importFileMeta').textContent='Choose a Telegram download or share a video to OtakuLog.';$('importAnimeTitle').value='';$('importSeason').value='';$('importEpisode').value='';$('importResults').innerHTML='';$('importResults').classList.remove('show');$('importSelectedText').textContent='Search suggestions will appear after the title is detected. You can still save manually.';$('markImportedWatched').checked=false;$('importDetectedStatus').value=$('folderAutoCategory')?.value||'WATCHING';$('videoFileInput').value='';openModal('importModal');}
   function showImportFile(fileInfo,fromShare=false){
     const origin=fileInfo.origin||(fromShare?'Telegram':'Downloads');
     pendingImportFile={...fileInfo,origin};
@@ -1158,7 +1193,7 @@ service cloud.firestore {
     $('importFileMeta').textContent=`${fileInfo.type||'Video file'} · ${humanFileSize(fileInfo.size)}${receivedLabel}`;
     $('importStatusText').textContent=`${pendingImportFile.origin} · ${firebaseReady&&currentUser?'Firebase sync ready':'Local save; sign in to sync'}`;
     $('skipFolderFileBtn')?.classList.toggle('hidden',!fileInfo.folderQueueId);
-    $('importAnimeTitle').value=parsed.title||'';$('importSeason').value=parsed.season||'';$('importEpisode').value=parsed.episode||'';
+    $('importAnimeTitle').value=parsed.title||'';$('importSeason').value=parsed.season||'';$('importEpisode').value=parsed.episode||'';$('importDetectedStatus').value=$('folderAutoCategory')?.value||'WATCHING';
     selectedImportAniList=null;$('importResults').innerHTML='';$('importResults').classList.remove('show');
     $('importSelectedText').textContent=parsed.episode?`Detected episode ${parsed.episode}${parsed.season?` from season ${parsed.season}`:''}. Confirm the anime below.`:'Anime/episode could not be fully detected. Edit the fields before saving.';
     openModal('importModal');
@@ -1176,33 +1211,39 @@ service cloud.firestore {
     }catch(err){console.warn(err);results.innerHTML='<div class="result-row"><div class="result-copy"><b>AniList search unavailable</b><span>Check your connection or save the title manually.</span></div></div>';}
   }
   async function saveImportedEpisode(){
-    const title=$('importAnimeTitle').value.trim();const episode=Math.max(0,Number($('importEpisode').value)||0);const season=Math.max(0,Number($('importSeason').value)||0)||null;
+    const title=$('importAnimeTitle').value.trim();
+    const episode=Math.max(0,Number($('importEpisode').value)||0);
+    const season=Math.max(0,Number($('importSeason').value)||0)||null;
     if(!title){showToast('Enter the anime title before saving.');return;}
     if(!pendingImportFile){showToast('Choose a video or share one from Telegram first.');return;}
-    if(!episode){showToast('Enter the episode number detected from the filename.');return;}
+    if(!episode&&!confirm('No episode number was found. Save the anime and record this download without changing watched progress?'))return;
     const candidate=selectedImportAniList;
     const norm=normalizeAnimeTitle(title);
     let existing=animeList.find(x=>(candidate?.id&&Number(x.anilistId)===Number(candidate.id))||normalizeAnimeTitle(x.title)===norm);
     if(!existing&&candidate){const candidateTitle=normalizeAnimeTitle(candidate.title.english||candidate.title.romaji||candidate.title.native||'');existing=animeList.find(x=>normalizeAnimeTitle(x.title)===candidateTitle);}
+    const filename=String(pendingImportFile.name||'').slice(0,240);
     const history=Array.isArray(existing?.downloadHistory)?[...existing.downloadHistory]:[];
-    const duplicate=history.some(x=>Number(x.episode)===episode&&Number(x.season||0)===Number(season||0));
-    if(!duplicate){history.push({episode,season,filename:String(pendingImportFile.name||'').slice(0,240),mimeType:String(pendingImportFile.type||'').slice(0,100),source:pendingImportFile.origin||'Downloads',importedAt:Date.now()});}
-    const markWatched=$('markImportedWatched').checked;
+    const duplicate=episode?history.some(x=>Number(x.episode)===episode&&Number(x.season||0)===Number(season||0)):history.some(x=>String(x.filename||'').toLowerCase()===filename.toLowerCase());
+    if(!duplicate)history.push({episode:episode||null,season,filename,mimeType:String(pendingImportFile.type||'').slice(0,100),source:pendingImportFile.origin||'Downloads',importedAt:Date.now(),detectedBy:'manual-review'});
+    const markWatched=$('markImportedWatched').checked&&!!episode;
     const total=Number(existing?.total)||Number(candidate?.episodes)||0;
     let progress=Number(existing?.progress)||0;
     if(markWatched)progress=Math.max(progress,episode);
-    let status=existing?.status||(markWatched?'WATCHING':'PLANNING');if(markWatched&&total>0&&progress>=total)status='COMPLETED';else if(markWatched&&status==='COMPLETED'&&progress<total)status='WATCHING';
+    let status=existing?.status||$('importDetectedStatus').value||'WATCHING';
+    if(existing&&pendingImportFile.folderQueueId&&$('folderApplyCategoryToggle').checked)status=getFolderCategory();
+    if(markWatched&&total>0&&progress>=total)status='COMPLETED';
+    const downloadNotes=Array.isArray(existing?.downloadNotes)?[...existing.downloadNotes]:[];
+    downloadNotes.push({filename,episode:episode||null,season,source:pendingImportFile.origin||'Downloads',detectedAt:Date.now(),episodeDetected:!!episode,manualReview:true});
     const item={
       ...(existing||{}),id:existing?.id||('a_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,7)),
       title:existing?.title||title,total,progress,status,source:existing?.source||pendingImportFile.origin||'Downloads',
       cover:safeImage(existing?.cover||candidate?.coverImage?.large||''),
       year:existing?.year||candidate?.seasonYear||null,format:existing?.format||(candidate?.format==='TV_SHORT'?'TV':(candidate?.format||'')),
-      airStatus:candidate?.status||existing?.airStatus||'',
-      nextEpisode:candidate?.nextAiringEpisode?.episode||existing?.nextEpisode||null,
-      nextAiringAt:candidate?.nextAiringEpisode?.airingAt||existing?.nextAiringAt||null,
-      anilistId:candidate?.id||existing?.anilistId||null,
-      lastDownloadedEpisode:episode,lastDownloadedSeason:season,lastDownloadedAt:Date.now(),
-      lastDownloadFileName:String(pendingImportFile.name||'').slice(0,240),lastDownloadSource:pendingImportFile.origin||'Downloads',downloadHistory:history.slice(-50),
+      airStatus:candidate?.status||existing?.airStatus||'',nextEpisode:candidate?.nextAiringEpisode?.episode||existing?.nextEpisode||null,
+      nextAiringAt:candidate?.nextAiringEpisode?.airingAt||existing?.nextAiringAt||null,anilistId:candidate?.id||existing?.anilistId||null,
+      ...(episode?{lastDownloadedEpisode:episode,lastDownloadedSeason:season,lastDownloadedAt:Date.now()}:{}),
+      lastDownloadFileName:filename,lastDownloadSource:pendingImportFile.origin||'Downloads',lastDownloadDetectedAt:Date.now(),
+      downloadHistory:history.slice(-100),downloadNotes:downloadNotes.slice(-100),
       createdAt:existing?.createdAt||Date.now(),updatedAt:Date.now()
     };
     const sharedRecordId=pendingImportFile.shareRecordId||null;
@@ -1212,7 +1253,7 @@ service cloud.firestore {
     if(!firebaseReady||!currentUser||!syncedToFirebase)render();
     closeModal('importModal');
     if(sharedRecordId){await deleteSharedMetadata(sharedRecordId);activeSharedRecordId=null;}
-    const savedMessage=duplicate?`${title} episode ${episode} was already recorded.`:`Saved ${title} episode ${episode}.`;
+    const savedMessage=duplicate?`${title} download was already recorded.`:`Saved ${title}${episode?` episode ${episode}`:' download note'}.`;
     showToast(`${savedMessage} ${syncedToFirebase?'Synced to Firebase.':'Saved on this device; sign in to sync.'}`);
     pendingImportFile=null;selectedImportAniList=null;
     await consumeSharedMetadata();
@@ -1233,7 +1274,17 @@ service cloud.firestore {
   $('connectFolderBtn').addEventListener('click',connectDownloadsFolder);
   $('scanFolderBtn').addEventListener('click',()=>scanConnectedFolder({allowPermissionPrompt:true}));
   $('reviewFolderQueueBtn').addEventListener('click',reviewNextFolderItem);
+  $('retryFolderMatchesBtn').addEventListener('click',retryUnmatchedFolderItems);
   $('disconnectFolderBtn').addEventListener('click',disconnectDownloadsFolder);
+  $('folderAutoTrackToggle').addEventListener('change',async()=>{
+    try{localStorage.setItem(FOLDER_AUTO_TRACK_KEY,$('folderAutoTrackToggle').checked?'1':'0');}catch(e){}
+    if($('folderAutoTrackToggle').checked)await autoProcessFolderQueue({quiet:false});
+    showToast($('folderAutoTrackToggle').checked?'Automatic library updates enabled.':'Automatic library updates paused.');
+  });
+  $('folderAutoCategory').addEventListener('change',()=>{try{localStorage.setItem(FOLDER_AUTO_CATEGORY_KEY,getFolderCategory());}catch(e){};$('importDetectedStatus').value=getFolderCategory();showToast(`New anime will be added to ${statusName(getFolderCategory())}.`);});
+  $('folderApplyCategoryToggle').addEventListener('change',()=>{try{localStorage.setItem(FOLDER_APPLY_CATEGORY_KEY,$('folderApplyCategoryToggle').checked?'1':'0');}catch(e){};});
+  $('folderAutoMarkWatchedToggle').addEventListener('change',()=>{try{localStorage.setItem(FOLDER_AUTO_WATCHED_KEY,$('folderAutoMarkWatchedToggle').checked?'1':'0');}catch(e){};});
+  $('folderTrackWithoutEpisodeToggle').addEventListener('change',()=>{try{localStorage.setItem(FOLDER_NO_EPISODE_KEY,$('folderTrackWithoutEpisodeToggle').checked?'1':'0');}catch(e){};});
   $('folderAutoScanToggle').addEventListener('change',()=>{
     try{localStorage.setItem(FOLDER_AUTO_SCAN_KEY,$('folderAutoScanToggle').checked?'1':'0');}catch(e){}
     setupFolderAutoScan();
@@ -1279,25 +1330,188 @@ service cloud.firestore {
     $('folderQueue').hidden=!queue.length;
     $('folderQueueCount').textContent=`${queue.length} waiting`;
     $('reviewFolderQueueBtn').disabled=!queue.length;
-    $('reviewFolderQueueBtn').textContent=`Review new episodes (${queue.length})`;
-    $('folderQueuePreview').innerHTML=queue.slice(0,3).map(item=>{
+    $('reviewFolderQueueBtn').textContent=`Review unmatched videos (${queue.length})`;
+    $('folderQueuePreview').innerHTML=queue.slice(0,4).map(item=>{
       const parsed=parseAnimeFilename(item.name||'');
-      const title=parsed.title||item.name||'Video file';
-      const ep=parsed.episode?`Episode ${parsed.episode}${parsed.season?` · Season ${parsed.season}`:''}`:'Needs manual episode check';
-      return `<div class="folder-queue-item"><b title="${escapeHtml(title)}">${escapeHtml(title)}</b><span>${escapeHtml(ep)}</span></div>`;
+      const title=item.matchedTitle||parsed.title||item.name||'Video file';
+      const ep=parsed.episode?`Episode ${parsed.episode}${parsed.season?` · Season ${parsed.season}`:''}`:'No episode number detected';
+      const state=item.autoState==='matching'?'Checking AniList…':(item.autoReason||ep);
+      return `<div class="folder-queue-item"><b title="${escapeHtml(title)}">${escapeHtml(title)}</b><span>${escapeHtml(state)}</span></div>`;
     }).join('');
-    if(queue.length>3){$('folderQueuePreview').insertAdjacentHTML('beforeend',`<div class="folder-queue-item"><b>+${queue.length-3} more videos</b><span>Review one by one</span></div>`);}
+    if(queue.length>4){$('folderQueuePreview').insertAdjacentHTML('beforeend',`<div class="folder-queue-item"><b>+${queue.length-4} more videos</b><span>Automatic matching will continue on scan</span></div>`);}
+    renderFolderAutoLog();
+  }
+  function renderFolderAutoLog(){
+    const log=Array.isArray(folderRecord?.autoLog)?folderRecord.autoLog:[];
+    $('folderAutoLog').hidden=!log.length;
+    $('folderAutoLogCount').textContent=log.length?`${log.length} saved`:'0';
+    $('folderAutoLogList').innerHTML=log.slice(-6).reverse().map(entry=>{
+      const ep=entry.episode?`S${entry.season||1} · EP ${entry.episode}`:'Episode not identified';
+      return `<div class="folder-auto-log-item"><b title="${escapeHtml(entry.title||'Anime')}">${escapeHtml(entry.title||'Anime')}</b><span>${escapeHtml(ep)} · ${escapeHtml(STATE_LABELS[entry.status]||entry.status||'Tracked')} · ${escapeHtml(entry.action||'Added to library')}</span></div>`;
+    }).join('');
   }
   function updateFolderMonitorUI(){
     const connected=!!connectedFolderHandle;
     $('scanFolderBtn').disabled=!connected||folderScanBusy;
     $('disconnectFolderBtn').disabled=!connected;
     $('connectFolderBtn').textContent=connected?'▣ Change folder':'▣ Connect folder';
+    $('retryFolderMatchesBtn').disabled=folderAutoProcessBusy||!folderQueue.some(item=>item.autoState==='needs_review');
     if(connected){
       if(!$('folderStatusText').textContent||$('folderStatusText').textContent==='No folder selected yet.')$('folderStatusText').textContent=`Connected folder: ${folderRecord?.name||connectedFolderHandle.name||'Selected folder'}`;
     }
     $('folderLastScan').textContent=folderLastScanAt?`Last scan: ${new Date(folderLastScanAt).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}`:'';
     renderFolderQueue();
+  }
+  function getFolderCategory(){return $('folderAutoCategory')?.value||'WATCHING';}
+  function folderTitleSimilarity(query,candidate){
+    const q=normalizeAnimeTitle(query),c=normalizeAnimeTitle(candidate);
+    if(!q||!c)return 0;
+    if(q===c)return 1;
+    if(q.length>=6&&c.startsWith(q))return 0.91+(q.length/c.length)*0.06;
+    if(c.length>=6&&q.startsWith(c))return 0.86+(c.length/q.length)*0.04;
+    if(q.length>=7&&c.includes(q))return 0.84;
+    const qt=String(query).toLowerCase().split(/[^a-z0-9]+/).filter(x=>x.length>1);
+    const ct=String(candidate).toLowerCase().split(/[^a-z0-9]+/).filter(x=>x.length>1);
+    const a=new Set(qt),b=new Set(ct);
+    const common=[...a].filter(x=>b.has(x)).length;
+    return a.size&&b.size?(2*common)/(a.size+b.size):0;
+  }
+  function scoreFolderAnime(query,media){
+    const titles=[media?.title?.english,media?.title?.romaji,media?.title?.native].filter(Boolean);
+    return Math.max(0,...titles.map(title=>folderTitleSimilarity(query,title)));
+  }
+  async function findFolderAniListMatch(query){
+    const raw=String(query||'').trim();
+    if(/^[@#]/.test(raw))return {confident:false,reason:'This looks like a channel or release-group name, not an anime title.'};
+    const cleaned=raw.replace(/\b(?:episode|download|telegram|video)\b/gi,' ').replace(/\s{2,}/g,' ').trim();
+    const key=normalizeAnimeTitle(cleaned);
+    if(!key||key.length<4)return {confident:false,reason:'Filename does not contain a clear anime title.'};
+    if(folderAniListMatchCache.has(key))return folderAniListMatchCache.get(key);
+    const gql=`query ($search: String) { Page(page: 1, perPage: 8) { media(search: $search, type: ANIME, sort: SEARCH_MATCH) { id title { romaji english native } coverImage { large } episodes status format seasonYear nextAiringEpisode { episode airingAt } description(asHtml: false) genres averageScore meanScore popularity studios(isMain: true) { nodes { name } } siteUrl startDate { year month day } endDate { year month day } } } }`;
+    const response=await fetch(ANILIST_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({query:gql,variables:{search:cleaned}})});
+    if(!response.ok)throw new Error(response.status===429?'AniList rate limit reached. Try again shortly.':'AniList lookup failed.');
+    const payload=await response.json();
+    const media=payload?.data?.Page?.media||[];
+    if(!media.length){const none={confident:false,reason:'No AniList anime match was found. Review this title manually.'};folderAniListMatchCache.set(key,none);return none;}
+    const ranked=media.map(item=>({item,score:scoreFolderAnime(cleaned,item)})).sort((a,b)=>b.score-a.score);
+    const best=ranked[0],second=ranked[1]?.score||0;
+    const exact=best.score>=0.999;
+    const confident=exact||(best.score>=0.925&&(second===0||best.score-second>=0.085));
+    const result=confident?{confident:true,media:best.item,score:best.score,reason:exact?'Exact title match':'High-confidence title match'}:{confident:false,reason:'More than one anime may match this filename. Review the title before adding it.'};
+    folderAniListMatchCache.set(key,result);
+    return result;
+  }
+  function makeFolderSource(){
+    const name=String(folderRecord?.name||'').toLowerCase();
+    return name.includes('telegram')?'Telegram':'Downloads folder';
+  }
+  async function saveFolderDetectionToLibrary(queueItem,parsed,media){
+    const displayTitle=media?.title?.english||media?.title?.romaji||media?.title?.native||parsed.title;
+    const existing=animeList.find(x=>(media?.id&&Number(x.anilistId)===Number(media.id))||normalizeAnimeTitle(x.title)===normalizeAnimeTitle(displayTitle)||normalizeAnimeTitle(x.title)===normalizeAnimeTitle(parsed.title));
+    const episode=Number(parsed.episode)||null;
+    const season=Number(parsed.season)||null;
+    const filename=String(queueItem.name||'').slice(0,240);
+    const relativePath=String(queueItem.relativePath||filename).slice(0,500);
+    const history=Array.isArray(existing?.downloadHistory)?[...existing.downloadHistory]:[];
+    const duplicate=episode?history.some(row=>Number(row.episode)===episode&&Number(row.season||0)===Number(season||0)):history.some(row=>String(row.filename||'').toLowerCase()===filename.toLowerCase());
+    if(!duplicate){history.push({episode,season,filename,mimeType:String(queueItem.type||mimeForVideo(filename)).slice(0,100),source:makeFolderSource(),relativePath,importedAt:Date.now(),detectedBy:'automatic-folder-scan'});}
+    const downloadNotes=Array.isArray(existing?.downloadNotes)?[...existing.downloadNotes]:[];
+    if(!downloadNotes.some(note=>note.relativePath===relativePath&&Number(note.size||0)===Number(queueItem.size||0))){
+      downloadNotes.push({filename,relativePath,episode,season,size:Number(queueItem.size)||0,source:makeFolderSource(),detectedAt:Date.now(),episodeDetected:!!episode,matchedTitle:displayTitle});
+    }
+    const selectedCategory=getFolderCategory();
+    const mayChangeExisting=$('folderApplyCategoryToggle').checked;
+    const autoMarkWatched=$('folderAutoMarkWatchedToggle').checked&&!!episode;
+    const total=Number(existing?.total)||Number(media?.episodes)||0;
+    let progress=Number(existing?.progress)||0;
+    if(autoMarkWatched)progress=Math.max(progress,episode);
+    let status=existing?(mayChangeExisting?selectedCategory:(existing.status||selectedCategory)):selectedCategory;
+    if(autoMarkWatched&&total>0&&progress>=total)status='COMPLETED';
+    const item={
+      ...(existing||{}),
+      id:existing?.id||('a_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,8)),
+      title:existing?.title||displayTitle,
+      total,progress,status,
+      source:existing?.source||makeFolderSource(),
+      cover:safeImage(existing?.cover||media?.coverImage?.large||''),
+      year:existing?.year||media?.seasonYear||null,
+      format:existing?.format||(media?.format==='TV_SHORT'?'TV':(media?.format||'')),
+      airStatus:media?.status||existing?.airStatus||'',
+      nextEpisode:media?.nextAiringEpisode?.episode||existing?.nextEpisode||null,
+      nextAiringAt:media?.nextAiringEpisode?.airingAt||existing?.nextAiringAt||null,
+      anilistId:media?.id||existing?.anilistId||null,
+      description:existing?.description||animePlainDescription(media?.description)||'',
+      genres:existing?.genres||media?.genres||[],
+      studios:existing?.studios||(media?.studios?.nodes||[]).map(studio=>studio.name),
+      averageScore:existing?.averageScore||media?.averageScore||media?.meanScore||null,
+      popularity:existing?.popularity||media?.popularity||null,
+      siteUrl:existing?.siteUrl||media?.siteUrl||'',
+      startDate:existing?.startDate||media?.startDate||null,
+      endDate:existing?.endDate||media?.endDate||null,
+      ...(episode?{lastDownloadedEpisode:episode,lastDownloadedSeason:season,lastDownloadedAt:Date.now()}:{}),
+      lastDownloadFileName:filename,lastDownloadSource:makeFolderSource(),lastDownloadDetectedAt:Date.now(),
+      downloadHistory:history.slice(-100),downloadNotes:downloadNotes.slice(-100),
+      createdAt:existing?.createdAt||Date.now(),updatedAt:Date.now()
+    };
+    const synced=await persist(item);
+    return {item,duplicate,synced,wasExisting:!!existing,episode,season};
+  }
+  async function saveFolderRecord(){
+    if(!folderRecord)folderRecord={id:FOLDER_SETTINGS_KEY,name:connectedFolderHandle?.name||'Selected folder',seenFingerprints:[],queue:[],autoLog:[]};
+    folderRecord.queue=folderQueue;
+    await writeFolderSettings(folderRecord);
+  }
+  async function autoProcessFolderQueue({quiet=true}={}){
+    if(folderAutoProcessBusy||!$('folderAutoTrackToggle')?.checked||!folderQueue.length)return;
+    folderAutoProcessBusy=true;
+    let added=0,review=0;
+    try{
+      const batch=folderQueue.filter(item=>!['needs_review','tracked'].includes(item.autoState)).slice(0,30);
+      for(const queued of batch){
+        const current=folderQueue.find(item=>item.id===queued.id);
+        if(!current)continue;
+        const parsed=parseAnimeFilename(current.name||'');
+        current.autoState='matching';current.autoReason='Searching AniList…';
+        await saveFolderRecord();renderFolderQueue();
+        if(!parsed.title||normalizeAnimeTitle(parsed.title).length<4){
+          current.autoState='needs_review';current.autoReason='Filename does not contain a reliable anime title.';review++;await saveFolderRecord();continue;
+        }
+        if(!parsed.episode&&!$('folderTrackWithoutEpisodeToggle').checked){
+          current.autoState='needs_review';current.autoReason='Episode number missing; automatic tracking without an episode is disabled.';review++;await saveFolderRecord();continue;
+        }
+        try{
+          const match=await findFolderAniListMatch(parsed.title);
+          if(!match.confident){current.autoState='needs_review';current.autoReason=match.reason||'Anime match needs confirmation.';review++;await saveFolderRecord();continue;}
+          const outcome=await saveFolderDetectionToLibrary(current,parsed,match.media);
+          const title=outcome.item.title;
+          folderRecord.autoLog=Array.isArray(folderRecord.autoLog)?folderRecord.autoLog:[];
+          folderRecord.autoLog.push({title,episode:outcome.episode,season:outcome.season,status:outcome.item.status,action:outcome.duplicate?'Download already noted':'Updated library',filename:current.name,at:Date.now()});
+          folderRecord.autoLog=folderRecord.autoLog.slice(-40);
+          folderQueue=folderQueue.filter(item=>item.id!==current.id);
+          await saveFolderRecord();
+          added++;
+        }catch(error){
+          console.warn('Automatic anime matching failed for',current.name,error);
+          current.autoState='needs_review';current.autoReason=error?.message||'Online anime lookup failed. Review manually.';review++;await saveFolderRecord();
+        }
+        renderFolderQueue();
+        // Keep requests comfortably below the public AniList rate limit.
+        await new Promise(resolve=>setTimeout(resolve,320));
+      }
+    }finally{
+      folderAutoProcessBusy=false;
+      updateFolderMonitorUI();
+    }
+    if(added&&!quiet)showToast(`${added} anime record(s) automatically added or updated in My Anime Library.`);
+    else if(added)showToast(`${added} new download(s) automatically tracked in My Anime Library.`);
+    if(review&&!quiet)showToast(`${review} file(s) need a title/episode review.`);
+  }
+  async function retryUnmatchedFolderItems(){
+    let retryCount=0;
+    folderQueue.forEach(item=>{if(item.autoState==='needs_review'){item.autoState='pending';item.autoReason='';retryCount++;}});
+    await saveFolderRecord();
+    if(!retryCount){showToast('There are no unmatched files to retry.');return;}
+    await autoProcessFolderQueue({quiet:false});
   }
   async function ensureFolderPermission(handle,allowPrompt=false){
     if(!handle)return false;
@@ -1371,11 +1585,13 @@ service cloud.firestore {
       await writeFolderSettings(record);
       folderRecord=record;folderQueue=record.queue;folderLastScanAt=record.lastScanAt;
       folderPermissionBadge('Folder access granted',true);
-      $('folderStatusText').textContent=`Scanned ${files.length}${files.length>=FOLDER_SCAN_MAX_FILES?'+':''} video file(s) in ${record.name}.`;
+      $('folderStatusText').textContent=`Scanned ${files.length}${files.length>=FOLDER_SCAN_MAX_FILES?'+':''} video file(s) in ${record.name}. Matching anime titles online…`;
       updateFolderMonitorUI();
-      $('folderStatusText').textContent=`Scanned ${files.length}${files.length>=FOLDER_SCAN_MAX_FILES?'+':''} video file(s) in ${record.name}.`;
-      if(newlyDetected&&!quiet)showToast(`Found ${newlyDetected} new video file(s). Review them to log episodes.`);
-      else if(newlyDetected&&quiet)showToast(`${newlyDetected} new video download(s) detected.`);
+      if($('folderAutoTrackToggle').checked)await autoProcessFolderQueue({quiet:true});
+      const waiting=folderQueue.length;
+      $('folderStatusText').textContent=`Scanned ${files.length}${files.length>=FOLDER_SCAN_MAX_FILES?'+':''} video file(s) in ${record.name}. ${waiting?`${waiting} file(s) need review.`:'All confident anime matches have been added to your library.'}`;
+      if(newlyDetected&&!quiet&&!$('folderAutoTrackToggle').checked)showToast(`Found ${newlyDetected} new video file(s). Enable automatic library updates or review them.`);
+      if(newlyDetected&&quiet&&!$('folderAutoTrackToggle').checked)showToast(`${newlyDetected} new video download(s) detected.`);
       if(files.length>=FOLDER_SCAN_MAX_FILES)showToast('Scan reached its safety limit. Organise videos into smaller folders for a full scan.');
     }catch(err){
       console.error('Folder scan failed',err);
@@ -1396,7 +1612,9 @@ service cloud.firestore {
     }
     folderQueue=folderQueue.slice(-FOLDER_QUEUE_LIMIT);
     try{folderRecord=folderRecord||{id:FOLDER_SETTINGS_KEY,name:'One-time folder selection',seenFingerprints:[],queue:[]};folderRecord.queue=folderQueue;folderRecord.seenFingerprints=[...(folderRecord.seenFingerprints||[]),...candidates.map(f=>folderFingerprint(f.webkitRelativePath||f.name,f.size,f.lastModified))].slice(-12000);folderRecord.lastScanAt=Date.now();await writeFolderSettings(folderRecord);}catch(err){console.warn(err);}
-    folderLastScanAt=Date.now();$('folderStatusText').textContent='One-time folder scan complete. Reconnect with Chrome folder access for automatic rescans.';folderPermissionBadge('One-time scan',false);updateFolderMonitorUI();showToast(`Found ${added} new video file(s).`);
+    folderLastScanAt=Date.now();$('folderStatusText').textContent='One-time folder scan complete. Reconnect with Chrome folder access for automatic rescans.';folderPermissionBadge('One-time scan',false);updateFolderMonitorUI();
+    if($('folderAutoTrackToggle').checked)await autoProcessFolderQueue({quiet:true});
+    showToast(`${added} new file(s) scanned${folderQueue.length?`; ${folderQueue.length} need review`: '; confident matches were added to your library'}.`);
   }
   async function reviewNextFolderItem(){
     if(!folderQueue.length){showToast('No new videos are waiting for review.');return;}
@@ -1424,7 +1642,15 @@ service cloud.firestore {
     }
   }
   async function initFolderMonitor(){
-    try{$('folderAutoScanToggle').checked=localStorage.getItem(FOLDER_AUTO_SCAN_KEY)!=='0';}catch(err){}
+    try{
+      $('folderAutoScanToggle').checked=localStorage.getItem(FOLDER_AUTO_SCAN_KEY)!=='0';
+      $('folderAutoTrackToggle').checked=localStorage.getItem(FOLDER_AUTO_TRACK_KEY)!=='0';
+      $('folderAutoCategory').value=localStorage.getItem(FOLDER_AUTO_CATEGORY_KEY)||'WATCHING';
+      $('folderApplyCategoryToggle').checked=localStorage.getItem(FOLDER_APPLY_CATEGORY_KEY)==='1';
+      $('folderAutoMarkWatchedToggle').checked=localStorage.getItem(FOLDER_AUTO_WATCHED_KEY)==='1';
+      $('folderTrackWithoutEpisodeToggle').checked=localStorage.getItem(FOLDER_NO_EPISODE_KEY)!=='0';
+      $('importDetectedStatus').value=$('folderAutoCategory').value;
+    }catch(err){}
     $('folderFallbackInput').webkitdirectory=true;$('folderFallbackInput').directory=true;
     if(!folderApiAvailable()){
       $('folderStatusText').textContent='Persistent folder scanning is not available in this browser. You can still select a folder for a one-time scan.';
@@ -1448,6 +1674,7 @@ service cloud.firestore {
         scanConnectedFolder({allowPermissionPrompt:false,quiet:true});
       }
     });
+    if(folderQueue.length&&$('folderAutoTrackToggle').checked)await autoProcessFolderQueue({quiet:true});
     setupFolderAutoScan();
   }
 
