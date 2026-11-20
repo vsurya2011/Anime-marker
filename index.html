@@ -9,6 +9,16 @@
   <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png" />
   <link rel="apple-touch-icon" href="./icons/icon-192.png" />
   <title>OtakuLog — Anime Tracker</title>
+  <script id="otakulog-theme-boot">
+    (() => {
+      try {
+        const saved = localStorage.getItem('otakulog_theme');
+        document.documentElement.dataset.theme = saved === 'light' ? 'light' : 'dark';
+      } catch (_) {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    })();
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -25,6 +35,31 @@
     .import-file-box{display:flex;align-items:center;gap:12px;padding:13px;border:1px dashed #555071;background:#1b1d2c;border-radius:12px;margin-bottom:14px}.import-file-icon{width:39px;height:39px;display:grid;place-items:center;border-radius:11px;background:rgba(155,140,255,.14);font-size:19px;flex-shrink:0}.import-file-name{font-size:12px;font-weight:700;overflow-wrap:anywhere}.import-file-meta{font-size:10px;color:var(--muted);margin-top:4px}.import-hint{color:var(--muted);font-size:11px;line-height:1.55;margin:10px 0 15px}.import-results{display:none;max-height:220px;overflow:auto;border:1px solid var(--line);border-radius:11px;margin-top:8px}.import-results.show{display:block}.import-results .result-row.selected{background:rgba(155,140,255,.16);outline:1px solid rgba(155,140,255,.4)}.import-results .result-row img{width:38px;height:52px;object-fit:cover;border-radius:6px;background:#292d3e}.import-selected{font-size:11px;color:#a9e9cb;margin-top:9px;min-height:16px}.import-checkbox{display:flex;gap:9px;align-items:flex-start;padding:12px;border:1px solid #34384b;border-radius:11px;background:#141824;margin-top:14px;color:#d9dbea;font-size:12px;line-height:1.45}.import-checkbox input{margin-top:2px;accent-color:#9b8cff}.downloaded-line{font-size:10px;color:#9dddc9;margin-top:8px}.downloaded-line span{color:#aab0c1}.install-note{font-size:11px;color:#aeb4c6;line-height:1.55;margin-top:9px}.install-note strong{color:#e3ddff}
     @media(max-width:760px){.import-panel{display:block;padding:15px}.import-panel-actions{margin-top:13px}.import-panel-actions .btn{flex:1}.import-panel-copy h2{font-size:16px}}
     @media(max-width:440px){.import-panel-actions .btn{font-size:11px;padding:9px 10px}}
+
+    /* Android Downloads folder monitor */
+    .folder-monitor{margin:-8px 0 30px;padding:18px 20px;border:1px solid var(--line);border-radius:17px;background:linear-gradient(120deg,rgba(155,140,255,.09),var(--panel));box-shadow:var(--shadow)}
+    .folder-monitor-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+    .folder-monitor-title{font:600 17px 'Space Grotesk',sans-serif;margin:0 0 5px;color:var(--text)}
+    .folder-monitor-copy{font-size:12px;color:var(--muted);line-height:1.6;margin:0;max-width:760px}
+    .folder-monitor-status{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px;font-size:11px;color:var(--muted)}
+    .folder-status-pill{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border:1px solid var(--line);border-radius:999px;background:var(--panel2);font-size:10px;font-weight:700;color:var(--muted)}
+    .folder-status-pill .dot{flex:0 0 auto}
+    .folder-monitor-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}
+    .folder-monitor-actions .btn{font-size:11px}
+    .folder-monitor-options{display:flex;align-items:center;gap:8px;margin-top:12px;color:var(--muted);font-size:11px}
+    .folder-monitor-options input{accent-color:var(--accent);width:15px;height:15px}
+    .folder-queue{margin-top:13px;border-top:1px solid var(--line);padding-top:12px}
+    .folder-queue-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px;font-size:11px;color:var(--text);font-weight:700}
+    .folder-queue-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+    .folder-queue-item{min-width:0;padding:9px 10px;border:1px solid var(--line);border-radius:10px;background:var(--panel2)}
+    .folder-queue-item b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10px;color:var(--text)}
+    .folder-queue-item span{display:block;font-size:9px;color:var(--muted);margin-top:4px}
+    .folder-monitor-note{font-size:10px;color:var(--muted);line-height:1.55;margin:11px 0 0}
+    .folder-monitor-note strong{color:var(--accent2)}
+    @media(max-width:760px){.folder-monitor{padding:15px}.folder-monitor-head{display:block}.folder-monitor-actions{display:grid;grid-template-columns:1fr 1fr}.folder-monitor-actions .btn{min-width:0;padding:9px 8px}.folder-queue-list{grid-template-columns:1fr 1fr}}
+    @media(max-width:440px){.folder-monitor-actions{grid-template-columns:1fr 1fr}.folder-queue-list{grid-template-columns:1fr}.folder-monitor-title{font-size:15px}}
+    :root[data-theme="light"] .folder-monitor{background:linear-gradient(120deg,rgba(132,111,228,.07),var(--panel));border-color:var(--line)}
+    :root[data-theme="light"] .folder-queue-item{background:#f8f9fd}
 
     /* Live anime discovery and airing schedule */
     .discover-section,.schedule-section{margin:0 0 30px}
@@ -89,6 +124,368 @@
     @media(max-width:760px){.catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.catalog-poster{height:165px}.schedule-list{grid-template-columns:1fr}.anime-detail-hero{grid-template-columns:115px 1fr;gap:12px}.anime-detail-poster{max-height:190px}.anime-detail-title{font-size:18px}}
     @media(max-width:440px){.catalog-poster{height:142px}.catalog-card-body{padding:10px}.catalog-title{font-size:12px}.catalog-desc{font-size:9px}.catalog-searchbar{padding:8px}.catalog-searchbar .btn{padding:8px 10px}.schedule-card{gap:8px;padding:8px}.schedule-card img,.schedule-poster-placeholder{width:46px;height:64px}.schedule-actions .btn{padding:6px}.detail-facts{grid-template-columns:1fr}.anime-detail-hero{grid-template-columns:92px 1fr}.anime-detail-title{font-size:16px}.detail-stat{font-size:9px}}
 
+
+    /* =========================================================
+       OtakuLog refreshed dashboard skin + accessible light mode
+       ========================================================= */
+    :root{
+      color-scheme:dark;
+      --bg:#0a0d14;
+      --panel:#111827;
+      --panel2:#172033;
+      --line:#263248;
+      --muted:#98a4b8;
+      --text:#eef2ff;
+      --accent:#9e8cff;
+      --accent2:#c6bbff;
+      --cyan:#71d8cb;
+      --orange:#ffc184;
+      --pink:#ff9fbd;
+      --green:#8fe0b3;
+      --red:#ff8c9e;
+      --shadow:0 18px 48px rgba(0,0,0,.24);
+    }
+    :root[data-theme="light"]{
+      color-scheme:light;
+      --bg:#f4f6fb;
+      --panel:#ffffff;
+      --panel2:#f7f8fc;
+      --line:#e2e7f0;
+      --muted:#69758b;
+      --text:#1b2436;
+      --accent:#7059dc;
+      --accent2:#6651cc;
+      --cyan:#168e86;
+      --orange:#b8752d;
+      --pink:#c45d82;
+      --green:#238b59;
+      --red:#c74f63;
+      --shadow:0 16px 42px rgba(26,39,67,.09);
+    }
+    html{scroll-padding-top:92px}
+    body{
+      background:
+        radial-gradient(ellipse at 82% -8%,rgba(139,119,255,.16),transparent 33%),
+        radial-gradient(ellipse at -12% 32%,rgba(75,194,181,.075),transparent 30%),
+        var(--bg);
+      color:var(--text);
+      transition:background .25s ease,color .25s ease;
+    }
+    :root[data-theme="light"] body{
+      background:
+        radial-gradient(ellipse at 85% -10%,rgba(137,119,235,.13),transparent 34%),
+        radial-gradient(ellipse at -10% 36%,rgba(75,180,169,.08),transparent 30%),
+        var(--bg);
+    }
+    .app{max-width:1460px;padding:20px 34px 64px}
+    .topbar{
+      position:relative;
+      display:flex;
+      min-height:66px;
+      margin:0 -8px 12px;
+      padding:9px 8px;
+      border-bottom:1px solid color-mix(in srgb,var(--line) 80%,transparent);
+    }
+    .brand{gap:13px}
+    .brand-mark{
+      width:46px;height:46px;border-radius:15px;
+      background:linear-gradient(145deg,#b5a8ff,#7466dc);
+      color:#17142b;font-size:23px;
+      box-shadow:0 9px 25px rgba(132,112,240,.25);
+    }
+    .brand-name{font-size:22px;color:var(--text);letter-spacing:-.8px}
+    .brand-sub{font-size:10px;letter-spacing:1.7px;color:var(--muted)}
+    .top-actions{gap:8px}
+    .sync-state{padding:8px 12px;border-color:var(--line);background:var(--panel);color:var(--muted)}
+    .btn{
+      padding:10px 14px;border-radius:11px;border-color:var(--line);
+      color:var(--text);background:var(--panel2);
+      transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease,background .18s ease;
+    }
+    .btn:hover{transform:translateY(-1px);border-color:var(--accent);background:var(--panel2);box-shadow:0 7px 18px rgba(0,0,0,.08)}
+    .btn.primary{
+      color:#17142b;background:linear-gradient(135deg,#b7aaff,#8d7df0);
+      box-shadow:0 8px 20px rgba(139,119,240,.2)
+    }
+    .btn.primary:hover{background:linear-gradient(135deg,#c5bbff,#9b8bff)}
+    .theme-toggle{display:flex;align-items:center;gap:7px;background:var(--panel);white-space:nowrap}
+    .theme-toggle-icon{font-size:14px;line-height:1}
+    .theme-toggle-label{font-size:12px}
+    .main-nav{
+      display:flex;align-items:center;gap:6px;
+      width:max-content;max-width:100%;overflow:auto;
+      padding:5px;margin:0 0 22px;
+      border:1px solid var(--line);border-radius:13px;
+      background:color-mix(in srgb,var(--panel) 88%,transparent);
+      scrollbar-width:none;
+    }
+    .main-nav::-webkit-scrollbar{display:none}
+    .main-nav-link{
+      display:inline-flex;align-items:center;justify-content:center;
+      min-height:34px;padding:7px 13px;border-radius:9px;
+      color:var(--muted);font-size:12px;font-weight:700;text-decoration:none;
+      white-space:nowrap;transition:.18s;
+    }
+    .main-nav-link:hover{background:var(--panel2);color:var(--text)}
+    .main-nav-link.active{background:rgba(155,140,255,.15);color:var(--accent2)}
+    .hero{
+      position:relative;overflow:hidden;isolation:isolate;
+      align-items:center;min-height:235px;margin-bottom:20px;
+      padding:34px 36px;border:1px solid color-mix(in srgb,var(--accent) 28%,var(--line));
+      border-radius:24px;
+      background:linear-gradient(112deg,rgba(35,34,65,.98),rgba(19,28,43,.96) 64%,rgba(19,37,48,.9));
+      box-shadow:var(--shadow);
+    }
+    .hero:before{
+      content:"";position:absolute;z-index:-1;width:340px;height:340px;right:5%;top:-185px;
+      border-radius:50%;border:1px solid rgba(194,183,255,.2);
+      box-shadow:0 0 0 34px rgba(194,183,255,.035),0 0 0 70px rgba(194,183,255,.025),0 0 100px rgba(149,132,255,.1);
+    }
+    .hero:after{
+      content:"";position:absolute;z-index:-1;width:190px;height:190px;right:17%;bottom:-140px;
+      border-radius:50%;background:rgba(112,217,208,.11);filter:blur(14px)
+    }
+    .hero .eyebrow{font-size:10px;letter-spacing:2.1px;color:#c4baff}
+    .hero h1{font-size:clamp(31px,4.4vw,48px);line-height:1.04;letter-spacing:-2px;color:#f5f3ff}
+    .hero h1 span{color:#b8adff}
+    .hero p{max-width:560px;color:#b3bbcf;font-size:13px;line-height:1.7}
+    .hero-actions{max-width:350px;justify-content:flex-end}
+    .hero-actions .btn{padding:11px 14px}
+    .stats{gap:14px;margin-bottom:30px}
+    .stat{
+      min-height:116px;padding:18px 19px;border-radius:17px;
+      border:1px solid var(--line);background:var(--panel);
+      box-shadow:0 5px 18px rgba(0,0,0,.035);
+    }
+    .stat:after{width:105px;height:105px;right:-35px;top:-44px}
+    .stat-label{font-size:11px;font-weight:600;letter-spacing:.15px;color:var(--muted)}
+    .stat-value{font-size:31px;letter-spacing:-1px;color:var(--text)}
+    .stat-foot{font-size:10px;color:var(--muted)}
+    .section-head{margin-bottom:16px}
+    .section-head h2{font-size:20px;letter-spacing:-.6px;color:var(--text)}
+    .section-head .sub{font-size:11px;color:var(--muted)}
+    .continue-wrap{margin-bottom:28px}
+    .continue-card{
+      min-height:150px;padding:15px;border-radius:18px;max-width:none;
+      border:1px solid color-mix(in srgb,var(--accent) 25%,var(--line));
+      background:linear-gradient(110deg,color-mix(in srgb,var(--panel2) 94%,#5c4aa0),var(--panel));
+      box-shadow:var(--shadow)
+    }
+    .cover{width:91px;height:120px;border-radius:11px}
+    .continue-title{font-size:20px;color:var(--text)}
+    .continue-meta,.progress-foot{color:var(--muted)}
+    .progress-line{background:color-mix(in srgb,var(--line) 80%,#526080)}
+    .toolbar{
+      gap:9px;padding:11px;margin-bottom:15px;
+      border:1px solid var(--line);border-radius:15px;
+      background:var(--panel);box-shadow:0 5px 18px rgba(0,0,0,.025)
+    }
+    .searchbox{max-width:320px}
+    .searchbox input{
+      min-height:39px;border:1px solid var(--line);border-radius:10px;
+      background:var(--panel2);color:var(--text)
+    }
+    .searchbox input::placeholder{color:var(--muted)}
+    .tab{padding:8px 10px;color:var(--muted)}
+    .tab:hover{background:var(--panel2);color:var(--text)}
+    .tab.active{background:rgba(155,140,255,.13);border-color:rgba(155,140,255,.28);color:var(--accent2)}
+    .sort-select{background:var(--panel2);border-color:var(--line);color:var(--text);padding:9px 10px}
+    .anime-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+    .anime-card,.catalog-card{
+      border:1px solid var(--line);border-radius:17px;
+      background:var(--panel);box-shadow:0 5px 18px rgba(0,0,0,.025)
+    }
+    .anime-card:hover,.catalog-card:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--accent) 55%,var(--line));box-shadow:var(--shadow)}
+    .card-poster{height:190px;background:var(--panel2)}
+    .card-poster img{opacity:.94}
+    .card-body{padding:14px}
+    .card-title{font-size:14px;color:var(--text)}
+    .card-meta{color:var(--muted)}
+    .card-progress-head{color:var(--muted)}
+    .card-progress-head b{color:var(--text)}
+    .mini-progress{background:var(--panel2)}
+    .icon-btn{border-color:var(--line);background:var(--panel2);color:var(--text)}
+    .icon-btn:hover{background:rgba(155,140,255,.15);border-color:var(--accent)}
+    .empty,.catalog-state,.schedule-empty{
+      border-color:var(--line);background:var(--panel);color:var(--muted)
+    }
+    .import-panel{
+      padding:17px 19px;border-color:color-mix(in srgb,var(--accent) 24%,var(--line));
+      border-radius:17px;background:linear-gradient(105deg,rgba(45,39,78,.64),var(--panel));
+      box-shadow:0 6px 20px rgba(0,0,0,.035)
+    }
+    .import-panel-copy h2{color:var(--text)}
+    .import-panel-copy p{color:var(--muted)}
+    .catalog-searchbar{
+      padding:11px 13px;border-color:var(--line);border-radius:14px;background:var(--panel);
+      box-shadow:0 5px 18px rgba(0,0,0,.025)
+    }
+    .catalog-searchbar input{color:var(--text)}
+    .catalog-searchbar input::placeholder{color:var(--muted)}
+    .catalog-search-note{color:var(--muted)}
+    .catalog-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:15px}
+    .catalog-poster{height:205px}
+    .catalog-card-body{padding:13px}
+    .catalog-title{color:var(--text)}
+    .catalog-meta,.catalog-desc{color:var(--muted)}
+    .catalog-genre{background:rgba(155,140,255,.12);color:var(--accent2)}
+    .schedule-day-tab{background:var(--panel);border-color:var(--line);color:var(--muted)}
+    .schedule-day-tab.active{background:rgba(155,140,255,.14);border-color:var(--accent);color:var(--accent2)}
+    .schedule-group-title{color:var(--text)}
+    .schedule-card{background:var(--panel);border-color:var(--line);border-radius:14px}
+    .schedule-meta{color:var(--muted)}
+    .schedule-source{color:var(--cyan);background:color-mix(in srgb,var(--cyan) 9%,transparent);border-color:color-mix(in srgb,var(--cyan) 24%,var(--line))}
+    .bottom-note{background:var(--panel);border-color:var(--line);color:var(--muted);border-radius:13px}
+    .bottom-note strong{color:var(--accent2)}
+    .footer{color:var(--muted)}
+    .footer button{color:var(--accent2)}
+    .modal-backdrop{background:rgba(4,7,14,.7)}
+    .modal{background:var(--panel);border-color:var(--line);color:var(--text)}
+    .modal-head{border-bottom-color:var(--line)}
+    .modal-head h3{color:var(--text)}
+    .modal-content{color:var(--text)}
+    .field label{color:var(--muted)}
+    .field input,.field textarea,.field select{
+      background:var(--panel2);border-color:var(--line);color:var(--text)
+    }
+    .field input::placeholder,.field textarea::placeholder{color:var(--muted)}
+    .search-results,.import-results{background:var(--panel2);border-color:var(--line)}
+    .result-row{border-bottom-color:var(--line)}
+    .result-row:hover{background:color-mix(in srgb,var(--accent) 10%,var(--panel2))}
+    .result-copy b{color:var(--text)}
+    .detail-stat,.detail-fact{background:var(--panel2);border-color:var(--line);color:var(--muted)}
+    .detail-fact b{color:var(--text)}
+    .detail-description{color:var(--muted)}
+    .help-content{color:var(--muted)}
+    .help-content h4{color:var(--text)}
+    .help-content pre{background:var(--panel2);border-color:var(--line);color:var(--text)}
+    .help-content code{background:var(--panel2);color:var(--accent2)}
+    .import-file-box{background:var(--panel2);border-color:var(--line)}
+    .import-checkbox{background:var(--panel2);border-color:var(--line);color:var(--text)}
+    .install-note{color:var(--muted)}
+    .install-note strong{color:var(--accent2)}
+    .auth-copy{color:var(--muted)}
+    .toast{z-index:100}
+    section[id],.hero[id]{scroll-margin-top:18px}
+    :root[data-theme="light"] .hero{
+      background:linear-gradient(112deg,#f0edff 0%,#eef1fb 65%,#eaf7f6 100%);
+      border-color:#ddd8fb
+    }
+    :root[data-theme="light"] .hero h1{color:#1d2540}
+    :root[data-theme="light"] .hero h1 span{color:#6b58d2}
+    :root[data-theme="light"] .hero p{color:#5f6a80}
+    :root[data-theme="light"] .hero .eyebrow{color:#6d5bd1}
+    :root[data-theme="light"] .continue-card{background:linear-gradient(110deg,#f4f1ff,#fff)}
+    :root[data-theme="light"] .import-panel{background:linear-gradient(105deg,#f2efff,#fff)}
+    :root[data-theme="light"] .stat{background:#fff}
+    :root[data-theme="light"] .anime-card,:root[data-theme="light"] .catalog-card{background:#fff}
+    :root[data-theme="light"] .searchbox input,
+    :root[data-theme="light"] .sort-select,
+    :root[data-theme="light"] .catalog-searchbar,
+    :root[data-theme="light"] .toolbar{background:#fff}
+    :root[data-theme="light"] .catalog-poster,
+    :root[data-theme="light"] .card-poster{background:#edf0f7}
+    :root[data-theme="light"] .schedule-card{background:#fff}
+    :root[data-theme="light"] .modal{background:#fff}
+    :root[data-theme="light"] .field input,
+    :root[data-theme="light"] .field textarea,
+    :root[data-theme="light"] .field select,
+    :root[data-theme="light"] .search-results,
+    :root[data-theme="light"] .import-results{background:#f8f9fc;color:#1b2436}
+    :root[data-theme="light"] .detail-stat,
+    :root[data-theme="light"] .detail-fact,
+    :root[data-theme="light"] .import-file-box,
+    :root[data-theme="light"] .import-checkbox{background:#f7f8fc}
+    :root[data-theme="light"] .help-content pre{background:#f6f7fb;color:#344057}
+    :root[data-theme="light"] .detail-fact b{color:#202a3d}
+    :root[data-theme="light"] .detail-description{color:#5c6880}
+    :root[data-theme="light"] .card-progress-head b{color:#263148}
+    :root[data-theme="light"] .mini-progress{background:#e8ebf3}
+    :root[data-theme="light"] .progress-line{background:#e7e9f3}
+    :root[data-theme="light"] .icon-btn{background:#f5f6fb;border-color:#e2e7f0;color:#3b4560}
+    :root[data-theme="light"] .tab:hover{background:#f2f3fa}
+    :root[data-theme="light"] .main-nav{background:rgba(255,255,255,.82)}
+    :root[data-theme="light"] .btn{background:#fff;color:#273149}
+    :root[data-theme="light"] .btn.primary{background:linear-gradient(135deg,#a99aff,#8675e8);color:#17142b}
+    :root[data-theme="light"] .btn.danger{background:#fff3f5;color:#b83e55;border-color:#f0cbd3}
+    :root[data-theme="light"] .status-pill{color:#fff!important}
+    :root[data-theme="light"] .card-actions .btn{background:#f4f2ff}
+    @media(max-width:1120px){
+      .anime-grid,.catalog-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+      .hero-actions{max-width:310px}
+    }
+    @media(max-width:800px){
+      .app{padding:15px 17px 48px}
+      .topbar{margin:0 -2px 10px}
+      .hero{padding:27px 24px;min-height:0}
+      .hero-actions{justify-content:flex-start;max-width:none}
+      .stats{gap:10px}
+      .anime-grid,.catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .card-poster{height:170px}
+      .catalog-poster{height:175px}
+      .main-nav{width:100%;margin-bottom:18px}
+    }
+    @media(max-width:560px){
+      .app{padding:11px 12px 38px}
+      .topbar{align-items:flex-start;gap:8px;flex-wrap:wrap}
+      .brand-mark{width:40px;height:40px;border-radius:13px}
+      .brand-name{font-size:19px}
+      .brand-sub{font-size:9px;display:block}
+      .top-actions{gap:6px;flex-wrap:wrap;justify-content:flex-end}
+      .top-actions .btn{padding:8px 9px;font-size:11px}
+      .theme-toggle{gap:5px}
+      .theme-toggle-label{font-size:10px}
+      .top-actions .sync-state{display:none}
+      .main-nav{gap:3px;padding:4px}
+      .main-nav-link{font-size:10px;padding:7px 10px;min-height:32px}
+      .hero{padding:23px 19px;border-radius:19px}
+      .hero h1{font-size:32px;letter-spacing:-1.3px}
+      .hero p{font-size:12px}
+      .hero-actions{gap:7px}
+      .hero-actions .btn{flex:1;font-size:10px;padding:10px 8px}
+      .stats{gap:8px;margin-bottom:24px}
+      .stat{min-height:98px;padding:13px;border-radius:14px}
+      .stat-value{font-size:25px;margin-top:6px}
+      .stat-label{font-size:10px}
+      .section-head h2{font-size:17px}
+      .section-head .sub{font-size:10px}
+      .continue-card{gap:11px;padding:11px}
+      .continue-ctrl{flex-direction:row;align-self:flex-end}
+      .continue-ctrl .btn{font-size:10px;padding:7px}
+      .toolbar{padding:8px}
+      .searchbox{max-width:none;flex-basis:100%}
+      .tabs{gap:3px}
+      .tab{font-size:10px;padding:7px 8px}
+      .sort-select{font-size:10px;padding:8px}
+      .anime-grid,.catalog-grid{gap:9px}
+      .card-poster{height:145px}
+      .catalog-poster{height:148px}
+      .card-body,.catalog-card-body{padding:10px}
+      .card-title{font-size:12px}
+      .card-meta{font-size:9px}
+      .card-actions{gap:5px}
+      .card-actions .btn{font-size:10px;padding:7px}
+      .icon-btn{width:27px;height:27px}
+      .import-panel{padding:14px}
+      .import-panel-actions{display:grid;grid-template-columns:1fr 1fr}
+      .import-panel-actions .btn{font-size:10px}
+      .catalog-searchbar{gap:6px}
+      .catalog-searchbar input{font-size:12px}
+      .catalog-searchbar .btn{font-size:10px}
+      .schedule-list{grid-template-columns:1fr}
+      .footer{align-items:flex-start;flex-direction:column}
+    }
+    @media(max-width:380px){
+      .brand-sub{display:none}
+      .top-actions{max-width:100%}
+      .theme-toggle-label{display:none}
+      .hero h1{font-size:28px}
+      .anime-grid,.catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .card-poster,.catalog-poster{height:130px}
+      .card-actions .btn{padding:6px}
+      .schedule-actions .btn{font-size:8px}
+    }
+
   </style>
 </head>
 <body>
@@ -97,14 +494,22 @@
     <div class="brand"><div class="brand-mark">✦</div><div><div class="brand-name">OtakuLog</div><div class="brand-sub">your anime memory</div></div></div>
     <div class="top-actions">
       <div class="sync-state" id="syncState"><span class="dot" id="syncDot"></span><span id="syncText">Local save</span></div>
+      <button class="btn theme-toggle" id="themeToggle" type="button" aria-label="Switch to light mode" title="Switch theme"><span class="theme-toggle-icon" aria-hidden="true">☀</span><span class="theme-toggle-label">Light mode</span></button>
       <button class="btn ghost" id="helpBtn">Setup</button>
       <button class="btn" id="accountBtn">Sign in</button>
       <button class="btn primary" id="topAddBtn">＋ Add anime</button>
     </div>
   </header>
 
-  <section class="hero">
-    <div><div class="eyebrow">Your personal watchlist</div><h1>Never lose your<br>episode again.</h1><p>Every anime, every episode, all in one place. Pick up exactly where you left off — whether you watch on a website, in Telegram, or somewhere else.</p></div>
+  <nav class="main-nav" aria-label="Main navigation">
+    <a class="main-nav-link active" href="#overview">Overview</a>
+    <a class="main-nav-link" href="#librarySection">My library</a>
+    <a class="main-nav-link" href="#discoverSection">Discover</a>
+    <a class="main-nav-link" href="#airingScheduleSection">Airing schedule</a>
+  </nav>
+
+  <section class="hero" id="overview">
+    <div><div class="eyebrow">YOUR PERSONAL ANIME SPACE</div><h1>Your anime journey,<br><span>beautifully organised.</span></h1><p>Keep every series, episode and watch note together. Pick up right where you left off, discover what to watch next, and never lose your place again.</p></div>
     <div class="hero-actions"><button class="btn" id="exportBtn">↓ Export list</button><button class="btn" id="importHeroBtn">📥 Import episode</button><button class="btn primary" id="heroAddBtn">＋ Track an anime</button></div>
   </section>
 
@@ -121,12 +526,52 @@
   </section>
 
   <section class="import-panel" aria-label="Android episode import">
-    <div class="import-panel-copy"><div class="import-kicker">Android quick import</div><h2>Send a Telegram episode straight to OtakuLog</h2><p>Install OtakuLog on your Android phone, then use Telegram's Share button and choose OtakuLog. You can also pick a video from Downloads manually.</p></div>
+    <div class="import-panel-copy"><div class="import-kicker">Android quick import</div><h2>Send a Telegram episode straight to OtakuLog</h2><p>Share a Telegram episode, import one video manually, or connect your Android Downloads folder below for automatic scans while OtakuLog is open.</p></div>
     <div class="import-panel-actions"><button class="btn primary" id="importEpisodeBtn">📥 Import downloaded video</button><button class="btn" id="installAppBtn">＋ Install app</button></div>
   </section>
 
+  <section class="folder-monitor" id="folderMonitor" aria-label="Automatic downloads folder detection">
+    <div class="folder-monitor-head">
+      <div>
+        <div class="import-kicker">Automatic episode detection</div>
+        <h2 class="folder-monitor-title">Connect your Downloads folder</h2>
+        <p class="folder-monitor-copy">Choose your Android <strong>Download</strong> or <strong>Telegram</strong> folder once. OtakuLog will look for new video files, read episode numbers from their filenames, and prepare matches for review. Your videos stay on your phone.</p>
+      </div>
+      <span class="folder-status-pill" id="folderPermissionPill"><span class="dot" id="folderStatusDot"></span><span id="folderPermissionText">Not connected</span></span>
+    </div>
+    <div class="folder-monitor-status">
+      <span id="folderStatusText">No folder selected yet.</span>
+      <span id="folderLastScan"></span>
+    </div>
+    <div class="folder-monitor-actions">
+      <button class="btn primary" type="button" id="connectFolderBtn">▣ Connect folder</button>
+      <button class="btn" type="button" id="scanFolderBtn" disabled>↻ Scan now</button>
+      <button class="btn" type="button" id="reviewFolderQueueBtn" disabled>Review new episodes (0)</button>
+      <button class="btn ghost" type="button" id="disconnectFolderBtn" disabled>Disconnect</button>
+    </div>
+    <label class="folder-monitor-options"><input type="checkbox" id="folderAutoScanToggle" checked> Automatically rescan every 60 seconds while OtakuLog is open</label>
+    <div class="folder-queue" id="folderQueue" hidden>
+      <div class="folder-queue-head"><span>New videos found</span><span id="folderQueueCount">0 waiting</span></div>
+      <div class="folder-queue-list" id="folderQueuePreview"></div>
+    </div>
+    <p class="folder-monitor-note"><strong>Privacy:</strong> OtakuLog reads filenames and file details only; it does not upload or play your videos. Automatic scans run while this page/PWA is open and visible. Android/Chrome may ask you to grant folder access again after reopening the app.</p>
+    <input id="folderFallbackInput" type="file" webkitdirectory directory multiple hidden />
+  </section>
+
+  <section id="librarySection">
+    <div class="section-head"><div><h2>My anime library</h2><div class="sub" id="librarySub">All your tracked shows in one place</div></div></div>
+    <div class="toolbar">
+      <div class="searchbox"><span class="search-icon">⌕</span><input id="filterInput" type="search" placeholder="Search your anime..." autocomplete="off"></div>
+      <div class="tabs" id="statusTabs">
+        <button class="tab active" data-filter="ALL">All</button><button class="tab" data-filter="WATCHING">Watching</button><button class="tab" data-filter="COMPLETED">Completed</button><button class="tab" data-filter="PLANNING">Plan to watch</button><button class="tab" data-filter="ON_HOLD">On hold</button><button class="tab" data-filter="DROPPED">Dropped</button>
+      </div>
+      <select class="sort-select" id="sortSelect" aria-label="Sort anime"><option value="updated">Recently updated</option><option value="title">Title A–Z</option><option value="progress">Most episodes</option><option value="rating">Highest rated</option></select>
+    </div>
+    <div class="anime-grid" id="animeGrid"></div>
+  </section>
+
   <!-- Live anime catalogue search: results are fetched from AniList and displayed as full cards. -->
-  <section class="discover-section" aria-label="Discover anime">
+  <section class="discover-section" id="discoverSection" aria-label="Discover anime">
     <div class="section-head"><div><h2>Discover anime</h2><div class="sub">Search the live anime catalogue and open a full details card</div></div><span class="schedule-source">Free AniList data</span></div>
     <div class="catalog-searchbar"><span class="catalog-search-icon">⌕</span><input id="catalogSearchInput" type="search" autocomplete="off" placeholder="Search any anime — e.g. Naruto, Frieren, One Piece..."><button class="btn primary" id="catalogSearchBtn">Search</button></div>
     <div class="catalog-search-note">Posters, synopsis, genres, scores, studios, episode counts, release status and next-airing information are fetched online. Search results do not enter your library until you choose Track anime.</div>
@@ -141,17 +586,7 @@
     <div id="scheduleResults"></div><div class="catalog-search-note">Airing dates and times reflect AniList's reported schedule, converted to IST. Actual streaming availability may differ by service and region.</div>
   </section>
 
-  <section>
-    <div class="section-head"><div><h2>My anime library</h2><div class="sub" id="librarySub">All your tracked shows in one place</div></div></div>
-    <div class="toolbar">
-      <div class="searchbox"><span class="search-icon">⌕</span><input id="filterInput" type="search" placeholder="Search your anime..." autocomplete="off"></div>
-      <div class="tabs" id="statusTabs">
-        <button class="tab active" data-filter="ALL">All</button><button class="tab" data-filter="WATCHING">Watching</button><button class="tab" data-filter="COMPLETED">Completed</button><button class="tab" data-filter="PLANNING">Plan to watch</button><button class="tab" data-filter="ON_HOLD">On hold</button><button class="tab" data-filter="DROPPED">Dropped</button>
-      </div>
-      <select class="sort-select" id="sortSelect" aria-label="Sort anime"><option value="updated">Recently updated</option><option value="title">Title A–Z</option><option value="progress">Most episodes</option><option value="rating">Highest rated</option></select>
-    </div>
-    <div class="anime-grid" id="animeGrid"></div>
-  </section>
+
 
   <div class="bottom-note"><strong>Tracking tip:</strong> after you finish an episode, tap <strong>+1 EP</strong> on its card. Set the source to your streaming site or Telegram so you also remember where you watched it. Firebase sync becomes available after you add your project configuration.</div>
   <div class="footer"><span>OtakuLog · Made for your watchlist</span><span><button id="footerSetup">Firebase setup & auto-tracking info</button></span></div>
@@ -204,7 +639,7 @@
       </div>
       <div class="field" style="margin-top:13px"><label>Confirm the matching anime</label><div class="import-results" id="importResults"></div><div class="import-selected" id="importSelectedText">Search suggestions will appear after the title is detected. You can still save manually.</div></div>
       <label class="import-checkbox"><input type="checkbox" id="markImportedWatched"><span><strong>Also update my watched progress</strong><br>Leave unchecked if you have downloaded the episode but have not watched it yet. The download will still be saved.</span></label>
-      <div class="form-actions"><span style="font-size:10px;color:#8f97aa" id="importStatusText">Source: Telegram / Downloads</span><div class="form-actions-right"><button type="button" class="btn" data-close="importModal">Cancel</button><button type="button" class="btn primary" id="saveImportBtn">Save episode details</button></div></div>
+      <div class="form-actions"><span style="font-size:10px;color:#8f97aa" id="importStatusText">Source: Telegram / Downloads</span><div class="form-actions-right"><button type="button" class="btn hidden" id="skipFolderFileBtn">Skip file</button><button type="button" class="btn" data-close="importModal">Cancel</button><button type="button" class="btn primary" id="saveImportBtn">Save episode details</button></div></div>
       <div class="install-note"><strong>Telegram shortcut:</strong> after installing this PWA, open a downloaded video in Telegram → Share → choose OtakuLog. If OtakuLog is not listed, install it from Chrome first.</div>
     </div>
   </div>
@@ -256,6 +691,9 @@ service cloud.firestore {
       <p>In this project folder, run <code>npm install -g firebase-tools</code>, then <code>firebase login</code>, then <code>firebase deploy</code>. The included <code>firebase.json</code> and <code>.firebaserc</code> are set for your project. Hosting provides the HTTPS origin required for installation and Android file sharing.</p>
       <h4>4. Install it on Android</h4>
       <p>Open your Firebase Hosting URL in <strong>Chrome on Android</strong> → ⋮ menu → <strong>Install app</strong> (or Add to Home screen). Open the installed OtakuLog app once. Then in Telegram, open a downloaded video → Share → choose OtakuLog. You can also use <strong>Import downloaded video</strong> and select a file through Android's picker.</p>
+      <h4>Connect your Downloads folder for automatic detection</h4>
+      <p>In OtakuLog, tap <strong>Connect folder</strong> and choose your Android Download folder or a Telegram video folder in the Android folder picker. Allow read access. OtakuLog scans filenames when it opens, when you tap Scan now, and every 60 seconds while the app is open and visible if automatic scanning is enabled. New videos appear in the review queue; review and save each episode to update your library. If Chrome asks for folder access again after reopening, tap Scan now and grant access.</p>
+      <p>On browsers without the native folder picker, the website can only run a one-time folder selection. Background scanning while OtakuLog is fully closed is not available to a normal PWA; use the Telegram Share button for that case.</p>
       <h4>How episode detection works</h4>
       <p>OtakuLog reads the video filename, detects common patterns such as <code>S02E05</code>, <code>Season 2 Episode 5</code>, or <code>Episode 5</code>, then searches AniList for the anime poster and catalogue information. Review the match before saving. Duplicate downloaded episode records are avoided.</p>
       <h4>Downloaded does not automatically mean watched</h4>
@@ -289,6 +727,29 @@ service cloud.firestore {
 
   const $ = (id) => document.getElementById(id);
   const STORAGE_KEY = 'otakulog_anime_v1';
+
+  const THEME_KEY = 'otakulog_theme';
+  function applyTheme(theme, persist=true){
+    const next = theme === 'light' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = next;
+    const button = $('themeToggle');
+    if(button){
+      const isDark = next === 'dark';
+      button.innerHTML = `<span class="theme-toggle-icon" aria-hidden="true">${isDark?'☀':'☾'}</span><span class="theme-toggle-label">${isDark?'Light mode':'Dark mode'}</span>`;
+      button.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+      button.title = isDark ? 'Switch to light mode' : 'Switch to dark mode';
+    }
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if(meta)meta.setAttribute('content',next==='light'?'#f4f6fb':'#0a0d14');
+    if(persist){try{localStorage.setItem(THEME_KEY,next);}catch(err){console.warn('Theme preference could not be saved',err);}}
+  }
+  function initTheme(){
+    let saved='dark';
+    try{saved=localStorage.getItem(THEME_KEY)||'dark';}catch(err){}
+    applyTheme(saved,false);
+    $('themeToggle')?.addEventListener('click',()=>applyTheme(document.documentElement.dataset.theme==='dark'?'light':'dark'));
+  }
+
   const STATE_LABELS = {WATCHING:'Watching',COMPLETED:'Completed',PLANNING:'Plan to watch',ON_HOLD:'On hold',DROPPED:'Dropped'};
   const STATE_COLORS = {WATCHING:'#c3baff',COMPLETED:'#9ce4bd',PLANNING:'#ffc68d',ON_HOLD:'#9bd9e1',DROPPED:'#ff9eaa'};
   let animeList = [];
@@ -311,6 +772,18 @@ service cloud.firestore {
   const SHARE_DB_NAME = 'otakulog-share-v1';
   const SHARE_STORE_NAME = 'incoming';
   let activeSharedRecordId = null;
+  const FOLDER_SETTINGS_KEY = 'folder-monitor-settings';
+  const FOLDER_AUTO_SCAN_KEY = 'otakulog_folder_auto_scan';
+  const VIDEO_EXTENSIONS = /\.(mp4|m4v|mkv|webm|avi|mov|mpeg|mpg|3gp|ts|m2ts)$/i;
+  let connectedFolderHandle = null;
+  let folderQueue = [];
+  let folderScanBusy = false;
+  let folderScanTimer = null;
+  let folderLastScanAt = 0;
+  let folderRecord = null;
+  const FOLDER_SCAN_INTERVAL_MS = 60000;
+  const FOLDER_SCAN_MAX_FILES = 1200;
+  const FOLDER_QUEUE_LIMIT = 300;
   let catalogSearchTimer = null;
   let catalogSearchToken = 0;
   let catalogSearchCache = new Map();
@@ -677,11 +1150,14 @@ service cloud.firestore {
   function normalizeAnimeTitle(value){return String(value||'').toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/g,'');}
   function openImportModal(){pendingImportFile=null;selectedImportAniList=null;$('importFileName').textContent='No video selected yet';$('importFileMeta').textContent='Choose a Telegram download or share a video to OtakuLog.';$('importAnimeTitle').value='';$('importSeason').value='';$('importEpisode').value='';$('importResults').innerHTML='';$('importResults').classList.remove('show');$('importSelectedText').textContent='Search suggestions will appear after the title is detected. You can still save manually.';$('markImportedWatched').checked=false;$('videoFileInput').value='';openModal('importModal');}
   function showImportFile(fileInfo,fromShare=false){
-    pendingImportFile={...fileInfo,origin:fromShare?'Telegram':'Downloads'};
+    const origin=fileInfo.origin||(fromShare?'Telegram':'Downloads');
+    pendingImportFile={...fileInfo,origin};
     const parsed=parseAnimeFilename(fileInfo.name||'');
     $('importFileName').textContent=fileInfo.name||'Shared video';
-    $('importFileMeta').textContent=`${fileInfo.type||'Video file'} · ${humanFileSize(fileInfo.size)}${fromShare?' · received from Android Share':''}`;
+    const receivedLabel=fromShare?' · received from Android Share':(origin==='Folder scan'?' · detected in connected folder':'');
+    $('importFileMeta').textContent=`${fileInfo.type||'Video file'} · ${humanFileSize(fileInfo.size)}${receivedLabel}`;
     $('importStatusText').textContent=`${pendingImportFile.origin} · ${firebaseReady&&currentUser?'Firebase sync ready':'Local save; sign in to sync'}`;
+    $('skipFolderFileBtn')?.classList.toggle('hidden',!fileInfo.folderQueueId);
     $('importAnimeTitle').value=parsed.title||'';$('importSeason').value=parsed.season||'';$('importEpisode').value=parsed.episode||'';
     selectedImportAniList=null;$('importResults').innerHTML='';$('importResults').classList.remove('show');
     $('importSelectedText').textContent=parsed.episode?`Detected episode ${parsed.episode}${parsed.season?` from season ${parsed.season}`:''}. Confirm the anime below.`:'Anime/episode could not be fully detected. Edit the fields before saving.';
@@ -730,7 +1206,9 @@ service cloud.firestore {
       createdAt:existing?.createdAt||Date.now(),updatedAt:Date.now()
     };
     const sharedRecordId=pendingImportFile.shareRecordId||null;
+    const folderQueueId=pendingImportFile.folderQueueId||null;
     const syncedToFirebase=await persist(item);
+    if(folderQueueId)await removeFolderQueueItem(folderQueueId);
     if(!firebaseReady||!currentUser||!syncedToFirebase)render();
     closeModal('importModal');
     if(sharedRecordId){await deleteSharedMetadata(sharedRecordId);activeSharedRecordId=null;}
@@ -746,8 +1224,234 @@ service cloud.firestore {
   $('videoFileInput').addEventListener('change',e=>{const file=e.target.files?.[0];if(!file)return;if(file.size>0&&file.type&&!file.type.startsWith('video/')&&!/\.(mkv|avi|mov|webm|mp4|m4v)$/i.test(file.name)){showToast('Choose a video file.');return;}showImportFile({name:file.name,type:file.type,size:file.size},false);});
   $('importAnimeTitle').addEventListener('input',()=>{clearTimeout(importSearchTimer);const q=$('importAnimeTitle').value;selectedImportAniList=null;importSearchTimer=setTimeout(()=>searchImportAniList(q),550);});
   $('saveImportBtn').addEventListener('click',saveImportedEpisode);
+  $('skipFolderFileBtn').addEventListener('click',async()=>{
+    const id=pendingImportFile?.folderQueueId;
+    if(id)await removeFolderQueueItem(id);
+    closeModal('importModal');pendingImportFile=null;selectedImportAniList=null;
+    showToast('Skipped this folder video.');
+  });
+  $('connectFolderBtn').addEventListener('click',connectDownloadsFolder);
+  $('scanFolderBtn').addEventListener('click',()=>scanConnectedFolder({allowPermissionPrompt:true}));
+  $('reviewFolderQueueBtn').addEventListener('click',reviewNextFolderItem);
+  $('disconnectFolderBtn').addEventListener('click',disconnectDownloadsFolder);
+  $('folderAutoScanToggle').addEventListener('change',()=>{
+    try{localStorage.setItem(FOLDER_AUTO_SCAN_KEY,$('folderAutoScanToggle').checked?'1':'0');}catch(e){}
+    setupFolderAutoScan();
+    showToast($('folderAutoScanToggle').checked?'Automatic scanning enabled while OtakuLog is open.':'Automatic scanning paused.');
+  });
+  $('folderFallbackInput').addEventListener('change',async e=>{
+    const files=[...(e.target.files||[])];
+    if(!files.length)return;
+    await importFallbackFolderFiles(files);
+    e.target.value='';
+  });
 
-  function openShareDb(){return new Promise((resolve,reject)=>{const req=indexedDB.open(SHARE_DB_NAME,1);req.onupgradeneeded=()=>{const db=req.result;if(!db.objectStoreNames.contains(SHARE_STORE_NAME))db.createObjectStore(SHARE_STORE_NAME,{keyPath:'id'});};req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error);});}
+  // Android/Chrome Downloads folder monitoring. Only filename + file metadata is read;
+  // video bytes are never opened, uploaded, or copied by this scanner.
+  function folderApiAvailable(){return typeof window.showDirectoryPicker==='function';}
+  function isVideoFilename(name){return VIDEO_EXTENSIONS.test(String(name||''));}
+  function mimeForVideo(name){
+    const ext=(String(name||'').split('.').pop()||'').toLowerCase();
+    return ({mp4:'video/mp4',m4v:'video/mp4',mkv:'video/x-matroska',webm:'video/webm',avi:'video/x-msvideo',mov:'video/quicktime',mpeg:'video/mpeg',mpg:'video/mpeg','3gp':'video/3gpp',ts:'video/mp2t',m2ts:'video/mp2t'})[ext]||'video/*';
+  }
+  function folderFingerprint(path,size,lastModified){return `${path}\u241f${Number(size)||0}\u241f${Number(lastModified)||0}`;}
+  async function readFolderSettings(){
+    const idb=await openShareDb();
+    try{return await new Promise((resolve,reject)=>{const tx=idb.transaction('settings','readonly');const req=tx.objectStore('settings').get(FOLDER_SETTINGS_KEY);req.onsuccess=()=>resolve(req.result||null);req.onerror=()=>reject(req.error);tx.onerror=()=>reject(tx.error);});}
+    finally{idb.close();}
+  }
+  async function writeFolderSettings(record){
+    const idb=await openShareDb();
+    try{await new Promise((resolve,reject)=>{const tx=idb.transaction('settings','readwrite');tx.objectStore('settings').put({...record,id:FOLDER_SETTINGS_KEY});tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error||new Error('Folder settings could not be saved.'));});}
+    finally{idb.close();}
+  }
+  async function removeFolderSettings(){
+    const idb=await openShareDb();
+    try{await new Promise((resolve,reject)=>{const tx=idb.transaction('settings','readwrite');tx.objectStore('settings').delete(FOLDER_SETTINGS_KEY);tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error);});}
+    finally{idb.close();}
+  }
+  function folderPermissionBadge(label,live=false){
+    $('folderPermissionText').textContent=label;
+    $('folderStatusDot').classList.toggle('live',!!live);
+  }
+  function renderFolderQueue(){
+    const queue=folderQueue||[];
+    $('folderQueue').hidden=!queue.length;
+    $('folderQueueCount').textContent=`${queue.length} waiting`;
+    $('reviewFolderQueueBtn').disabled=!queue.length;
+    $('reviewFolderQueueBtn').textContent=`Review new episodes (${queue.length})`;
+    $('folderQueuePreview').innerHTML=queue.slice(0,3).map(item=>{
+      const parsed=parseAnimeFilename(item.name||'');
+      const title=parsed.title||item.name||'Video file';
+      const ep=parsed.episode?`Episode ${parsed.episode}${parsed.season?` · Season ${parsed.season}`:''}`:'Needs manual episode check';
+      return `<div class="folder-queue-item"><b title="${escapeHtml(title)}">${escapeHtml(title)}</b><span>${escapeHtml(ep)}</span></div>`;
+    }).join('');
+    if(queue.length>3){$('folderQueuePreview').insertAdjacentHTML('beforeend',`<div class="folder-queue-item"><b>+${queue.length-3} more videos</b><span>Review one by one</span></div>`);}
+  }
+  function updateFolderMonitorUI(){
+    const connected=!!connectedFolderHandle;
+    $('scanFolderBtn').disabled=!connected||folderScanBusy;
+    $('disconnectFolderBtn').disabled=!connected;
+    $('connectFolderBtn').textContent=connected?'▣ Change folder':'▣ Connect folder';
+    if(connected){
+      if(!$('folderStatusText').textContent||$('folderStatusText').textContent==='No folder selected yet.')$('folderStatusText').textContent=`Connected folder: ${folderRecord?.name||connectedFolderHandle.name||'Selected folder'}`;
+    }
+    $('folderLastScan').textContent=folderLastScanAt?`Last scan: ${new Date(folderLastScanAt).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}`:'';
+    renderFolderQueue();
+  }
+  async function ensureFolderPermission(handle,allowPrompt=false){
+    if(!handle)return false;
+    try{
+      let permission=typeof handle.queryPermission==='function'?await handle.queryPermission({mode:'read'}):'granted';
+      if(permission==='granted')return true;
+      if(permission==='prompt'&&allowPrompt&&typeof handle.requestPermission==='function')permission=await handle.requestPermission({mode:'read'});
+      return permission==='granted';
+    }catch(err){console.warn('Folder permission check failed',err);return false;}
+  }
+  async function connectDownloadsFolder(){
+    if(!folderApiAvailable()){
+      $('folderFallbackInput').click();
+      showToast('This browser has no persistent folder access. Choose the folder to run a one-time scan.');
+      return;
+    }
+    try{
+      const handle=await window.showDirectoryPicker({id:'otakulog-download-folder',mode:'read',startIn:'downloads'});
+      connectedFolderHandle=handle;
+      folderRecord={id:FOLDER_SETTINGS_KEY,handle,name:handle.name||'Selected folder',seenFingerprints:[],queue:[],lastScanAt:0};
+      await writeFolderSettings(folderRecord);
+      folderQueue=[];folderLastScanAt=0;updateFolderMonitorUI();
+      await scanConnectedFolder({allowPermissionPrompt:true,quiet:false});
+      setupFolderAutoScan();
+    }catch(err){
+      if(err?.name!=='AbortError'){console.error(err);showToast('Could not connect this folder. Try Chrome on Android over HTTPS.');}
+    }
+  }
+  async function collectVideoFiles(directory,path='',depth=0,output=[]){
+    if(output.length>=FOLDER_SCAN_MAX_FILES)return output;
+    for await (const [name,entry] of directory.entries()){
+      if(output.length>=FOLDER_SCAN_MAX_FILES)break;
+      if(name.startsWith('.'))continue;
+      const relative=path?`${path}/${name}`:name;
+      if(entry.kind==='directory'&&depth<3){
+        await collectVideoFiles(entry,relative,depth+1,output);
+      }else if(entry.kind==='file'&&isVideoFilename(name)){
+        try{
+          const file=await entry.getFile();
+          output.push({name:file.name||name,type:file.type||mimeForVideo(name),size:file.size||0,lastModified:file.lastModified||0,relativePath:relative});
+        }catch(err){console.warn('Could not read metadata for',relative,err);}
+      }
+    }
+    return output;
+  }
+  async function scanConnectedFolder({allowPermissionPrompt=false,quiet=true}={}){
+    if(folderScanBusy)return;
+    if(!connectedFolderHandle){folderPermissionBadge('Not connected',false);$('folderStatusText').textContent='Choose a folder to start automatic detection.';return;}
+    folderScanBusy=true;$('scanFolderBtn').disabled=true;$('folderStatusText').textContent='Scanning folder for video files…';
+    try{
+      const permitted=await ensureFolderPermission(connectedFolderHandle,allowPermissionPrompt);
+      if(!permitted){folderPermissionBadge('Permission needed',false);$('folderStatusText').textContent='Folder remembered. Tap Scan now and allow access to continue.';return;}
+      const files=await collectVideoFiles(connectedFolderHandle,'',0,[]);
+      const record=folderRecord||await readFolderSettings()||{id:FOLDER_SETTINGS_KEY,handle:connectedFolderHandle,name:connectedFolderHandle.name||'Selected folder',seenFingerprints:[],queue:[]};
+      const seen=new Set(record.seenFingerprints||[]);
+      const queue=Array.isArray(record.queue)?record.queue:[];
+      const queuedIds=new Set(queue.map(item=>item.id));
+      let newlyDetected=0;
+      for(const file of files){
+        const fingerprint=folderFingerprint(file.relativePath,file.size,file.lastModified);
+        if(seen.has(fingerprint))continue;
+        if(queue.length>=FOLDER_QUEUE_LIMIT)break;
+        seen.add(fingerprint);
+        if(!queuedIds.has(fingerprint)){
+          queue.push({id:fingerprint,...file,origin:'Folder scan',detectedAt:Date.now()});
+          queuedIds.add(fingerprint);newlyDetected++;
+        }
+      }
+      record.handle=connectedFolderHandle;record.name=connectedFolderHandle.name||record.name||'Selected folder';
+      record.seenFingerprints=[...seen].slice(-12000);record.queue=queue.slice(-FOLDER_QUEUE_LIMIT);record.lastScanAt=Date.now();
+      await writeFolderSettings(record);
+      folderRecord=record;folderQueue=record.queue;folderLastScanAt=record.lastScanAt;
+      folderPermissionBadge('Folder access granted',true);
+      $('folderStatusText').textContent=`Scanned ${files.length}${files.length>=FOLDER_SCAN_MAX_FILES?'+':''} video file(s) in ${record.name}.`;
+      updateFolderMonitorUI();
+      $('folderStatusText').textContent=`Scanned ${files.length}${files.length>=FOLDER_SCAN_MAX_FILES?'+':''} video file(s) in ${record.name}.`;
+      if(newlyDetected&&!quiet)showToast(`Found ${newlyDetected} new video file(s). Review them to log episodes.`);
+      else if(newlyDetected&&quiet)showToast(`${newlyDetected} new video download(s) detected.`);
+      if(files.length>=FOLDER_SCAN_MAX_FILES)showToast('Scan reached its safety limit. Organise videos into smaller folders for a full scan.');
+    }catch(err){
+      console.error('Folder scan failed',err);
+      folderPermissionBadge('Scan issue',false);
+      $('folderStatusText').textContent=err?.name==='NotAllowedError'?'Folder permission was not granted. Tap Scan now to retry.':'Could not scan this folder. Reconnect it and try again.';
+      if(!quiet)showToast('Folder scan failed. Check folder permission.');
+    }finally{folderScanBusy=false;$('scanFolderBtn').disabled=!connectedFolderHandle;}
+  }
+  async function importFallbackFolderFiles(files){
+    const candidates=files.filter(file=>isVideoFilename(file.name)).slice(0,FOLDER_QUEUE_LIMIT);
+    if(!candidates.length){showToast('No supported video files were found in that folder.');return;}
+    const known=new Set(folderQueue.map(x=>x.id));let added=0;
+    for(const file of candidates){
+      const path=file.webkitRelativePath||file.name;
+      const id=folderFingerprint(path,file.size,file.lastModified);
+      if(known.has(id))continue;
+      folderQueue.push({id,name:file.name,type:file.type||mimeForVideo(file.name),size:file.size,lastModified:file.lastModified,relativePath:path,origin:'Folder scan'});known.add(id);added++;
+    }
+    folderQueue=folderQueue.slice(-FOLDER_QUEUE_LIMIT);
+    try{folderRecord=folderRecord||{id:FOLDER_SETTINGS_KEY,name:'One-time folder selection',seenFingerprints:[],queue:[]};folderRecord.queue=folderQueue;folderRecord.seenFingerprints=[...(folderRecord.seenFingerprints||[]),...candidates.map(f=>folderFingerprint(f.webkitRelativePath||f.name,f.size,f.lastModified))].slice(-12000);folderRecord.lastScanAt=Date.now();await writeFolderSettings(folderRecord);}catch(err){console.warn(err);}
+    folderLastScanAt=Date.now();$('folderStatusText').textContent='One-time folder scan complete. Reconnect with Chrome folder access for automatic rescans.';folderPermissionBadge('One-time scan',false);updateFolderMonitorUI();showToast(`Found ${added} new video file(s).`);
+  }
+  async function reviewNextFolderItem(){
+    if(!folderQueue.length){showToast('No new videos are waiting for review.');return;}
+    const item=folderQueue[0];
+    showImportFile({...item,origin:'Folder scan',folderQueueId:item.id},false);
+  }
+  async function removeFolderQueueItem(id){
+    if(!id)return;
+    folderQueue=folderQueue.filter(item=>item.id!==id);
+    try{folderRecord=folderRecord||await readFolderSettings()||{id:FOLDER_SETTINGS_KEY,seenFingerprints:[],queue:[]};folderRecord.queue=folderQueue;await writeFolderSettings(folderRecord);}catch(err){console.warn('Could not update folder queue',err);}
+    renderFolderQueue();
+  }
+  async function disconnectDownloadsFolder(){
+    if(!confirm('Disconnect this folder and clear its pending review queue?'))return;
+    connectedFolderHandle=null;folderRecord=null;folderQueue=[];folderLastScanAt=0;
+    try{await removeFolderSettings();}catch(err){console.warn(err);}
+    setupFolderAutoScan();folderPermissionBadge('Not connected',false);$('folderStatusText').textContent='Folder disconnected. Your anime library and saved download history are unchanged.';updateFolderMonitorUI();
+  }
+  function setupFolderAutoScan(){
+    if(folderScanTimer){clearInterval(folderScanTimer);folderScanTimer=null;}
+    if($('folderAutoScanToggle')?.checked&&connectedFolderHandle){
+      folderScanTimer=setInterval(()=>{
+        if(document.visibilityState==='visible'&&!folderScanBusy)scanConnectedFolder({allowPermissionPrompt:false,quiet:true});
+      },FOLDER_SCAN_INTERVAL_MS);
+    }
+  }
+  async function initFolderMonitor(){
+    try{$('folderAutoScanToggle').checked=localStorage.getItem(FOLDER_AUTO_SCAN_KEY)!=='0';}catch(err){}
+    $('folderFallbackInput').webkitdirectory=true;$('folderFallbackInput').directory=true;
+    if(!folderApiAvailable()){
+      $('folderStatusText').textContent='Persistent folder scanning is not available in this browser. You can still select a folder for a one-time scan.';
+      $('scanFolderBtn').disabled=true;
+    }
+    try{
+      const record=await readFolderSettings();
+      if(record){folderRecord=record;folderQueue=Array.isArray(record.queue)?record.queue:[];folderLastScanAt=Number(record.lastScanAt)||0;}
+      if(record?.handle){
+        connectedFolderHandle=record.handle;
+        const permitted=await ensureFolderPermission(connectedFolderHandle,false);
+        if(permitted){folderPermissionBadge('Folder access restored',true);updateFolderMonitorUI();await scanConnectedFolder({allowPermissionPrompt:false,quiet:true});}
+        else{folderPermissionBadge('Permission needed',false);$('folderStatusText').textContent=`${record.name||'Your folder'} is remembered. Tap Scan now and allow access to resume scanning.`;updateFolderMonitorUI();}
+        setupFolderAutoScan();
+      }else{
+        folderPermissionBadge(folderApiAvailable()?'Not connected':'One-time scan only',false);updateFolderMonitorUI();
+      }
+    }catch(err){console.warn('Folder monitor could not initialise',err);$('folderStatusText').textContent='Folder access is unavailable. You can still use Telegram Share or Import downloaded video.';}
+    document.addEventListener('visibilitychange',()=>{
+      if(document.visibilityState==='visible'&&connectedFolderHandle&&$('folderAutoScanToggle').checked&&Date.now()-folderLastScanAt>55000){
+        scanConnectedFolder({allowPermissionPrompt:false,quiet:true});
+      }
+    });
+    setupFolderAutoScan();
+  }
+
+  function openShareDb(){return new Promise((resolve,reject)=>{const req=indexedDB.open(SHARE_DB_NAME,2);req.onupgradeneeded=()=>{const db=req.result;if(!db.objectStoreNames.contains(SHARE_STORE_NAME))db.createObjectStore(SHARE_STORE_NAME,{keyPath:'id'});if(!db.objectStoreNames.contains('settings'))db.createObjectStore('settings',{keyPath:'id'});};req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error);});}
   async function getSharedMetadata(){
     const idb=await openShareDb();
     try{return await new Promise((resolve,reject)=>{const tx=idb.transaction(SHARE_STORE_NAME,'readonly');const req=tx.objectStore(SHARE_STORE_NAME).getAll();req.onsuccess=()=>resolve(req.result||[]);req.onerror=()=>reject(req.error);tx.onerror=()=>reject(tx.error);});}
@@ -787,7 +1491,22 @@ service cloud.firestore {
   window.addEventListener('appinstalled',()=>{installPromptEvent=null;$('installAppBtn').textContent='✓ App installed';$('installAppBtn').disabled=true;showToast('OtakuLog installed on this device.');});
   $('installAppBtn').addEventListener('click',async()=>{if(installPromptEvent){installPromptEvent.prompt();const choice=await installPromptEvent.userChoice;installPromptEvent=null;if(choice?.outcome==='accepted')showToast('Installing OtakuLog…');}else{showToast('Open this website in Chrome on Android → ⋮ → Install app / Add to Home screen.');}});
 
-  animeList=readLocal(); render(); configureFirebase(); registerPwa(); consumeSharedMetadata(); initLiveAnimeFeatures();
+  initTheme();
+
+  const mainNavLinks=[...document.querySelectorAll('.main-nav-link')];
+  mainNavLinks.forEach(link=>link.addEventListener('click',()=>{
+    mainNavLinks.forEach(x=>x.classList.toggle('active',x===link));
+  }));
+  if('IntersectionObserver' in window && mainNavLinks.length){
+    const navObserver=new IntersectionObserver(entries=>{
+      const visible=entries.filter(entry=>entry.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+      if(!visible)return;
+      mainNavLinks.forEach(link=>link.classList.toggle('active',link.getAttribute('href')===`#${visible.target.id}`));
+    },{rootMargin:'-20% 0px -65% 0px',threshold:[0,.2,.5]});
+    ['overview','librarySection','discoverSection','airingScheduleSection'].forEach(id=>{const el=$(id);if(el)navObserver.observe(el);});
+  }
+
+  animeList=readLocal(); render(); configureFirebase(); registerPwa(); consumeSharedMetadata(); initLiveAnimeFeatures(); initFolderMonitor();
 </script>
 </body>
 </html>
